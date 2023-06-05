@@ -1,7 +1,6 @@
 package lk.ijse.restomaster.controler;
 
 import com.jfoenix.controls.JFXTextField;
-import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -10,22 +9,19 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
-import lk.ijse.restomaster.dto.Customer;
+import lk.ijse.restomaster.bo.custom.CustomerBO;
+import lk.ijse.restomaster.bo.custom.Impl.CustomerBOImpl;
+import lk.ijse.restomaster.dto.CustomerDTO;
 import lk.ijse.restomaster.dto.tm.CustomerTM;
 import lk.ijse.restomaster.model.CustomerModel;
 import lk.ijse.restomaster.util.Regex;
 import lk.ijse.restomaster.util.TextFilds;
 import lombok.SneakyThrows;
 
-import java.net.URL;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 import java.util.Properties;
 import java.util.ResourceBundle;
@@ -91,7 +87,7 @@ public class ManageCustomerFormController implements Initializable{
         //txtcustmerid.setStyle("-fx-background-color: white");
     }
 
-    public void btnaddonaction(ActionEvent actionEvent) throws SQLException {
+    public void btnaddonaction(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
 
         if(!isValidated()){
             new Alert(Alert.AlertType.ERROR, "Invalid Input !").show();
@@ -102,24 +98,28 @@ public class ManageCustomerFormController implements Initializable{
         String contact = txtnumber.getText();
         String address = txtaddress.getText();
 
+        CustomerBO customerBO = new CustomerBOImpl();
 
-            try (Connection con = DriverManager.getConnection(URL, props)) {
-                String sql = "INSERT INTO Customer(CustomerId , CustomerName , CustomerContact , CustomerAddress) VALUES(?, ?, ?, ?)";
-
-                PreparedStatement pstm = con.prepareStatement(sql);
-                pstm.setString(1, labelCustomerId.getText());
-                pstm.setString(2, name);
-                pstm.setString(3, contact);
-                pstm.setString(4, address);
-
-
-                int affectedRows = pstm.executeUpdate();
-                if (affectedRows > 0) {
-                    new Alert(Alert.AlertType.CONFIRMATION, "Customer Added!!").show();
-                }
-            }
-
-
+//            try (Connection con = DriverManager.getConnection(URL, props)) {
+//                String sql = "INSERT INTO Customer(CustomerId , CustomerName , CustomerContact , CustomerAddress) VALUES(?, ?, ?, ?)";
+//
+//                PreparedStatement pstm = con.prepareStatement(sql);
+//                pstm.setString(1, labelCustomerId.getText());
+//                pstm.setString(2, name);
+//                pstm.setString(3, contact);
+//                pstm.setString(4, address);
+//
+//
+//                int affectedRows = pstm.executeUpdate();
+//                if (affectedRows > 0) {
+//                    new Alert(Alert.AlertType.CONFIRMATION, "Customer Added!!").show();
+//                }
+//            }
+            //new
+        customerBO.addCustomers(new CustomerDTO(id,name,contact,address));
+        if(!customerBO.addCustomers(new CustomerDTO(id,name,contact,address))){
+            new Alert(Alert.AlertType.ERROR , "Can not Added Customer !").show();
+        }
             labelCustomerId.setText("");
             txtname.setText("");
             txtnumber.setText("");
@@ -143,9 +143,9 @@ public class ManageCustomerFormController implements Initializable{
     private void getAll() {
           try{
               observableList = FXCollections.observableArrayList();
-              List <Customer> CustomerList = CustomerModel.getAll();
+              List <CustomerDTO> CustomerList = CustomerModel.getAll();
 
-              for(Customer customer : CustomerList){
+              for(CustomerDTO customer : CustomerList){
                      observableList.add(new CustomerTM(
                              customer.getId(),
                              customer.getName(),

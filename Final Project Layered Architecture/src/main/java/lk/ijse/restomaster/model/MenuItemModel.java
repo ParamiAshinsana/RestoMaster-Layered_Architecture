@@ -1,7 +1,6 @@
 package lk.ijse.restomaster.model;
 
 import lk.ijse.restomaster.db.DBConnection;
-import lk.ijse.restomaster.dto.Customer;
 import lk.ijse.restomaster.dto.MenuItem;
 
 import java.sql.Connection;

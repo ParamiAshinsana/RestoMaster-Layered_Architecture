@@ -1,7 +1,7 @@
 package lk.ijse.restomaster.model;
 
 import lk.ijse.restomaster.db.DBConnection;
-import lk.ijse.restomaster.dto.Customer;
+import lk.ijse.restomaster.dto.CustomerDTO;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -11,15 +11,15 @@ import java.util.List;
 
 public class CustomerModel {
 
-    public static List<Customer> getAll() throws SQLException {
+    public static List<CustomerDTO> getAll() throws SQLException {
         Connection con = DBConnection.getInstance().getConnection();
         String sql = "SELECT * FROM Customer";
 
-        List<Customer> data = new ArrayList<>();
+        List<CustomerDTO> data = new ArrayList<>();
 
         ResultSet resultSet = con.createStatement().executeQuery(sql);
         while(resultSet.next()){
-             data.add(new Customer(
+             data.add(new CustomerDTO(
                      resultSet.getString(1),
                      resultSet.getString(2),
                      resultSet.getString(3),
