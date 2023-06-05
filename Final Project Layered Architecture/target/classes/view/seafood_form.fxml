@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane fx:id="sfselectionroot" opacity="0.75" prefHeight="355.0" prefWidth="977.0" styleClass="OrdersBackground" stylesheets="@../CSS/stylesheet.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.restomaster.controler.SeafoodFormController">
+   <children>
+      <Label layoutX="355.0" layoutY="26.0" prefHeight="32.0" prefWidth="241.0" text="Sea Food Selection " textFill="#f2f2f2">
+         <font>
+            <Font name="SimSun-ExtB" size="24.0" />
+         </font>
+         <effect>
+            <DropShadow spread="0.74" />
+         </effect>
+      </Label>
+      <Label layoutX="25.0" layoutY="91.0" prefHeight="42.0" prefWidth="198.0" text="Menu Item Code :" textFill="#fcfcfc">
+         <font>
+            <Font name="Monospaced Regular" size="20.0" />
+         </font>
+      </Label>
+      <ComboBox layoutX="237.0" layoutY="97.0" prefWidth="150.0" styleClass="TextFiled" stylesheets="@../CSS/stylesheet.css" />
+      <Label layoutX="397.0" layoutY="93.0" prefHeight="42.0" prefWidth="162.0" text="Description :" textFill="#fcfcfc">
+         <font>
+            <Font name="Monospaced Regular" size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="395.0" layoutY="139.0" prefHeight="32.0" prefWidth="297.0" textFill="#f8f8f8">
+         <font>
+            <Font name="System Bold Italic" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="626.0" layoutY="95.0" prefHeight="42.0" prefWidth="179.0" text="Serving Size :" textFill="#fcfcfc">
+         <font>
+            <Font name="Monospaced Regular" size="20.0" />
+         </font>
+      </Label>
+      <ComboBox layoutX="810.0" layoutY="100.0" prefWidth="150.0" styleClass="TextFiled" stylesheets="@../CSS/stylesheet.css" />
+      <Label layoutX="34.0" layoutY="195.0" prefHeight="42.0" prefWidth="150.0" text="Unit price :" textFill="#fcfcfc">
+         <font>
+            <Font name="Monospaced Regular" size="20.0" />
+         </font>
+      </Label>
+      <JFXTextField focusColor="#485d9e" layoutX="197.0" layoutY="195.0" prefHeight="29.0" prefWidth="100.0" unFocusColor="#1e1c1c">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </JFXTextField>
+      <Label layoutX="314.0" layoutY="196.0" prefHeight="42.0" prefWidth="241.0" text="Required Quantity :" textFill="#fcfcfc">
+         <font>
+            <Font name="Monospaced Regular" size="20.0" />
+         </font>
+      </Label>
+      <JFXTextField layoutX="557.0" layoutY="199.0" prefHeight="29.0" prefWidth="108.0" />
+      <Button layoutX="777.0" layoutY="202.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="132.0" style="-fx-background-color: grey;" styleClass="TextFiled" stylesheets="@../CSS/stylesheet.css" text="Get   Total">
+         <font>
+            <Font name="Serif Bold Italic" size="20.0" />
+         </font>
+      </Button>
+      <ImageView fitHeight="32.0" fitWidth="36.0" layoutX="768.0" layoutY="224.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/Total.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="58.0" fitWidth="121.0" layoutX="626.0" layoutY="277.0" onMouseClicked="#selectionback" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/Back.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="btnplaceorder" graphicTextGap="20.0" layoutX="766.0" layoutY="283.0" mnemonicParsing="false" onAction="#btnplaceorderonaction" prefHeight="50.0" prefWidth="179.0" style="-fx-background-color: black;" text="Place Order" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+         <graphic>
+            <ImageView fitHeight="40.0" fitWidth="81.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/Cart.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+   </children>
+</AnchorPane>

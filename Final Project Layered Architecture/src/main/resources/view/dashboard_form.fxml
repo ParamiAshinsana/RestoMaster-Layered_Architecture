@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import java.lang.String?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.Blend?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="rootdashboard" prefHeight="780.0" prefWidth="1535.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.restomaster.controler.DashboardFormController">
+   <children>
+      <ImageView fitHeight="782.0" fitWidth="1539.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/Dashboaerd.jpg" />
+         </image>
+      </ImageView>
+      <AnchorPane layoutX="16.0" layoutY="63.0" opacity="0.44" prefHeight="665.0" prefWidth="321.0" stylesheets="@../CSS/stylesheet.css">
+         <styleClass>
+            <String fx:value="DashBoard" />
+            <String fx:value="DashboardBorder" />
+         </styleClass></AnchorPane>
+      <ImageView fitHeight="238.0" fitWidth="252.0" layoutX="17.0" layoutY="59.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/Logo1.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="78.0" layoutY="8.0" opacity="0.75" prefHeight="48.0" prefWidth="158.0" style="-fx-background-color: white;" styleClass="TextFiled" stylesheets="@../CSS/stylesheet.css" text="  Admin ' Profile">
+         <font>
+            <Font name="Century" size="16.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="48.0" fitWidth="63.0" layoutX="17.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/Admin1.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="39.0" fitWidth="48.0" layoutX="233.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/MenuVerticle.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="39.0" fitWidth="48.0" layoutX="274.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/Reminder.png" />
+         </image>
+      </ImageView>
+      <JFXButton fx:id="btnmanageorders" graphicTextGap="36.0" layoutX="21.0" layoutY="343.0" onAction="#btnonactionmanageorders" opacity="0.7" prefHeight="60.0" prefWidth="302.0" stylesheets="@../CSS/stylesheet.css" text="              Manage Orders">
+         <font>
+            <Font name="System Bold Italic" size="15.0" />
+         </font>
+         <styleClass>
+            <String fx:value="TabsBoarders" />
+            <String fx:value="Button1" />
+            <String fx:value="Button2" />
+         </styleClass>
+         <graphic>
+            <ImageView fitHeight="39.0" fitWidth="56.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/Orders.png" />
+               </image>
+               <effect>
+                  <Blend />
+               </effect>
+            </ImageView>
+         </graphic></JFXButton>
+      <JFXButton fx:id="btnmanagemenuitem" graphicTextGap="20.0" layoutX="21.0" layoutY="416.0" onAction="#btnmanagemenuitemonaction" opacity="0.7" prefHeight="60.0" prefWidth="302.0" stylesheets="@../CSS/stylesheet.css" text="          Manage Menu Items">
+         <graphic>
+            <ImageView fitHeight="39.0" fitWidth="56.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/MenuItem.png" />
+               </image>
+               <effect>
+                  <Blend />
+               </effect>
+            </ImageView>
+         </graphic>
+         <font>
+            <Font name="System Bold Italic" size="15.0" />
+         </font>
+         <styleClass>
+            <String fx:value="TabsBoarders" />
+            <String fx:value="Button1" />
+            <String fx:value="Button2" />
+         </styleClass></JFXButton>
+      <JFXButton fx:id="btnmanagestock" graphicTextGap="28.0" layoutX="21.0" layoutY="490.0" onAction="#btnmanagestockonaction" opacity="0.7" prefHeight="60.0" prefWidth="302.0" stylesheets="@../CSS/stylesheet.css" text="                 Manage Stoks">
+         <graphic>
+            <ImageView fitHeight="39.0" fitWidth="56.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/Stock.png" />
+               </image>
+               <effect>
+                  <Blend />
+               </effect>
+            </ImageView>
+         </graphic>
+         <font>
+            <Font name="System Bold Italic" size="15.0" />
+         </font>
+         <styleClass>
+            <String fx:value="TabsBoarders" />
+            <String fx:value="Button1" />
+            <String fx:value="Button2" />
+         </styleClass></JFXButton>
+      <JFXButton fx:id="btnmanagesupplier" graphicTextGap="12.0" layoutX="21.0" layoutY="562.0" onAction="#btnmanagesupplieronaction" opacity="0.7" prefHeight="60.0" prefWidth="302.0" stylesheets="@../CSS/stylesheet.css" text="               Manage Suppliers">
+         <graphic>
+            <ImageView fitHeight="39.0" fitWidth="56.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/Suppliers.png" />
+               </image>
+               <effect>
+                  <Blend />
+               </effect>
+            </ImageView>
+         </graphic>
+         <font>
+            <Font name="System Bold Italic" size="15.0" />
+         </font>
+         <styleClass>
+            <String fx:value="TabsBoarders" />
+            <String fx:value="Button1" />
+            <String fx:value="Button2" />
+         </styleClass></JFXButton>
+      <JFXButton fx:id="btnmanageemployee" graphicTextGap="17.0" layoutX="23.0" layoutY="633.0" onAction="#btnmanageemployeeonaction" opacity="0.7" prefHeight="60.0" prefWidth="302.0" stylesheets="@../CSS/stylesheet.css" text="            Manage Employees">
+         <graphic>
+            <ImageView fitHeight="39.0" fitWidth="56.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/Employee.png" />
+               </image>
+               <effect>
+                  <Blend />
+               </effect>
+            </ImageView>
+         </graphic>
+         <font>
+            <Font name="System Bold Italic" size="15.0" />
+         </font>
+         <styleClass>
+            <String fx:value="TabsBoarders" />
+            <String fx:value="Button1" />
+            <String fx:value="Button2" />
+         </styleClass></JFXButton>
+      <JFXButton fx:id="btnsuperviseitemprice" disable="true" graphicTextGap="2.0" layoutX="408.0" layoutY="550.0" onAction="#btnsuperviseitempriceonaction" opacity="0.0" prefHeight="39.0" prefWidth="302.0" stylesheets="@../CSS/stylesheet.css" text="           Supervise Item's Price">
+         <graphic>
+            <ImageView fitHeight="38.5" fitWidth="56.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/Item.png" />
+               </image>
+               <effect>
+                  <Blend />
+               </effect>
+            </ImageView>
+         </graphic>
+         <font>
+            <Font name="System Bold Italic" size="15.0" />
+         </font>
+         <styleClass>
+            <String fx:value="TabsBoarders" />
+            <String fx:value="Button1" />
+            <String fx:value="Button2" />
+         </styleClass></JFXButton>
+      <JFXButton fx:id="btndecideprofit" disable="true" layoutX="405.0" layoutY="611.0" onAction="#btndecideprofitonaction" opacity="0.0" prefHeight="39.0" prefWidth="302.0" stylesheets="@../CSS/stylesheet.css" text="        Decide Profit Percentage">
+         <graphic>
+            <ImageView fitHeight="39.0" fitWidth="56.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/Profit.png" />
+               </image>
+               <effect>
+                  <Blend />
+               </effect>
+            </ImageView>
+         </graphic>
+         <font>
+            <Font name="System Bold Italic" size="15.0" />
+         </font>
+         <styleClass>
+            <String fx:value="TabsBoarders" />
+            <String fx:value="Button1" />
+            <String fx:value="Button2" />
+         </styleClass>
+      </JFXButton>
+      <JFXButton fx:id="btngeneratereports" disable="true" graphicTextGap="30.0" layoutX="404.0" layoutY="671.0" onAction="#btngeneratereportsonaction" opacity="0.0" prefHeight="39.0" prefWidth="302.0" stylesheets="@../CSS/stylesheet.css" text="             Generate Reports">
+         <graphic>
+            <ImageView fitHeight="39.0" fitWidth="56.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/Reports.png" />
+               </image>
+               <effect>
+                  <Blend />
+               </effect>
+            </ImageView>
+         </graphic>
+         <font>
+            <Font name="System Bold Italic" size="15.0" />
+         </font>
+         <styleClass>
+            <String fx:value="TabsBoarders" />
+            <String fx:value="Button1" />
+            <String fx:value="Button2" />
+         </styleClass></JFXButton>
+      <JFXButton fx:id="btncustomer" layoutX="21.0" layoutY="269.0" onAction="#btnmanagecustomer" opacity="0.7" prefHeight="60.0" prefWidth="302.0" stylesheets="@../CSS/stylesheet.css" text="                   Manage Customers">
+         <graphic>
+            <ImageView fitHeight="39.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/Customer.png" />
+               </image>
+               <effect>
+                  <Blend />
+               </effect>
+            </ImageView>
+         </graphic>
+         <font>
+            <Font name="System Bold Italic" size="15.0" />
+         </font>
+         <styleClass>
+            <String fx:value="TabsBoarders" />
+            <String fx:value="Button2" />
+            <String fx:value="Button1" />
+         </styleClass>
+      </JFXButton>
+      <StackPane fx:id="controllarea" layoutX="371.0" layoutY="65.0" prefHeight="695.0" prefWidth="1150.0" stylesheets="@../CSS/stylesheet.css" />
+      <ImageView fitHeight="60.0" fitWidth="62.0" layoutX="246.0" layoutY="708.0" onMouseClicked="#logoutonmouseclicked" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/Logout.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="1001.0" layoutY="4.0" prefHeight="48.0" prefWidth="165.0" text="Timestamp  :  " textFill="#f5f5f5">
+         <font>
+            <Font name="Garamond Bold" size="26.0" />
+         </font>
+      </Label>
+      <Label fx:id="lbldate" layoutX="1207.0" layoutY="14.0" prefHeight="32.0" prefWidth="158.0" textFill="WHITE">
+         <font>
+            <Font name="Garamond Bold" size="30.0" />
+         </font>
+      </Label>
+      <Label fx:id="lbltime" layoutX="1374.0" layoutY="14.0" prefHeight="32.0" prefWidth="150.0" textFill="WHITE">
+         <font>
+            <Font name="Garamond Bold" size="30.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

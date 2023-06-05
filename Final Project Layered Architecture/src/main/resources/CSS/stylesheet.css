@@ -1,0 +1,117 @@
+.LoginWindowImage{
+    -fx-border-radius: 40px 40px 40px 40px;
+    -fx-background-radius: 40px 40px 40px 40px;
+}
+
+.Login{
+    -fx-border-radius: 90px 90px 100px 100px;
+    -fx-background-radius: 100px 100px 100px 100px;
+}
+
+.LoginBackground{
+    -fx-background-color: linear-gradient(to left,F11D28,FD3A2D,FE612C,FF872C,FFA12C );
+}
+.AAA{
+    -fx-background-color: linear-gradient(to right,#61D8DE, #E839F6, #E3A3AA);
+}
+
+.Button1:hover{
+    //-fx-background-color: linear-gradient(to right,#61D8DE, #E839F6);
+    -fx-background-color: linear-gradient(to right,#FFFFFF,#FFF59E);
+}
+
+.Button2:pressed{
+    -fx-background-color: #63e5ff;
+}
+.LoginB{
+    -fx-background-color: linear-gradient(to left,#9B9A9C,#6D6A6A,#3E3B39,#100C07);
+}
+
+.TextFiled{
+    -fx-border-radius: 20px 20px 20px 20px;
+    -fx-background-radius: 20px 20px 20px 20px;
+}
+
+.DashBoard{
+    -fx-background-color: linear-gradient(to right,#000000,#000000);
+}
+
+.DashBoard1{
+    -fx-background-color: linear-gradient(to bottom,#b5e2ff,#b5e2ff);
+    //#b5e2ff
+}
+.DashboardBorder{
+    -fx-border-radius: 5px 50px 5px 5px;
+    -fx-background-radius: 5px 50px 5px 5px;
+
+}
+
+.TabsBoarders{
+    -fx-border-radius: 20px 20px 0px 0px;
+    -fx-background-radius: 20px 20px 0px 0px;
+    -fx-background-color: linear-gradient(to top,#F6830C,#FFFF33);
+}
+.TabColours{
+    -fx-background-color: linear-gradient(to left,#2A2E34,#FFFF33);
+}
+
+.CrudOperations{
+    -fx-border-radius: 30px 30px 0px 0px;
+    -fx-background-radius: 30px 30px 0px 0px;
+}
+.AddButton{
+    -fx-background-color: linear-gradient(to left,#f6d365 0%, #fda085 51%, #f6d365 100%);
+}
+.UpdateButton{
+    -fx-background-color: linear-gradient(to left,#84fab0 0%, #8fd3f4 51%, #84fab0 100%);
+}
+.DeleteButton{
+    -fx-background-color: linear-gradient(to left,#F9B8AE 0%, #F19B7C 51%, #EE4C5A 100%);
+}
+.ClearButton{
+    -fx-background-color: linear-gradient(to left,#fbc2eb 0%, #a6c1ee 51%, #fbc2eb 100%);
+}
+.AllButton:hover{
+    -fx-background-color: linear-gradient(to right,#FFFFFF,#FFFFFF);
+}
+.DashBoardVBox{
+    -fx-border-radius: 20px 20px 20px 20px;
+    -fx-background-radius: 20px 20px 20px 20px;
+    -fx-background-color: linear-gradient(to left,#BFBFFF,#FFFFFF);
+}
+.OrdersBackground{
+    -fx-background-color: linear-gradient(to right,#2d388a,#00a1ff,#00aeef,#00ff8f);
+}
+.TextFront{
+    -fx-text-fill: #ffffff ;
+    -fx-font-size: 15 ;
+}
+.SerachText{
+    -fx-border-radius: 20px 20px 20px 20px;
+    -fx-background-radius: 20px 20px 20px 20px;
+    -fx-font-size: 15 ;
+    -fx-font-style:bold ;
+}
+
+.ButtonAnother1:hover{
+    -fx-background-color: linear-gradient(to right,#63e5ff,#63e5ff);
+}
+
+.ButtonDelete1:hover{
+    -fx-background-color: #FF0000;
+}
+.ButtonDelete2:pressed{
+    -fx-background-color: #FF0000;
+}
+
+.ButtonAnother2:pressed{
+    -fx-background-color: linear-gradient(to left,#63e5ff,#63e5ff);
+}
+
+.ButtonMenu1:hover{
+    -fx-background-color: linear-gradient(to left,#F6830C,#FFFF33);
+}
+
+.ButtonMenu2:pressed{
+    -fx-background-color: linear-gradient(to left,#F6830C,#FFFF33);
+}

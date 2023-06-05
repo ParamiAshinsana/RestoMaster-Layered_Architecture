@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.20.0.final using JasperReports Library version 6.20.0-2bc7ab61c56f459e8176eb05c7705e145cd400ad  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="SeaFoodMenuItem" pageWidth="595" pageHeight="2500" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="e6852185-bd69-4ed7-aa00-1da605cfd298">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="New Data Adapter (2)"/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<parameter name="SeaFood" class="java.lang.String"/>
+	<queryString language="SQL">
+		<![CDATA[select*from  menuitem  where   restomaster.menuitem.`MenuItemType` =  $P{SeaFood}]]>
+	</queryString>
+	<field name="MenuItemCode" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="MenuItemCode"/>
+		<property name="com.jaspersoft.studio.field.label" value="MenuItemCode"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="menuitem"/>
+	</field>
+	<field name="MenuItemType" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="MenuItemType"/>
+		<property name="com.jaspersoft.studio.field.label" value="MenuItemType"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="menuitem"/>
+	</field>
+	<field name="Description" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="Description"/>
+		<property name="com.jaspersoft.studio.field.label" value="Description"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="menuitem"/>
+	</field>
+	<field name="UnitPrice" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.name" value="UnitPrice"/>
+		<property name="com.jaspersoft.studio.field.label" value="UnitPrice"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="menuitem"/>
+	</field>
+	<field name="Quantity" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="Quantity"/>
+		<property name="com.jaspersoft.studio.field.label" value="Quantity"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="menuitem"/>
+	</field>
+	<field name="PreparationTime" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="PreparationTime"/>
+		<property name="com.jaspersoft.studio.field.label" value="PreparationTime"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="menuitem"/>
+	</field>
+	<group name="MenuItemCode">
+		<groupExpression><![CDATA[$F{MenuItemCode}]]></groupExpression>
+	</group>
+	<group name="MenuItemType">
+		<groupExpression><![CDATA[$F{MenuItemType}]]></groupExpression>
+	</group>
+	<group name="Description">
+		<groupExpression><![CDATA[$F{Description}]]></groupExpression>
+	</group>
+	<group name="UnitPrice">
+		<groupExpression><![CDATA[$F{UnitPrice}]]></groupExpression>
+	</group>
+	<group name="Quantity">
+		<groupExpression><![CDATA[$F{Quantity}]]></groupExpression>
+	</group>
+	<group name="PreparationTime">
+		<groupExpression><![CDATA[$F{PreparationTime}]]></groupExpression>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="120" splitType="Stretch">
+			<image>
+				<reportElement x="-20" y="-18" width="180" height="137" uuid="c28bbcb0-b5af-455e-ab2f-2d2dd686c5a3"/>
+				<imageExpression><![CDATA["C:/Users/Parami/Downloads/WhatsApp Image 2023-03-28 at 13.41.06.jpg"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="110" y="-15" width="360" height="44" forecolor="#F29718" uuid="763a2aaf-93f8-489f-9b73-2ba74681b828"/>
+				<textElement>
+					<font fontName="Serif" size="32"/>
+				</textElement>
+				<text><![CDATA[ The Curry Leaf Restaurant]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="193" y="22" width="190" height="34" forecolor="#F29A1F" uuid="3f2e637b-3546-4725-87ea-a747ce2d1d7f"/>
+				<textElement>
+					<font fontName="Monotype Corsiva" size="22"/>
+				</textElement>
+				<text><![CDATA[A taste you'll remember]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="189" y="48" width="210" height="28" uuid="96ded9f3-d31b-40e6-9d7a-0e56cd25ad31"/>
+				<textElement>
+					<font fontName="Garamond" size="14"/>
+				</textElement>
+				<text><![CDATA[thecurryleafrestaurant@gmail.com]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="207" y="67" width="152" height="24" uuid="95c4bed1-c1b6-423f-ab33-7f40eb098243"/>
+				<textElement>
+					<font fontName="Garamond" size="14"/>
+				</textElement>
+				<text><![CDATA[0112452895 , 0714589624]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="440" y="34" width="32" height="20" uuid="27150c36-185e-4173-bc03-c0588cc9619e"/>
+				<text><![CDATA[Date :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="440" y="49" width="32" height="20" uuid="663910f8-2925-496a-89a9-bc51734cc65d"/>
+				<text><![CDATA[Time :]]></text>
+			</staticText>
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement x="482" y="33" width="78" height="16" uuid="108eebe1-791f-4296-9640-3058d6264130"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField pattern="HH:mm">
+				<reportElement x="486" y="49" width="54" height="20" uuid="3c0d114f-a4b8-4a01-8792-00a6607f531a"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="410" y="73" width="162" height="18" uuid="e8bbf935-a9ce-4d19-b8e4-bfdc3e6dc7df"/>
+				<textElement>
+					<font fontName="Comic Sans MS" size="11"/>
+				</textElement>
+				<text><![CDATA[68 , W.A. Silva Mawatha Road ,]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="409" y="90" width="162" height="18" uuid="58489312-9055-4eab-8782-4b800a8b441a"/>
+				<textElement>
+					<font fontName="Comic Sans MS" size="11"/>
+				</textElement>
+				<text><![CDATA[Wellawaththa,]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="409" y="104" width="162" height="16" uuid="00e60071-6efd-477b-9a90-8bc995f5d6ac"/>
+				<textElement>
+					<font fontName="Comic Sans MS" size="11"/>
+				</textElement>
+				<text><![CDATA[Sri Lanka.]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="10" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="35" splitType="Stretch">
+			<staticText>
+				<reportElement x="178" y="4" width="190" height="30" uuid="7a6460a7-9126-4a50-b540-87a75df55b66"/>
+				<textElement>
+					<font fontName="Garamond" size="22" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SEA FOOD MENU]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="145" splitType="Stretch">
+			<textField>
+				<reportElement mode="Opaque" x="0" y="21" width="60" height="40" forecolor="#BD8D1C" backcolor="#080707" uuid="8b24bedd-9671-4860-88d2-d535c1a97782">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a864e9bd-fa72-44b5-9a54-2793bd40c3ac"/>
+				</reportElement>
+				<textElement>
+					<font fontName="Impact" size="24"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{MenuItemCode}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="4" y="86" width="426" height="30" uuid="b103fe89-67df-4921-bb26-5c369160a967">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="903b6b4a-c5bb-4830-ad20-463a4b74bf89"/>
+				</reportElement>
+				<textElement>
+					<font fontName="Ink Free" size="18" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Description}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="6" y="109" width="134" height="30" uuid="7de73069-74b5-4ab3-b73c-75f6c5c8d538">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a4ce0d90-86b0-4322-8355-263c1b3f8dd0"/>
+				</reportElement>
+				<textElement>
+					<font fontName="Serif" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{PreparationTime}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="468" y="20" width="100" height="30" forecolor="#912813" uuid="29c7bd37-c8ce-439f-bb36-10871a171a94">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="53d04e5b-dc35-4b84-83e3-93d4f279fdff"/>
+				</reportElement>
+				<textElement>
+					<font fontName="Arial Black" size="20"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{UnitPrice}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="-20" y="143" width="595" height="1" uuid="2e1a2d01-8353-419f-b910-28c9f2e44dc8"/>
+				<graphicElement>
+					<pen lineStyle="Dashed"/>
+				</graphicElement>
+			</line>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

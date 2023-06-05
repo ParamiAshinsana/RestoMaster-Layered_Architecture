@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXTextField?>
+<?import java.lang.String?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.effect.Blend?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane opacity="0.9" prefHeight="695.0" prefWidth="1150.0" styleClass="DashBoard" stylesheets="@../CSS/stylesheet.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.restomaster.controler.ManageMenuItemsFormController">
+   <children>
+      <Label layoutX="8.0" layoutY="118.0" prefHeight="42.0" prefWidth="160.0" text="Menu Item Code :" textFill="#fcfcfc">
+         <font>
+            <Font name="Consolas Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="339.0" layoutY="116.0" prefHeight="42.0" prefWidth="160.0" text="Menu Item Type :" textFill="#fcfcfc">
+         <font>
+            <Font name="Consolas Bold" size="18.0" />
+         </font>
+      </Label>
+      <ComboBox fx:id="itemtypeCbox" layoutX="504.0" layoutY="123.0" prefHeight="31.0" prefWidth="142.0" styleClass="TextFiled" stylesheets="@../CSS/stylesheet.css" />
+      <Label layoutX="662.0" layoutY="117.0" prefHeight="42.0" prefWidth="133.0" text="Description :" textFill="#fcfcfc">
+         <font>
+            <Font name="Consolas Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="19.0" layoutY="179.0" prefHeight="42.0" prefWidth="133.0" text="Unit Price :" textFill="#fcfcfc">
+         <font>
+            <Font name="Consolas Bold" size="18.0" />
+         </font>
+      </Label>
+      <JFXTextField fx:id="txtunitprice" layoutX="162.0" layoutY="181.0" onKeyReleased="#upOnKeyReleased" prefHeight="29.0" prefWidth="174.0" promptText="Unit Price" styleClass="TextFront" stylesheets="@../CSS/stylesheet.css" />
+      <TableView fx:id="tblmenuitem" layoutX="6.0" layoutY="383.0" onMouseClicked="#tblmiMouseClicked" prefHeight="304.0" prefWidth="1138.0">
+        <columns>
+          <TableColumn fx:id="colitemcode" prefWidth="147.0" text="Menu Item Code" />
+          <TableColumn fx:id="colitemtype" prefWidth="176.0" text="Menu Item Type" />
+            <TableColumn fx:id="coldescription" prefWidth="462.0" text="Description" />
+            <TableColumn fx:id="colunitprice" prefWidth="117.0" text="Unit Price" />
+            <TableColumn fx:id="colQuantity" prefWidth="94.0" text="Quantity" />
+            <TableColumn fx:id="colpretime" prefWidth="135.0" text="Preparation Time" />
+        </columns>
+      </TableView>
+      <Label layoutX="757.0" layoutY="177.0" prefHeight="42.0" prefWidth="187.0" text="Preparation Time :" textFill="#fcfcfc">
+         <font>
+            <Font name="Consolas Bold" size="18.0" />
+         </font>
+      </Label>
+      <ComboBox fx:id="preparationtimeCbox" layoutX="960.0" layoutY="182.0" prefHeight="31.0" prefWidth="160.0" styleClass="TextFiled" stylesheets="@../CSS/stylesheet.css" />
+      <Button fx:id="btnupdatemenu" layoutX="676.0" layoutY="258.0" mnemonicParsing="false" onAction="#btnupdatemenuonaction" prefHeight="42.0" prefWidth="133.0" stylesheets="@../CSS/stylesheet.css" text="Update Menu">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+         <styleClass>
+            <String fx:value="ButtonAnother1" />
+            <String fx:value="ButtonAnother2" />
+         </styleClass>
+      </Button>
+      <Button fx:id="btndeletemenu" layoutX="831.0" layoutY="258.0" mnemonicParsing="false" onAction="#btndeletemenuonaction" prefHeight="42.0" prefWidth="133.0" stylesheets="@../CSS/stylesheet.css" text="Delete Menu">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+         <styleClass>
+            <String fx:value="ButtonDelete1" />
+            <String fx:value="ButtonDelete2" />
+         </styleClass>
+      </Button>
+      <Button fx:id="btnclearmenu" layoutX="982.0" layoutY="259.0" mnemonicParsing="false" onAction="#btnclearmenuonaction" prefHeight="42.0" prefWidth="133.0" stylesheets="@../CSS/stylesheet.css" text="Clear">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+         <styleClass>
+            <String fx:value="ButtonAnother1" />
+            <String fx:value="ButtonAnother2" />
+         </styleClass>
+      </Button>
+      <Button fx:id="btnaddmenu" layoutX="523.0" layoutY="259.0" mnemonicParsing="false" onAction="#btnaddmenuonaction" prefHeight="42.0" prefWidth="133.0" stylesheets="@../CSS/stylesheet.css" text="Add Menu">
+         <font>
+            <Font name="Corbel Bold Italic" size="18.0" />
+         </font>
+         <styleClass>
+            <String fx:value="ButtonAnother1" />
+            <String fx:value="ButtonAnother2" />
+         </styleClass>
+      </Button>
+      <JFXTextField fx:id="txtitemcode" disable="true" layoutX="184.0" layoutY="120.0" opacity="0.0" prefHeight="29.0" prefWidth="125.0" promptText="Item Codde" styleClass="TextFront" stylesheets="@../CSS/stylesheet.css" />
+      <JFXTextField fx:id="txtdescription" layoutX="799.0" layoutY="117.0" onKeyPressed="#descriptionOnKeyReleased" prefHeight="29.0" prefWidth="332.0" promptText="Description" styleClass="TextFront" stylesheets="@../CSS/stylesheet.css" />
+      <Label layoutX="378.0" layoutY="178.0" prefHeight="42.0" prefWidth="133.0" text="Quantity :" textFill="#fcfcfc">
+         <font>
+            <Font name="Consolas Bold" size="18.0" />
+         </font>
+      </Label>
+      <JFXTextField fx:id="txtQuantity" layoutX="526.0" layoutY="181.0" onKeyReleased="#qtyOnKeyReleased" prefHeight="29.0" prefWidth="174.0" promptText="Quantity" styleClass="TextFront" stylesheets="@../CSS/stylesheet.css" />
+      <Button fx:id="btnTFMenu" layoutX="17.0" layoutY="249.0" mnemonicParsing="false" onAction="#btnTFMenuOnAction" prefHeight="31.0" prefWidth="391.0" stylesheets="@../CSS/stylesheet.css" text="Traditional Food Menu Items">
+         <font>
+            <Font name="Consolas Bold Italic" size="17.0" />
+         </font>
+         <styleClass>
+            <String fx:value="ButtonMenu1" />
+            <String fx:value="ButtonMenu2" />
+            <String fx:value="TextFiled" />
+         </styleClass></Button>
+      <Button fx:id="btnSFMenu" layoutX="18.0" layoutY="292.0" mnemonicParsing="false" onAction="#btnSFMenuOnAction" prefHeight="31.0" prefWidth="391.0" stylesheets="@../CSS/stylesheet.css" text="Sea Food Menu Items">
+         <font>
+            <Font name="Consolas Bold Italic" size="17.0" />
+         </font>
+         <styleClass>
+            <String fx:value="ButtonMenu1" />
+            <String fx:value="ButtonMenu2" />
+            <String fx:value="TextFiled" />
+         </styleClass>
+      </Button>
+      <Button fx:id="btnBeverages" layoutX="18.0" layoutY="338.0" mnemonicParsing="false" onAction="#btnBeveragesOnAction" prefHeight="31.0" prefWidth="391.0" stylesheets="@../CSS/stylesheet.css" text="Beverages  Menu Items">
+         <font>
+            <Font name="Consolas Bold Italic" size="17.0" />
+         </font>
+         <styleClass>
+            <String fx:value="ButtonMenu1" />
+            <String fx:value="ButtonMenu2" />
+            <String fx:value="TextFiled" />
+         </styleClass>
+      </Button>
+      <ImageView fitHeight="117.0" fitWidth="114.0" layoutX="838.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/AddMenuItem.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="336.0" layoutY="-6.0" prefHeight="64.0" prefWidth="521.0" text="MANAGE  MENU  ITEMS" textFill="#ffa600">
+         <font>
+            <Font name="Garamond Italic" size="44.0" />
+         </font>
+         <effect>
+            <Blend />
+         </effect>
+      </Label>
+      <Label fx:id="labelMenuItemCode" layoutX="177.0" layoutY="118.0" prefHeight="42.0" prefWidth="142.0" textFill="WHITE">
+         <font>
+            <Font name="Century" size="18.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

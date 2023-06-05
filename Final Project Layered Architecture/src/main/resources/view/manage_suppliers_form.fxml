@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXTextField?>
+<?import java.lang.String?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.effect.Blend?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane opacity="0.9" prefHeight="695.0" prefWidth="1150.0" styleClass="DashBoard" stylesheets="@../CSS/stylesheet.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.restomaster.controler.ManageSuppliersFormController">
+   <children>
+      <Label layoutX="25.0" layoutY="115.0" prefHeight="42.0" prefWidth="138.0" text="Supplier Id :" textFill="#fcfcfc">
+         <font>
+            <Font name="Consolas Bold" size="18.0" />
+         </font>
+      </Label>
+      <JFXTextField fx:id="txtSId" disable="true" layoutX="172.0" layoutY="113.0" opacity="0.0" prefHeight="29.0" prefWidth="163.0" styleClass="TextFront" stylesheets="@../CSS/stylesheet.css" />
+      <Label layoutX="363.0" layoutY="117.0" prefHeight="42.0" prefWidth="261.0" text="Supplier's Name(Company) :" textFill="#fcfcfc">
+         <font>
+            <Font name="Consolas Bold" size="18.0" />
+         </font>
+      </Label>
+      <JFXTextField fx:id="txtOfferings" layoutX="232.0" layoutY="170.0" onKeyReleased="#supplierOfferingsOnKeyReleased" prefHeight="29.0" prefWidth="490.0" styleClass="TextFront" stylesheets="@../CSS/stylesheet.css" />
+      <Label layoutX="25.0" layoutY="164.0" prefHeight="42.0" prefWidth="204.0" text="Service Offerings : " textFill="#fcfcfc">
+         <font>
+            <Font name="Consolas Bold" size="18.0" />
+         </font>
+      </Label>
+      <JFXTextField fx:id="txtSname" layoutX="648.0" layoutY="121.0" onKeyReleased="#supplierNameOnKeyReleased" prefHeight="29.0" prefWidth="423.0" styleClass="TextFront" stylesheets="@../CSS/stylesheet.css" />
+      <Label layoutX="570.0" layoutY="216.0" prefHeight="42.0" prefWidth="110.0" text="Quantity :" textFill="#fcfcfc">
+         <font>
+            <Font name="Consolas Bold" size="18.0" />
+         </font>
+      </Label>
+      <JFXTextField fx:id="txtUnitPrice" layoutX="172.0" layoutY="215.0" onKeyReleased="#supplierUPOnKey" prefHeight="29.0" prefWidth="261.0" styleClass="TextFront" stylesheets="@../CSS/stylesheet.css" />
+      <Label layoutX="25.0" layoutY="214.0" prefHeight="42.0" prefWidth="129.0" text="Unit Price :" textFill="#fcfcfc">
+         <font>
+            <Font name="Consolas Bold" size="18.0" />
+         </font>
+      </Label>
+      <JFXTextField fx:id="txtQuantity" layoutX="699.0" layoutY="219.0" onKeyReleased="#supplierQTYOnKey" prefHeight="29.0" prefWidth="252.0" styleClass="TextFront" stylesheets="@../CSS/stylesheet.css" />
+      <Label layoutX="12.0" layoutY="245.0" prefHeight="62.0" prefWidth="231.0" text="Contact Imformations" textFill="WHITE" underline="true">
+         <font>
+            <Font name="Javanese Text" size="22.0" />
+         </font>
+      </Label>
+      <Label layoutX="12.0" layoutY="296.0" prefHeight="42.0" prefWidth="95.0" text="Address :" textFill="#fcfcfc">
+         <font>
+            <Font name="Consolas Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="283.0" layoutY="300.0" prefHeight="42.0" prefWidth="150.0" text="Mobile Number :" textFill="#fcfcfc">
+         <font>
+            <Font name="Consolas Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="617.0" layoutY="303.0" prefHeight="42.0" prefWidth="163.0" text="Email Address :" textFill="#fcfcfc">
+         <font>
+            <Font name="Consolas Bold" size="18.0" />
+         </font>
+      </Label>
+      <JFXTextField fx:id="txtAddress" layoutX="110.0" layoutY="296.0" onKeyReleased="#supplierAddressOnKey" prefHeight="29.0" prefWidth="154.0" styleClass="TextFront" stylesheets="@../CSS/stylesheet.css" />
+      <JFXTextField fx:id="txtSMobile" layoutX="436.0" layoutY="299.0" onKeyReleased="#supplierContactOnKey" prefHeight="29.0" prefWidth="163.0" styleClass="TextFront" stylesheets="@../CSS/stylesheet.css" />
+      <JFXTextField fx:id="txtEmailAddress" layoutX="788.0" layoutY="301.0" onKeyReleased="#supplierEMailOnKey" prefHeight="29.0" prefWidth="331.0" styleClass="TextFront" stylesheets="@../CSS/stylesheet.css" />
+      <Button fx:id="btnAddSupplier" layoutX="406.0" layoutY="361.0" mnemonicParsing="false" onAction="#btnAddSupplierOnAction" prefHeight="42.0" prefWidth="154.0" stylesheets="@../CSS/stylesheet.css" text="Add Supplier">
+         <font>
+            <Font name="System Bold Italic" size="15.0" />
+         </font>
+         <styleClass>
+            <String fx:value="ButtonAnother1" />
+            <String fx:value="ButtonAnother2" />
+         </styleClass>
+      </Button>
+      <TableView fx:id="tblSupplier" layoutX="6.0" layoutY="424.0" onMouseClicked="#tblSupplierMouseClicked" prefHeight="262.0" prefWidth="1138.0">
+        <columns>
+          <TableColumn fx:id="colSId" prefWidth="55.0" text="Sp Id " />
+          <TableColumn fx:id="colSName" prefWidth="206.0" text="Supplier Name(Company)" />
+            <TableColumn fx:id="colOfferings" prefWidth="164.0" text="Service Offerings" />
+            <TableColumn fx:id="colPrice" prefWidth="83.0" text="UnitPrice" />
+            <TableColumn fx:id="colQuantity" prefWidth="82.0" text="Quantity" />
+            <TableColumn fx:id="colCost" prefWidth="73.0" text="Cost" />
+            <TableColumn fx:id="colAddress" minWidth="3.0" prefWidth="109.0" text="Address" />
+            <TableColumn fx:id="colMobileNumber" prefWidth="121.0" text="Mobile Number" />
+            <TableColumn fx:id="colEAddress" prefWidth="238.0" text="E. Address" />
+        </columns>
+      </TableView>
+      <Button fx:id="btnUpdateSupplier" layoutX="585.0" layoutY="358.0" mnemonicParsing="false" onAction="#btnUpdateSupplierOnAction" prefHeight="42.0" prefWidth="154.0" stylesheets="@../CSS/stylesheet.css" text="Update Supplier">
+         <font>
+            <Font name="System Bold Italic" size="15.0" />
+         </font>
+         <styleClass>
+            <String fx:value="ButtonAnother2" />
+            <String fx:value="ButtonAnother1" />
+         </styleClass>
+      </Button>
+      <Button fx:id="btnDeleteSupplier" layoutX="774.0" layoutY="359.0" mnemonicParsing="false" onAction="#btnDeleteSupplierOnAction" prefHeight="42.0" prefWidth="154.0" stylesheets="@../CSS/stylesheet.css" text="Delete Supplier">
+         <font>
+            <Font name="System Bold Italic" size="15.0" />
+         </font>
+         <styleClass>
+            <String fx:value="ButtonDelete1" />
+            <String fx:value="ButtonDelete2" />
+         </styleClass>
+      </Button>
+      <Button fx:id="btnClear" layoutX="957.0" layoutY="360.0" mnemonicParsing="false" onAction="#btnClearOnAction" prefHeight="42.0" prefWidth="154.0" stylesheets="@../CSS/stylesheet.css" text="Clear">
+         <font>
+            <Font name="System Bold Italic" size="15.0" />
+         </font>
+         <styleClass>
+            <String fx:value="ButtonAnother1" />
+            <String fx:value="ButtonAnother2" />
+         </styleClass>
+      </Button>
+      <ImageView fitHeight="109.0" fitWidth="110.0" layoutX="817.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/SupplierImage.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="376.0" layoutY="-6.0" prefHeight="64.0" prefWidth="450.0" text="MANAGE  SUPPLIERS" textFill="#ffa600">
+         <font>
+            <Font name="Garamond Italic" size="44.0" />
+         </font>
+         <effect>
+            <Blend />
+         </effect>
+      </Label>
+      <Label fx:id="lblError" layoutX="779.0" layoutY="263.0" prefHeight="35.0" prefWidth="349.0" textFill="RED">
+         <font>
+            <Font name="System Bold Italic" size="24.0" />
+         </font>
+      </Label>
+      <Label fx:id="labelSupplierId" layoutX="170.0" layoutY="118.0" prefHeight="42.0" prefWidth="142.0" textFill="WHITE">
+         <font>
+            <Font name="Century" size="18.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="rootselection" opacity="0.85" prefHeight="680.0" prefWidth="1140.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.restomaster.controler.SelectionFormController">
+   <children>
+      <ImageView fitHeight="340.0" fitWidth="329.0" layoutX="42.0" layoutY="147.0" onMouseClicked="#tfselectiononaction" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/SLTraditionalfood.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="189.0" fitWidth="312.0" layoutX="434.0" layoutY="146.0" onMouseClicked="#sfselectiononclicked" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/SlSeafood.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="253.0" fitWidth="283.0" layoutX="799.0" layoutY="148.0" onMouseClicked="#beverageselectiononclicked" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/SlBeverage.jpg" />
+         </image>
+      </ImageView>
+      <Button fx:id="btnselectionback" layoutX="890.0" layoutY="595.0" mnemonicParsing="false" onAction="#btnselectionbackonaction" prefHeight="71.0" prefWidth="170.0" style="-fx-background-color: red;" text="Go">
+         <font>
+            <Font name="Lucida Bright Regular" size="24.0" />
+         </font>
+      </Button>
+      <Label alignment="TOP_LEFT" layoutX="432.0" layoutY="6.0" prefHeight="76.0" prefWidth="336.0" text="SELECTIONS" textFill="#c3afaf">
+         <font>
+            <Font name="Monotype Corsiva" size="59.0" />
+         </font>
+      </Label>
+      <Label layoutX="96.0" layoutY="342.0" prefHeight="45.0" prefWidth="204.0" text="Traditional  Foods" textFill="#fff202">
+         <font>
+            <Font name="Gabriola" size="36.0" />
+         </font>
+      </Label>
+      <Label layoutX="516.0" layoutY="344.0" prefHeight="45.0" prefWidth="129.0" text="Sea  Foods" textFill="#f2ff00">
+         <font>
+            <Font name="Gabriola" size="36.0" />
+         </font>
+      </Label>
+      <Label layoutX="883.0" layoutY="342.0" prefHeight="45.0" prefWidth="122.0" text="Beverages" textFill="#ffff04">
+         <font>
+            <Font name="Gabriola" size="36.0" />
+         </font>
+      </Label>
+      <Label layoutX="56.0" layoutY="403.0" prefHeight="31.0" prefWidth="283.0" text="The central feature of Sri Lankan cuisine " textFill="#fcfcfc" />
+      <Label layoutX="56.0" layoutY="425.0" prefHeight="31.0" prefWidth="296.0" text="is boiled or steamed rice,served with a curry" textFill="#fcfcfc" />
+      <Label layoutX="53.0" layoutY="445.0" prefHeight="31.0" prefWidth="310.0" text="of fish or meat, along with other curries made" textFill="#fcfcfc" />
+      <Label layoutX="48.0" layoutY="464.0" prefHeight="31.0" prefWidth="310.0" text=" with vegetables, lentils, or fruits.Dishes are  " textFill="#fcfcfc" />
+      <Label layoutX="52.0" layoutY="484.0" prefHeight="31.0" prefWidth="310.0" text="accompanied by pickled fruits or vegetables, " textFill="#fcfcfc" />
+      <Label layoutX="54.0" layoutY="507.0" prefHeight="31.0" prefWidth="176.0" text="chutneys, and sambols." textFill="#fcfcfc" />
+      <Label layoutX="421.0" layoutY="403.0" prefHeight="31.0" prefWidth="336.0" text="Fresh harvests of the Indian Ocean, naturally bred, " textFill="#fcfcfc" />
+      <Label layoutX="422.0" layoutY="425.0" prefHeight="31.0" prefWidth="336.0" text="ethically caught, and delivered fresh to the global " textFill="#fcfcfc" />
+      <Label layoutX="424.0" layoutY="446.0" prefHeight="31.0" prefWidth="329.0" text="markets by local communities of fishermen, who " textFill="#fcfcfc" />
+      <Label layoutX="413.0" layoutY="470.0" prefHeight="31.0" prefWidth="365.0" text=" blend traditional knowledge with modern technology." textFill="#fcfcfc" />
+      <Label layoutX="781.0" layoutY="403.0" prefHeight="31.0" prefWidth="329.0" text="Beverages include all alcoholic and non- alcoholic" textFill="#fcfcfc" />
+      <Label layoutX="781.0" layoutY="422.0" prefHeight="31.0" prefWidth="329.0" text="drinks. Alcoholic beverages include wines and all" textFill="#fcfcfc" />
+      <Label layoutX="782.0" layoutY="445.0" prefHeight="31.0" prefWidth="329.0" text="other types of alcoholic drink such as Cocktails," textFill="#fcfcfc" />
+      <Label layoutX="783.0" layoutY="467.0" prefHeight="31.0" prefWidth="329.0" text="Beers, Cider, Spirits and Liqueurs. Nonalcoholic" textFill="#fcfcfc" />
+      <Label layoutX="784.0" layoutY="491.0" prefHeight="31.0" prefWidth="336.0" text="beverage includes mineral waters, juices, squashes" textFill="#fcfcfc" />
+      <Label layoutX="783.0" layoutY="510.0" prefHeight="31.0" prefWidth="336.0" text="andaerated waters as .well as tea, coffee, " textFill="#fcfcfc" />
+      <Label layoutX="785.0" layoutY="531.0" prefHeight="31.0" prefWidth="219.0" text="chocolate, milk and milk drinks." textFill="#fcfcfc" />
+   </children>
+</AnchorPane>
