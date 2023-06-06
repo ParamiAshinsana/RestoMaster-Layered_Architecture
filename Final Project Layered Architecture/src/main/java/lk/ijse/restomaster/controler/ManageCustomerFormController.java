@@ -22,12 +22,15 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 import java.util.ResourceBundle;
 import java.util.regex.Pattern;
 
 public class ManageCustomerFormController implements Initializable{
+
+    CustomerBO customerBO = new CustomerBOImpl();
 
     private final static String URL = "jdbc:mysql://localhost:3306/RestoMaster";
     private final static Properties props = new Properties();
@@ -98,7 +101,7 @@ public class ManageCustomerFormController implements Initializable{
         String contact = txtnumber.getText();
         String address = txtaddress.getText();
 
-        CustomerBO customerBO = new CustomerBOImpl();
+
 
 //            try (Connection con = DriverManager.getConnection(URL, props)) {
 //                String sql = "INSERT INTO Customer(CustomerId , CustomerName , CustomerContact , CustomerAddress) VALUES(?, ?, ?, ?)";
@@ -142,24 +145,37 @@ public class ManageCustomerFormController implements Initializable{
 
     @SneakyThrows
     private void getAll() {
-          try{
-              observableList = FXCollections.observableArrayList();
-              List <CustomerDTO> CustomerList = CustomerModel.getAll();
+//          try{
+//              observableList = FXCollections.observableArrayList();
+//              List <CustomerDTO> CustomerList = CustomerModel.getAll();
+//
+//              for(CustomerDTO customer : CustomerList){
+//                     observableList.add(new CustomerTM(
+//                             customer.getId(),
+//                             customer.getName(),
+//                             customer.getContact(),
+//                             customer.getAddress()
+//                     ));
+//              }
+//              tblcustomer.setItems(observableList);
+//          }catch (SQLException e ){
+//              e.printStackTrace();
+//              new Alert(Alert.AlertType.ERROR , "Query Error !").show();
+//
+//          }
 
-              for(CustomerDTO customer : CustomerList){
-                     observableList.add(new CustomerTM(
-                             customer.getId(),
-                             customer.getName(),
-                             customer.getContact(),
-                             customer.getAddress()
-                     ));
-              }
-              tblcustomer.setItems(observableList);
-          }catch (SQLException e ){
-              e.printStackTrace();
-              new Alert(Alert.AlertType.ERROR , "Query Error !").show();
+        try {
+            ArrayList<CustomerDTO> allCustomers = customerBO.getAllCustomers();
 
-          }
+            for (CustomerDTO c : allCustomers) {
+                //tblcustomer.getItems().add(new CustomerTM(c.getId(), c.getName(), c.getAddress()));
+                tblcustomer.getItems().add(new CustomerTM(c.getId(),c.getName(),c.getContact(),c.getAddress()));
+            }
+        } catch (SQLException e) {
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+        } catch (ClassNotFoundException e) {
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+        }
     }
 
     public void btnclearonaction(ActionEvent actionEvent) throws SQLException {
@@ -189,22 +205,18 @@ public class ManageCustomerFormController implements Initializable{
     }
 
     public void btnupdateonaction(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
-        System.out.println("1");
+
         if(!isValidated()){
             new Alert(Alert.AlertType.ERROR, "  Can not Updated !!").show();
             return;
         }
-        System.out.println("2");
         String id = txtid.getText();
         String name = txtname.getText();
         String contact = txtnumber.getText();
         String address = txtaddress.getText();
 
-        System.out.println("3");
+        //CustomerBO customerBO = new CustomerBOImpl();
 
-        CustomerBO customerBO = new CustomerBOImpl();
-
-        System.out.println("4");
 //        try(Connection con = DriverManager.getConnection(URL, props)) {
 //            //String sql = "UPDATE Customer SET name = ?, address = ?, salary = ? WHERE id = ?";
 //            String sql = "UPDATE Customer SET CustomerName = ? , CustomerContact = ? , CustomerAddress = ? WHERE CustomerId = ?";
@@ -220,18 +232,13 @@ public class ManageCustomerFormController implements Initializable{
 //                new Alert(Alert.AlertType.CONFIRMATION, "Customer Updated!!").show();
 //            }
 //        }
-        System.out.println("5");
 
-        System.out.println("6");
         //customerBO.updateCustomers(new CustomerDTO(name,contact,address,id));
         if(!customerBO.updateCustomers(new CustomerDTO(id,name,contact,address))){
-            System.out.println("7");
             new Alert(Alert.AlertType.ERROR , "Can not Uptaded Customer !").show();
-            System.out.println("8");
         }else{
             new Alert(Alert.AlertType.CONFIRMATION , "Customer Added!!").show();
         }
-        System.out.println("9");
 
         getAll();
 
@@ -240,9 +247,6 @@ public class ManageCustomerFormController implements Initializable{
         txtnumber.setText("");
         txtaddress.setText("");
         generateNextCustomerID();
-        System.out.println("10");
-
-        System.out.println("end");
     }
 
     public void custableonclicked(MouseEvent mouseEvent) {
