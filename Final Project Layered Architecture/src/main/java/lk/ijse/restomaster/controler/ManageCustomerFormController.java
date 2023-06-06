@@ -116,15 +116,16 @@ public class ManageCustomerFormController implements Initializable{
 //                }
 //            }
             //new
-        customerBO.addCustomers(new CustomerDTO(id,name,contact,address));
+        //customerBO.addCustomers(new CustomerDTO(id,name,contact,address));
         if(!customerBO.addCustomers(new CustomerDTO(id,name,contact,address))){
             new Alert(Alert.AlertType.ERROR , "Can not Added Customer !").show();
+        }else{
+            new Alert(Alert.AlertType.CONFIRMATION , "Customer Added!!").show();
         }
             labelCustomerId.setText("");
             txtname.setText("");
             txtnumber.setText("");
             txtaddress.setText("");
-
 
         getAll();
         generateNextCustomerID();
@@ -187,42 +188,65 @@ public class ManageCustomerFormController implements Initializable{
         generateNextCustomerID();
     }
 
-    public void btnupdateonaction(ActionEvent actionEvent) throws SQLException {
+    public void btnupdateonaction(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
+        System.out.println("1");
         if(!isValidated()){
-            new Alert(Alert.AlertType.ERROR, "Customer Added!!").show();
+            new Alert(Alert.AlertType.ERROR, "  Can not Updated !!").show();
             return;
         }
-
+        System.out.println("2");
         String id = txtid.getText();
         String name = txtname.getText();
         String contact = txtnumber.getText();
         String address = txtaddress.getText();
 
-        try(Connection con = DriverManager.getConnection(URL, props)) {
-            //String sql = "UPDATE Customer SET name = ?, address = ?, salary = ? WHERE id = ?";
-            String sql = "UPDATE Customer SET CustomerName = ? , CustomerContact = ? , CustomerAddress = ? WHERE CustomerId = ?";
-            //"UPDATE Customer SET(CustomerId , CustomerName , CustomerContact , CustomerAddress) VALUES(?, ?, ?, ?)"
+        System.out.println("3");
 
-            PreparedStatement pstm = con.prepareStatement(sql);
-            pstm.setString(1, name);
-            pstm.setString(2, contact);
-            pstm.setString(3, address);
-            pstm.setString(4, id);
+        CustomerBO customerBO = new CustomerBOImpl();
 
-            if(pstm.executeUpdate() > 0) {
-                new Alert(Alert.AlertType.CONFIRMATION, "Customer Updated!!").show();
-            }
+        System.out.println("4");
+//        try(Connection con = DriverManager.getConnection(URL, props)) {
+//            //String sql = "UPDATE Customer SET name = ?, address = ?, salary = ? WHERE id = ?";
+//            String sql = "UPDATE Customer SET CustomerName = ? , CustomerContact = ? , CustomerAddress = ? WHERE CustomerId = ?";
+//            //"UPDATE Customer SET(CustomerId , CustomerName , CustomerContact , CustomerAddress) VALUES(?, ?, ?, ?)"
+//
+//            PreparedStatement pstm = con.prepareStatement(sql);
+//            pstm.setString(1, name);
+//            pstm.setString(2, contact);
+//            pstm.setString(3, address);
+//            pstm.setString(4, id);
+//
+//            if(pstm.executeUpdate() > 0) {
+//                new Alert(Alert.AlertType.CONFIRMATION, "Customer Updated!!").show();
+//            }
+//        }
+        System.out.println("5");
+
+        System.out.println("6");
+        //customerBO.updateCustomers(new CustomerDTO(name,contact,address,id));
+        if(!customerBO.updateCustomers(new CustomerDTO(name,contact,address,id))){
+            System.out.println("7");
+            new Alert(Alert.AlertType.ERROR , "1 Can not Uptaded Customer !").show();
+            System.out.println("8");
+        }else{
+            new Alert(Alert.AlertType.CONFIRMATION , "Customer Added!!").show();
         }
-        getAll();
+        System.out.println("9");
+
 
         labelCustomerId.setText("");
         txtname.setText("");
         txtnumber.setText("");
         txtaddress.setText("");
         generateNextCustomerID();
+        System.out.println("10");
+
+        getAll();
+        System.out.println("end");
     }
 
     public void custableonclicked(MouseEvent mouseEvent) {
+
         Integer index = tblcustomer.getSelectionModel().getSelectedIndex();
        if (index <= -1) {
             return;
@@ -236,7 +260,6 @@ public class ManageCustomerFormController implements Initializable{
 
     public void customerContactOnKeyReleased(KeyEvent keyEvent) {
         Regex.setTextColor(TextFilds.PHONE ,txtnumber );
-
     }
 
     public void customerAddressOnKeyReleased(KeyEvent keyEvent) {

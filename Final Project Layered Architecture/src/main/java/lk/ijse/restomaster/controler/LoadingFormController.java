@@ -32,7 +32,7 @@ public class LoadingFormController implements Initializable {
 
         Timeline timeline = new Timeline();
         //KeyFrame keyFrame = new KeyFrame(Duration.millis(10000), actionEvent -> {
-        KeyFrame keyFrame = new KeyFrame(Duration.millis(8000), actionEvent -> {
+        KeyFrame keyFrame = new KeyFrame(Duration.millis(800), actionEvent -> {
             System.out.println("Initializing...");
         });
 

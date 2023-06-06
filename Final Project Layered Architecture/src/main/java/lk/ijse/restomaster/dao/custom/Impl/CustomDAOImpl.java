@@ -21,7 +21,8 @@ public class CustomDAOImpl implements CustomDAO {
 
     @Override
     public boolean update(Customer entity) throws SQLException, ClassNotFoundException {
-        return false;
+        System.out.println("update line DAOImpl");
+        return SQLUtil.execute("UPDATE Customer SET CustomerName = ? , CustomerContact = ? , CustomerAddress = ? WHERE CustomerId = ?",entity.getName(),entity.getContact(),entity.getAddress(),entity.getId());
     }
 
     @Override

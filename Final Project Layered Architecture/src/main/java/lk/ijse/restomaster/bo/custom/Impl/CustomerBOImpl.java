@@ -19,12 +19,14 @@ public class CustomerBOImpl implements CustomerBO {
 
     @Override
     public boolean addCustomers(CustomerDTO dto) throws SQLException, ClassNotFoundException {
-        return customDAO.add(new Customer(dto.getId(),dto.getName(),dto.getContact(),dto.getAddress())) ;
+        return customDAO.add(new Customer(dto.getId(),dto.getName(),dto.getContact(),dto.getAddress()));
     }
 
     @Override
     public boolean updateCustomers(CustomerDTO dto) throws SQLException, ClassNotFoundException {
-        return false;
+        System.out.println("update BOImpl");
+        return customDAO.update(new Customer(dto.getName(),dto.getContact(),dto.getAddress(),dto.getId()));
+        //return customDAO.update(new Customer(dto.getId(),dto.getName(),dto.getContact(),dto.getAddress()));
     }
 
     @Override
