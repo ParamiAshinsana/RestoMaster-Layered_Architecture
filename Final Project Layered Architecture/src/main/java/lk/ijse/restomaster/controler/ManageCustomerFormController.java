@@ -101,8 +101,6 @@ public class ManageCustomerFormController implements Initializable{
         String contact = txtnumber.getText();
         String address = txtaddress.getText();
 
-
-
 //            try (Connection con = DriverManager.getConnection(URL, props)) {
 //                String sql = "INSERT INTO Customer(CustomerId , CustomerName , CustomerContact , CustomerAddress) VALUES(?, ?, ?, ?)";
 //
@@ -163,7 +161,7 @@ public class ManageCustomerFormController implements Initializable{
 //              new Alert(Alert.AlertType.ERROR , "Query Error !").show();
 //
 //          }
-
+        tblcustomer.getItems().clear();
         try {
             ArrayList<CustomerDTO> allCustomers = customerBO.getAllCustomers();
 
@@ -185,19 +183,22 @@ public class ManageCustomerFormController implements Initializable{
         txtaddress.setText("");
     }
 
-    public void btndeleteonaction(ActionEvent actionEvent) throws SQLException{
+    public void btndeleteonaction(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
         String id = txtid.getText();
 
-        try (Connection con = DriverManager.getConnection(URL, props)) {
-            String sql = "DELETE FROM Customer WHERE CustomerId = ?";
+//        try (Connection con = DriverManager.getConnection(URL, props)) {
+//            String sql = "DELETE FROM Customer WHERE CustomerId = ?";
+//
+//            PreparedStatement pstm = con.prepareStatement(sql);
+//            pstm.setString(1, id);
+//
+//            if(pstm.executeUpdate() > 0 ) {
+//                new Alert(Alert.AlertType.CONFIRMATION, "Huree!! deleted :)").show();
+//            }
+//        }
 
-            PreparedStatement pstm = con.prepareStatement(sql);
-            pstm.setString(1, id);
+        customerBO.deleteCustomers(txtid.getText());
 
-            if(pstm.executeUpdate() > 0 ) {
-                new Alert(Alert.AlertType.CONFIRMATION, "Huree!! deleted :)").show();
-            }
-        }
         getAll();
         labelCustomerId.setText("");
 
