@@ -39,6 +39,6 @@ public class CustomerBOImpl implements CustomerBO {
 
     @Override
     public String generateNewCustomersID() throws SQLException, ClassNotFoundException {
-        return null;
+        return customerDAO.generateNewId();
     }
 }

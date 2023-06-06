@@ -70,13 +70,15 @@ public class ManageCustomerFormController implements Initializable{
         generateNextCustomerID();
     }
 
-    private void generateNextCustomerID() {
-        try {
-            String nextId = CustomerModel.generateNextCustomerID();
-            labelCustomerId.setText(nextId);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+    private void generateNextCustomerID() throws SQLException, ClassNotFoundException {
+//        try {
+//            String nextId = CustomerModel.generateNextCustomerID();
+//            labelCustomerId.setText(nextId);
+//        } catch (SQLException e) {
+//            throw new RuntimeException(e);
+//        }
+        String nextId = customerBO.generateNewCustomersID();
+        labelCustomerId.setText(nextId);
     }
 
     void setCellValueFactory() {
