@@ -33,7 +33,7 @@ public class CustomerDAOImpl implements CustomerDAO {
 
     @Override
     public boolean delete(String id) throws SQLException, ClassNotFoundException {
-        return SQLUtil.execute("DELETE FROM Customer WHERE CustomerId=?", id);
+       return SQLUtil.execute("DELETE FROM Customer WHERE CustomerId=?", id);
     }
 
     @Override

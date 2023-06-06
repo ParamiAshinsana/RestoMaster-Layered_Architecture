@@ -139,7 +139,7 @@
             <Blend />
          </effect>
       </Label>
-      <Label fx:id="labelCustomerId" layoutX="271.0" layoutY="140.0" prefHeight="42.0" prefWidth="248.0" textFill="WHITE">
+      <Label fx:id="labelCustomerId" layoutX="271.0" layoutY="132.0" prefHeight="42.0" prefWidth="248.0" textFill="WHITE">
          <font>
             <Font name="Century" size="18.0" />
          </font></Label>

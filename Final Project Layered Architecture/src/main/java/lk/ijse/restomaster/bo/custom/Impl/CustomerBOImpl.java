@@ -29,7 +29,6 @@ public class CustomerBOImpl implements CustomerBO {
 
     @Override
     public boolean updateCustomers(CustomerDTO dto) throws SQLException, ClassNotFoundException {
-        //return customDAO.update(new Customer(dto.getName(),dto.getContact(),dto.getAddress(),dto.getId()));
         return customerDAO.update(new Customer(dto.getId(),dto.getName(),dto.getContact(),dto.getAddress()));
     }
 
