@@ -224,15 +224,16 @@ public class ManageCustomerFormController implements Initializable{
 
         System.out.println("6");
         //customerBO.updateCustomers(new CustomerDTO(name,contact,address,id));
-        if(!customerBO.updateCustomers(new CustomerDTO(name,contact,address,id))){
+        if(!customerBO.updateCustomers(new CustomerDTO(id,name,contact,address))){
             System.out.println("7");
-            new Alert(Alert.AlertType.ERROR , "1 Can not Uptaded Customer !").show();
+            new Alert(Alert.AlertType.ERROR , "Can not Uptaded Customer !").show();
             System.out.println("8");
         }else{
             new Alert(Alert.AlertType.CONFIRMATION , "Customer Added!!").show();
         }
         System.out.println("9");
 
+        getAll();
 
         labelCustomerId.setText("");
         txtname.setText("");
@@ -241,7 +242,6 @@ public class ManageCustomerFormController implements Initializable{
         generateNextCustomerID();
         System.out.println("10");
 
-        getAll();
         System.out.println("end");
     }
 
