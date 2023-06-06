@@ -39,7 +39,7 @@ import java.time.LocalDate;
 import java.util.*;
 import java.util.Date;
 
-public class FoodSelectionFormController implements Initializable {
+public class ManageOrderFormController implements Initializable {
 
     private final static String URL = "jdbc:mysql://localhost:3306/RestoMaster";
     private final static Properties props = new Properties();

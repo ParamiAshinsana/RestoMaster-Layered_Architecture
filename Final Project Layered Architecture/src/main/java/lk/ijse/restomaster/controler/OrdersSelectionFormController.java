@@ -3,20 +3,17 @@ package lk.ijse.restomaster.controler;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
-import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class SelectionFormController implements Initializable {
+public class OrdersSelectionFormController implements Initializable {
 
     public AnchorPane rootselection;
     public Button btnselectionback;
@@ -54,7 +51,7 @@ public class SelectionFormController implements Initializable {
         st.setVisible(true);
         FXMLLoader loader= new FXMLLoader(getClass().getResource("/view/food_selection_form.fxml"));
         AnchorPane anchorPane = loader.load();
-        FoodSelectionFormController controller = loader.getController();
+        ManageOrderFormController controller = loader.getController();
         controller.setControllArea(st);
         st.getChildren().removeAll();
         st.getChildren().setAll(anchorPane);

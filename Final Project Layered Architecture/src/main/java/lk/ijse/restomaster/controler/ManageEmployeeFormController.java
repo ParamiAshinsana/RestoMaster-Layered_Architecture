@@ -24,7 +24,7 @@ import java.util.List;
 import java.util.Properties;
 import java.util.ResourceBundle;
 
-public class ManageEmployeesFormController implements Initializable {
+public class ManageEmployeeFormController implements Initializable {
 
     private final static String URL = "jdbc:mysql://localhost:3306/RestoMaster";
     private final static Properties props = new Properties();

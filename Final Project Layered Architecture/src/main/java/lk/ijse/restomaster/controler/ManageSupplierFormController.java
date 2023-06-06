@@ -29,7 +29,7 @@ import java.util.Properties;
 import java.util.ResourceBundle;
 import java.util.regex.Pattern;
 
-public class ManageSuppliersFormController implements Initializable {
+public class ManageSupplierFormController implements Initializable {
 
     private final static String URL = "jdbc:mysql://localhost:3306/RestoMaster";
     private final static Properties props = new Properties();

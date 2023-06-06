@@ -13,7 +13,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
-import javax.swing.*;
 import java.io.IOException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
@@ -64,7 +63,7 @@ public class DashboardFormController implements Initializable {
         controllarea.setVisible(true);
         FXMLLoader loader= new FXMLLoader(getClass().getResource("/view/selection_form.fxml"));
         AnchorPane anchorPane = loader.load();
-        SelectionFormController controller = loader.getController();
+        OrdersSelectionFormController controller = loader.getController();
         controller.setControllArea(controllarea);
         controllarea.getChildren().removeAll();
         controllarea.getChildren().setAll(anchorPane);

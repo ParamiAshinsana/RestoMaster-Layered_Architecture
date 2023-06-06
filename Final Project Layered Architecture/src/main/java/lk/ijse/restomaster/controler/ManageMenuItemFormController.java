@@ -27,7 +27,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.*;
 
-public class ManageMenuItemsFormController implements Initializable {
+public class ManageMenuItemFormController implements Initializable {
 
     private final static String URL = "jdbc:mysql://localhost:3306/RestoMaster";
     private final static Properties props = new Properties();

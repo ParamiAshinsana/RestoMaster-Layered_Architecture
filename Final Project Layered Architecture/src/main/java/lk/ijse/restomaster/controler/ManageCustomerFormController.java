@@ -11,6 +11,8 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import lk.ijse.restomaster.bo.custom.CustomerBO;
 import lk.ijse.restomaster.bo.custom.Impl.CustomerBOImpl;
+import lk.ijse.restomaster.dao.DAOFactory;
+import lk.ijse.restomaster.dao.custom.CustomerDAO;
 import lk.ijse.restomaster.dto.CustomerDTO;
 import lk.ijse.restomaster.dto.tm.CustomerTM;
 import lk.ijse.restomaster.model.CustomerModel;
@@ -31,6 +33,7 @@ import java.util.regex.Pattern;
 public class ManageCustomerFormController implements Initializable{
 
     CustomerBO customerBO = new CustomerBOImpl();
+    //CustomerDAO customerDAO = (CustomerDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.CUSTOMERS);
 
     private final static String URL = "jdbc:mysql://localhost:3306/RestoMaster";
     private final static Properties props = new Properties();
