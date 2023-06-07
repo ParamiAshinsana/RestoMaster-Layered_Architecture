@@ -23,8 +23,8 @@ public class DAOFactory {
 //                return new CustomerDAOImpl();
 //            case MENU_ITEMS:
 //                return new CustomerDAOImpl();
-//            case SUPPLIERS:
-//                return new CustomerDAOImpl();
+            case SUPPLIERS:
+                return new CustomerDAOImpl();
 //            case STOCKS:
 //                return new CustomerDAOImpl();
 //            case EMPLOYEES:

@@ -8,7 +8,7 @@ import lombok.*;
 @Setter
 @ToString
 
-public class Supplier {
+public class SupplierDTO {
     private String spId;
     private String spName;
     private String serviceOfferings;

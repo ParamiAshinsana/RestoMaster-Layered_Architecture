@@ -202,10 +202,16 @@ public class ManageCustomerFormController implements Initializable{
 //            }
 //        }
 
-        customerBO.deleteCustomers(txtid.getText());
-
+        if(!customerBO.deleteCustomers(txtid.getText())){
+            new Alert(Alert.AlertType.ERROR , "Can not Delete !)").show();
+        }else{
+            new Alert(Alert.AlertType.CONFIRMATION, " Customer Deleted :)").show();
+        }
         getAll();
         labelCustomerId.setText("");
+        txtname.setText("");
+        txtnumber.setText("");
+        txtaddress.setText("");
 
         generateNextCustomerID();
     }

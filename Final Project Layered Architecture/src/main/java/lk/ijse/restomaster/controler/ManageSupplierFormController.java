@@ -9,12 +9,8 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
-import lk.ijse.restomaster.dto.Stock;
-import lk.ijse.restomaster.dto.Supplier;
-import lk.ijse.restomaster.dto.tm.StockTM;
+import lk.ijse.restomaster.dto.SupplierDTO;
 import lk.ijse.restomaster.dto.tm.SupplierTM;
-import lk.ijse.restomaster.model.CustomerModel;
-import lk.ijse.restomaster.model.StockModel;
 import lk.ijse.restomaster.model.SupplierModel;
 import lk.ijse.restomaster.util.Regex;
 import lk.ijse.restomaster.util.TextFilds;
@@ -27,7 +23,6 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Properties;
 import java.util.ResourceBundle;
-import java.util.regex.Pattern;
 
 public class ManageSupplierFormController implements Initializable {
 
@@ -89,9 +84,9 @@ public class ManageSupplierFormController implements Initializable {
     private void getAll() {
         try{
             observableList = FXCollections.observableArrayList();
-            List<Supplier> SupplierList = SupplierModel.getAll();
+            List<SupplierDTO> SupplierList = SupplierModel.getAll();
 
-            for(Supplier supplier : SupplierList){
+            for(SupplierDTO supplier : SupplierList){
                 observableList.add(new SupplierTM(
                         supplier.getSpId(),
                         supplier.getSpName(),
