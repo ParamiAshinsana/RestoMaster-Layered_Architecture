@@ -13,10 +13,10 @@ public class DAOFactory {
     public enum DAOTypes{
          CUSTOMERS , ORDERS , ORDER_SELECTIONS , MENU_ITEMS , SUPPLIERS , STOCKS , EMPLOYEES
     }
-    public void getDAO(DAOTypes types){
+    public SuperDAO getDAO(DAOTypes types){
         switch (types){
             case CUSTOMERS:
-                /*return*/ new CustomerDAOImpl();
+                return new CustomerDAOImpl();
 //            case ORDERS:
 //                return new CustomerDAOImpl();
 //            case ORDER_SELECTIONS:
@@ -29,6 +29,8 @@ public class DAOFactory {
 //                return new CustomerDAOImpl();
 //            case EMPLOYEES:
 //                return new CustomerDAOImpl();
+              default:
+                  return null ;
         }
     }
 }
