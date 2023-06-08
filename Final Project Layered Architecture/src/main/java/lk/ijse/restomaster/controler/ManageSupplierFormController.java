@@ -232,19 +232,25 @@ public class ManageSupplierFormController implements Initializable {
         generateNextSupplierId();
     }
 
-    public void btnDeleteSupplierOnAction(ActionEvent actionEvent) throws SQLException {
+    public void btnDeleteSupplierOnAction(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
         String spId = txtSId.getText();
 
-        try (Connection con = DriverManager.getConnection(URL, props)) {
-            String sql = "DELETE FROM Supplier WHERE SupplierId = ?";
-
-            PreparedStatement pstm = con.prepareStatement(sql);
-            pstm.setString(1, txtSId.getText());
-
-            if(pstm.executeUpdate() > 0 ) {
-                new Alert(Alert.AlertType.CONFIRMATION, "Huree!! deleted :)").show();
-            }
+//        try (Connection con = DriverManager.getConnection(URL, props)) {
+//            String sql = "DELETE FROM Supplier WHERE SupplierId = ?";
+//
+//            PreparedStatement pstm = con.prepareStatement(sql);
+//            pstm.setString(1, txtSId.getText());
+//
+//            if(pstm.executeUpdate() > 0 ) {
+//                new Alert(Alert.AlertType.CONFIRMATION, "Huree!! deleted :)").show();
+//            }
+//        }
+        if(!supplierBO.deleteSuppliers(txtSId.getText())){
+            new Alert(Alert.AlertType.ERROR , "Can not Delete !)").show();
+        }else{
+            new Alert(Alert.AlertType.CONFIRMATION, " Supplier Deleted :)").show();
         }
+
         getAll();
         labelSupplierId.setText("");
         generateNextSupplierId();
@@ -314,5 +320,4 @@ public class ManageSupplierFormController implements Initializable {
         if (!Regex.setTextColor(TextFilds.EMAIL,txtEmailAddress))return false;
         return true;
     }
-
 }

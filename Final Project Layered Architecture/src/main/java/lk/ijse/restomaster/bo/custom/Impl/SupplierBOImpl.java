@@ -34,7 +34,7 @@ public class SupplierBOImpl implements SupplierBO {
 
     @Override
     public boolean deleteSuppliers(String id) throws SQLException, ClassNotFoundException {
-        return false;
+        return supplierDAO.delete(id);
     }
 
     @Override
