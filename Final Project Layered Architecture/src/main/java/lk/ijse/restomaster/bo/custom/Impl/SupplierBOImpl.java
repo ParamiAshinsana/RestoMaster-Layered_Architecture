@@ -19,7 +19,12 @@ public class SupplierBOImpl implements SupplierBO {
 
     @Override
     public ArrayList<SupplierDTO> getAllSuppliers() throws SQLException, ClassNotFoundException {
-        return null;
+        ArrayList<SupplierDTO> allSupplier = new ArrayList<>();
+        ArrayList<Supplier> all = supplierDAO.getAll();
+        for (Supplier c : all) {
+            allSupplier.add(new SupplierDTO(c.getSpId(),c.getSpName(),c.getServiceOfferings(),c.getUnitPrice(),c.getQuantity(),c.getTotal(),c.getAddress(),c.getMobileNumber(),c.getEmail()));
+        }
+        return allSupplier;
     }
 
     @Override

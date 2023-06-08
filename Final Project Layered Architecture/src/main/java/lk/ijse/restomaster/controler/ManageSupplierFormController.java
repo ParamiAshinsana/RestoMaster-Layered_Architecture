@@ -15,6 +15,7 @@ import lk.ijse.restomaster.bo.custom.Impl.SupplierBOImpl;
 import lk.ijse.restomaster.bo.custom.SupplierBO;
 import lk.ijse.restomaster.dto.CustomerDTO;
 import lk.ijse.restomaster.dto.SupplierDTO;
+import lk.ijse.restomaster.dto.tm.CustomerTM;
 import lk.ijse.restomaster.dto.tm.SupplierTM;
 import lk.ijse.restomaster.model.SupplierModel;
 import lk.ijse.restomaster.util.Regex;
@@ -25,6 +26,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 import java.util.ResourceBundle;
@@ -89,28 +91,41 @@ public class ManageSupplierFormController implements Initializable {
     }
 
     private void getAll() {
-        try{
-            observableList = FXCollections.observableArrayList();
-            List<SupplierDTO> SupplierList = SupplierModel.getAll();
+//        try{
+//            observableList = FXCollections.observableArrayList();
+//            List<SupplierDTO> SupplierList = SupplierModel.getAll();
+//
+//            for(SupplierDTO supplier : SupplierList){
+//                observableList.add(new SupplierTM(
+//                        supplier.getSpId(),
+//                        supplier.getSpName(),
+//                        supplier.getServiceOfferings(),
+//                        supplier.getUnitPrice(),
+//                        supplier.getQuantity(),
+//                        supplier.getTotal(),
+//                        supplier.getAddress(),
+//                        supplier.getMobileNumber(),
+//                        supplier.getEmail()
+//                ));
+//            }
+//            tblSupplier.setItems(observableList);
+//        }catch (SQLException e ){
+//            e.printStackTrace();
+//            new Alert(Alert.AlertType.ERROR , "Query Error !").show();
+//        }
+        tblSupplier.getItems().clear();
+        try {
+            ArrayList<SupplierDTO> allSuppliers = supplierBO.getAllSuppliers();
 
-            for(SupplierDTO supplier : SupplierList){
-                observableList.add(new SupplierTM(
-                        supplier.getSpId(),
-                        supplier.getSpName(),
-                        supplier.getServiceOfferings(),
-                        supplier.getUnitPrice(),
-                        supplier.getQuantity(),
-                        supplier.getTotal(),
-                        supplier.getAddress(),
-                        supplier.getMobileNumber(),
-                        supplier.getEmail()
-                ));
+            for (SupplierDTO c : allSuppliers) {
+                tblSupplier.getItems().add(new SupplierTM(c.getSpId(),c.getSpName(),c.getServiceOfferings(),c.getUnitPrice(),c.getQuantity(),c.getTotal(),c.getAddress(),c.getMobileNumber(),c.getEmail()));
             }
-            tblSupplier.setItems(observableList);
-        }catch (SQLException e ){
-            e.printStackTrace();
-            new Alert(Alert.AlertType.ERROR , "Query Error !").show();
+        } catch (SQLException e) {
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+        } catch (ClassNotFoundException e) {
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
+
     }
 
     private void setCellValueFactory() {
@@ -257,7 +272,7 @@ public class ManageSupplierFormController implements Initializable {
     }
 
     public void btnClearOnAction(ActionEvent actionEvent) {
-        labelSupplierId.setText("");
+        //labelSupplierId.setText("");
         txtSname.setText("");
         txtOfferings.setText("");
         txtUnitPrice.setText("");

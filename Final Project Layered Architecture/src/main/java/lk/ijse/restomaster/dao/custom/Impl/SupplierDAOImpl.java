@@ -2,8 +2,10 @@ package lk.ijse.restomaster.dao.custom.Impl;
 
 import lk.ijse.restomaster.dao.SQLUtil;
 import lk.ijse.restomaster.dao.custom.SupplierDAO;
+import lk.ijse.restomaster.entity.Customer;
 import lk.ijse.restomaster.entity.Supplier;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -11,7 +13,13 @@ public class SupplierDAOImpl implements SupplierDAO {
 
     @Override
     public ArrayList<Supplier> getAll() throws SQLException, ClassNotFoundException {
-        return null;
+        ArrayList<Supplier> allSUppliers = new ArrayList<>();
+        ResultSet rst = SQLUtil.execute("SELECT * FROM Supplier");
+        while (rst.next()) {
+            Supplier supplier = new Supplier(rst.getString("SupplierId"),rst.getString("SupplierName"),rst.getString("ServiceOfferings"),rst.getDouble("UnitPrice"),rst.getInt("Quantity"),rst.getDouble("Total"),rst.getString("Address"),rst.getString("MobileNumber"),rst.getString("EmailAddress"));
+            allSUppliers.add(supplier);
+        }
+        return allSUppliers;
     }
 
     @Override
