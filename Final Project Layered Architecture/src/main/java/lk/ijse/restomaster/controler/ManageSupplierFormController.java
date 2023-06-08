@@ -308,4 +308,8 @@ public class ManageSupplierFormController implements Initializable {
         if (!Regex.setTextColor(TextFilds.EMAIL,txtEmailAddress))return false;
         return true;
     }
+
+    public void LastDay(){
+        System.out.println("Hello");
+    }
 }
