@@ -1,4 +1,4 @@
-package lk.ijse.restomaster.dto;
+package lk.ijse.restomaster.entity;
 
 import lombok.*;
 
@@ -7,7 +7,6 @@ import lombok.*;
 @Getter
 @Setter
 @ToString
-
 public class Stock {
     private String siCode;
     private String siName;

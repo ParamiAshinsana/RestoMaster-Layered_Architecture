@@ -9,12 +9,17 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
-import lk.ijse.restomaster.dto.Stock;
+import lk.ijse.restomaster.bo.custom.CustomerBO;
+import lk.ijse.restomaster.bo.custom.Impl.CustomerBOImpl;
+import lk.ijse.restomaster.dao.custom.Impl.StockDAOImpl;
+import lk.ijse.restomaster.dao.custom.StockDAO;
+import lk.ijse.restomaster.dto.StockDTO;
 import lk.ijse.restomaster.dto.tm.StockTM;
 import lk.ijse.restomaster.model.StockModel;
 import lk.ijse.restomaster.model.SupplierModel;
 import lk.ijse.restomaster.util.Regex;
 import lk.ijse.restomaster.util.TextFilds;
+import lombok.SneakyThrows;
 
 import java.net.URL;
 import java.sql.Connection;
@@ -27,6 +32,8 @@ import java.util.Properties;
 import java.util.ResourceBundle;
 
 public class ManageStockFormController implements Initializable {
+
+    StockDAO stockDAO = new StockDAOImpl();
 
     private final static String URL = "jdbc:mysql://localhost:3306/RestoMaster";
     private final static Properties props = new Properties();
@@ -70,6 +77,7 @@ public class ManageStockFormController implements Initializable {
     public Label labelMenuItemCode;
 
 
+    @SneakyThrows
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         setCellValueFactory();
@@ -87,7 +95,7 @@ public class ManageStockFormController implements Initializable {
         }
     }
 
-    private void loadSupplierId() {
+    private void loadSupplierId() throws SQLException, ClassNotFoundException {
         try {
             List<String> ids = SupplierModel.getIds();
             ObservableList<String> obList = FXCollections.observableArrayList();
@@ -101,14 +109,23 @@ public class ManageStockFormController implements Initializable {
             e.printStackTrace();
             new Alert(Alert.AlertType.ERROR, "SQL Error!").show();
         }
+
+        List<String> id = stockDAO.loadSuppliersId();
+        ObservableList<String> obList = FXCollections.observableArrayList();
+
+        for (String un : id){
+            obList.add(un);
+        }
+        supllierIdCBox.setItems(obList);
+
     }
+
 
     private void getAll() {
         try{
             observableList = FXCollections.observableArrayList();
-            List<Stock> StockList = StockModel.getAll();
-
-            for(Stock stock : StockList){
+            List<StockDTO> StockList = StockModel.getAll();
+            for(StockDTO stock : StockList){
                 observableList.add(new StockTM(
                         stock.getSiCode(),
                         stock.getSiName(),
