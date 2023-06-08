@@ -43,22 +43,22 @@ public class CustomerModel {
     }
 
     private static String splitOrderId(String string) {
-        if(string != null) {
-            String[] strings = string.split("C0");
-            int id = Integer.parseInt(strings[1]);
-            id++;
-            String ID = String.valueOf(id);
-            int length = ID.length();
-            if (length < 2){
-                return "C00"+id;
-            }else {
-                if (length < 3){
-                    return "C0"+id;
+            if(string != null) {
+                String[] strings = string.split("C0");
+                int id = Integer.parseInt(strings[1]);
+                id++;
+                String ID = String.valueOf(id);
+                int length = ID.length();
+                if (length < 2){
+                    return "C00"+id;
                 }else {
-                    return "C"+id;
+                    if (length < 3){
+                        return "C0"+id;
+                    }else {
+                        return "C"+id;
+                    }
                 }
             }
-        }
-        return "C001";
+            return "C001";
     }
 }
