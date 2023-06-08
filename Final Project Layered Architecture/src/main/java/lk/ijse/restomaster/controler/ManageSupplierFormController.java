@@ -9,6 +9,10 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import lk.ijse.restomaster.bo.custom.CustomerBO;
+import lk.ijse.restomaster.bo.custom.Impl.CustomerBOImpl;
+import lk.ijse.restomaster.bo.custom.Impl.SupplierBOImpl;
+import lk.ijse.restomaster.bo.custom.SupplierBO;
 import lk.ijse.restomaster.dto.SupplierDTO;
 import lk.ijse.restomaster.dto.tm.SupplierTM;
 import lk.ijse.restomaster.model.SupplierModel;
@@ -25,6 +29,8 @@ import java.util.Properties;
 import java.util.ResourceBundle;
 
 public class ManageSupplierFormController implements Initializable {
+
+    SupplierBO supplierBO = new SupplierBOImpl();
 
     private final static String URL = "jdbc:mysql://localhost:3306/RestoMaster";
     private final static Properties props = new Properties();
