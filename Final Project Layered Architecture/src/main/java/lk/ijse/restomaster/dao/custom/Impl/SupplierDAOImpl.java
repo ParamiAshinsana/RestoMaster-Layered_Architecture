@@ -22,7 +22,7 @@ public class SupplierDAOImpl implements SupplierDAO {
 
     @Override
     public boolean update(Supplier entity) throws SQLException, ClassNotFoundException {
-        return false;
+       return SQLUtil.execute("UPDATE Supplier SET SupplierName = ? , ServiceOfferings = ? , UnitPrice = ? , Quantity = ? , Total = ? , Address = ? , MobileNumber = ? , EmailAddress = ?  WHERE SupplierId = ?" , entity.getSpName(),entity.getServiceOfferings(),entity.getUnitPrice(),entity.getQuantity(),entity.getTotal(),entity.getAddress(),entity.getMobileNumber(),entity.getEmail(),entity.getSpId());
     }
 
     @Override

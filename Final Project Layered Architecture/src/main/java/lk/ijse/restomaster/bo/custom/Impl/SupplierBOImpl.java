@@ -29,7 +29,7 @@ public class SupplierBOImpl implements SupplierBO {
 
     @Override
     public boolean updateSuppliers(SupplierDTO dto) throws SQLException, ClassNotFoundException {
-        return false;
+        return supplierDAO.update(new Supplier(dto.getSpId(),dto.getSpName(),dto.getServiceOfferings(),dto.getUnitPrice(),dto.getQuantity(),dto.getTotal(),dto.getAddress(),dto.getMobileNumber(),dto.getEmail()));
     }
 
     @Override

@@ -179,7 +179,7 @@ public class ManageSupplierFormController implements Initializable {
         generateNextSupplierId();
     }
 
-    public void btnUpdateSupplierOnAction(ActionEvent actionEvent) throws SQLException {
+    public void btnUpdateSupplierOnAction(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
         if(!isValidated()){
             new Alert(Alert.AlertType.ERROR, "Invalid Input !").show();
             return;
@@ -196,24 +196,30 @@ public class ManageSupplierFormController implements Initializable {
 
         Double tot = quantity * unitPrice;
 
-        try(Connection con = DriverManager.getConnection(URL, props)) {
-            String sql = "UPDATE Supplier SET SupplierName = ? , ServiceOfferings = ? , UnitPrice = ? , Quantity = ? , Total = ? , Address = ? , MobileNumber = ? , EmailAddress = ?  WHERE SupplierId = ?";
-
-            PreparedStatement pstm = con.prepareStatement(sql);
-
-            pstm.setString(1, spName);
-            pstm.setString(2, serviceOfferings);
-            pstm.setDouble(3, Double.parseDouble(String.valueOf(unitPrice)));
-            pstm.setInt(4, quantity);
-            pstm.setDouble(5, tot);
-            pstm.setString(6, address);
-            pstm.setString(7, mobileNumber);
-            pstm.setString(8, email);
-            pstm.setString(9, spId);
-            if(pstm.executeUpdate() > 0) {
-                new Alert(Alert.AlertType.CONFIRMATION, "Supplier Updated!!").show();
-            }
+//        try(Connection con = DriverManager.getConnection(URL, props)) {
+//            String sql = "UPDATE Supplier SET SupplierName = ? , ServiceOfferings = ? , UnitPrice = ? , Quantity = ? , Total = ? , Address = ? , MobileNumber = ? , EmailAddress = ?  WHERE SupplierId = ?";
+//
+//            PreparedStatement pstm = con.prepareStatement(sql);
+//
+//            pstm.setString(1, spName);
+//            pstm.setString(2, serviceOfferings);
+//            pstm.setDouble(3, Double.parseDouble(String.valueOf(unitPrice)));
+//            pstm.setInt(4, quantity);
+//            pstm.setDouble(5, tot);
+//            pstm.setString(6, address);
+//            pstm.setString(7, mobileNumber);
+//            pstm.setString(8, email);
+//            pstm.setString(9, spId);
+//            if(pstm.executeUpdate() > 0) {
+//                new Alert(Alert.AlertType.CONFIRMATION, "Supplier Updated!!").show();
+//            }
+//        }
+        if(!supplierBO.updateSuppliers(new SupplierDTO(spId,spName,serviceOfferings,unitPrice,quantity,tot,address,mobileNumber,email))){
+            new Alert(Alert.AlertType.ERROR , "Can not Added Supplier !").show();
+        }else{
+            new Alert(Alert.AlertType.CONFIRMATION , "Supplier Added!!").show();
         }
+
         getAll();
         labelSupplierId.setText("");
         txtSname.setText("");
