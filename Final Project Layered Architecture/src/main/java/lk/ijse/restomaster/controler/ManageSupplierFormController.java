@@ -13,6 +13,7 @@ import lk.ijse.restomaster.bo.custom.CustomerBO;
 import lk.ijse.restomaster.bo.custom.Impl.CustomerBOImpl;
 import lk.ijse.restomaster.bo.custom.Impl.SupplierBOImpl;
 import lk.ijse.restomaster.bo.custom.SupplierBO;
+import lk.ijse.restomaster.dto.CustomerDTO;
 import lk.ijse.restomaster.dto.SupplierDTO;
 import lk.ijse.restomaster.dto.tm.SupplierTM;
 import lk.ijse.restomaster.model.SupplierModel;
@@ -124,7 +125,7 @@ public class ManageSupplierFormController implements Initializable {
         colEAddress.setCellValueFactory(new PropertyValueFactory<>("email"));
     }
 
-    public void btnAddSupplierOnAction(ActionEvent actionEvent) throws SQLException {
+    public void btnAddSupplierOnAction(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
         if(!isValidated()){
             new Alert(Alert.AlertType.ERROR, "Invalid Input !").show();
             return;
@@ -140,26 +141,31 @@ public class ManageSupplierFormController implements Initializable {
         String email = txtEmailAddress.getText();
         Double  tot = quantity * unitPrice;
 
-            try (Connection con = DriverManager.getConnection(URL, props)) {
-                String sql = "INSERT INTO Supplier( SupplierId , SupplierName , ServiceOfferings , UnitPrice , Quantity , Total , Address , MobileNumber , EmailAddress ) VALUES(?,? ,? ,?, ?,?,?,?,?)";
+//            try (Connection con = DriverManager.getConnection(URL, props)) {
+//                String sql = "INSERT INTO Supplier( SupplierId , SupplierName , ServiceOfferings , UnitPrice , Quantity , Total , Address , MobileNumber , EmailAddress ) VALUES(?,? ,? ,?, ?,?,?,?,?)";
+//
+//                PreparedStatement pstm = con.prepareStatement(sql);
+//                pstm.setString(1, spId);
+//                pstm.setString(2, spName);
+//                pstm.setString(3, serviceOfferings);
+//                pstm.setDouble(4, Double.parseDouble(String.valueOf(unitPrice)));
+//                pstm.setInt(5, quantity);
+//                pstm.setDouble(6, tot);
+//                pstm.setString(7, address);
+//                pstm.setString(8, mobileNumber);
+//                pstm.setString(9, email);
+//
+//                int affectedRows = pstm.executeUpdate();
+//                if (affectedRows > 0) {
+//                    new Alert(Alert.AlertType.CONFIRMATION, "Stock Added!!").show();
+//                }
+//            }
 
-                PreparedStatement pstm = con.prepareStatement(sql);
-                pstm.setString(1, spId);
-                pstm.setString(2, spName);
-                pstm.setString(3, serviceOfferings);
-                pstm.setDouble(4, Double.parseDouble(String.valueOf(unitPrice)));
-                pstm.setInt(5, quantity);
-                pstm.setDouble(6, tot);
-                pstm.setString(7, address);
-                pstm.setString(8, mobileNumber);
-                pstm.setString(9, email);
-
-                int affectedRows = pstm.executeUpdate();
-                if (affectedRows > 0) {
-                    new Alert(Alert.AlertType.CONFIRMATION, "Stock Added!!").show();
-                }
-            }
-
+        if(!supplierBO.addSuppliers(new SupplierDTO(spId,spName,serviceOfferings,unitPrice,quantity,tot,address,mobileNumber,email))){
+            new Alert(Alert.AlertType.ERROR , "Can not Added Supplier !").show();
+        }else{
+            new Alert(Alert.AlertType.CONFIRMATION , "Supplier Added!!").show();
+        }
             labelSupplierId.setText("");
             txtSname.setText("");
             txtOfferings.setText("");
