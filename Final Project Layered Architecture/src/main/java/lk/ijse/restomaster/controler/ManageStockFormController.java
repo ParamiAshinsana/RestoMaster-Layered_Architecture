@@ -117,7 +117,6 @@ public class ManageStockFormController implements Initializable {
             obList.add(un);
         }
         supllierIdCBox.setItems(obList);
-
     }
 
 

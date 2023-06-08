@@ -9,4 +9,5 @@ import java.util.List;
 
 public interface StockDAO extends CrudDAO<Stock> {
     public List<String> loadSuppliersId() throws SQLException, ClassNotFoundException;
+
 }
