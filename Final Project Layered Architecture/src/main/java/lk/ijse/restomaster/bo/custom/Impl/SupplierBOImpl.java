@@ -7,6 +7,8 @@ import lk.ijse.restomaster.dao.custom.Impl.SupplierDAOImpl;
 import lk.ijse.restomaster.dao.custom.SupplierDAO;
 import lk.ijse.restomaster.dto.CustomerDTO;
 import lk.ijse.restomaster.dto.SupplierDTO;
+import lk.ijse.restomaster.entity.Customer;
+import lk.ijse.restomaster.entity.Supplier;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -22,7 +24,7 @@ public class SupplierBOImpl implements SupplierBO {
 
     @Override
     public boolean addSuppliers(SupplierDTO dto) throws SQLException, ClassNotFoundException {
-        return false;
+        return supplierDAO.add(new Supplier(dto.getSpId(),dto.getSpName(),dto.getServiceOfferings(),dto.getUnitPrice(),dto.getQuantity(),dto.getTotal(),dto.getAddress(),dto.getMobileNumber(),dto.getEmail()));
     }
 
     @Override

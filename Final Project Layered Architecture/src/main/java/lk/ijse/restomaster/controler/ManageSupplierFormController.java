@@ -309,7 +309,4 @@ public class ManageSupplierFormController implements Initializable {
         return true;
     }
 
-    public void LastDay(){
-        System.out.println("Hello");
-    }
 }
