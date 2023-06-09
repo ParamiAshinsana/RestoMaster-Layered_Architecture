@@ -20,6 +20,7 @@ import lk.ijse.restomaster.dto.tm.SupplierTM;
 import lk.ijse.restomaster.model.SupplierModel;
 import lk.ijse.restomaster.util.Regex;
 import lk.ijse.restomaster.util.TextFilds;
+import lombok.SneakyThrows;
 
 import java.net.URL;
 import java.sql.Connection;
@@ -74,6 +75,7 @@ public class ManageSupplierFormController implements Initializable {
     public Label labelSupplierId;
 
 
+    @SneakyThrows
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         setCellValueFactory();
@@ -81,13 +83,15 @@ public class ManageSupplierFormController implements Initializable {
         generateNextSupplierId();
     }
 
-    private void generateNextSupplierId() {
-        try {
-            String nextId = SupplierModel.generateNextSupplierId();
-            labelSupplierId.setText(nextId);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+    private void generateNextSupplierId() throws SQLException, ClassNotFoundException{
+//        try {
+//            String nextId = SupplierModel.generateNextSupplierId();
+//            labelSupplierId.setText(nextId);
+//        } catch (SQLException e) {
+//            throw new RuntimeException(e);
+//        }
+        String nextId = supplierBO.generateNewSuppliersID();
+        labelSupplierId.setText(nextId);
     }
 
     private void getAll() {
