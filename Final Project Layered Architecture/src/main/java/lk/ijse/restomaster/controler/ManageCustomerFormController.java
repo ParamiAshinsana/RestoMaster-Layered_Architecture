@@ -96,7 +96,6 @@ public class ManageCustomerFormController implements Initializable{
     }
 
     public void btnaddonaction(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
-
         if(!isValidated()){
             new Alert(Alert.AlertType.ERROR, "Invalid Input !").show();
             return;
@@ -123,6 +122,7 @@ public class ManageCustomerFormController implements Initializable{
 //            }
             //new
         //customerBO.addCustomers(new CustomerDTO(id,name,contact,address));
+
         if(!customerBO.addCustomers(new CustomerDTO(id,name,contact,address))){
             new Alert(Alert.AlertType.ERROR , "Can not Added Customer !").show();
         }else{

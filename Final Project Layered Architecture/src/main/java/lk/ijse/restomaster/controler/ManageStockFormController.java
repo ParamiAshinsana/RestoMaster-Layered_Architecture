@@ -11,8 +11,11 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import lk.ijse.restomaster.bo.custom.CustomerBO;
 import lk.ijse.restomaster.bo.custom.Impl.CustomerBOImpl;
+import lk.ijse.restomaster.bo.custom.Impl.StockBOImpl;
+import lk.ijse.restomaster.bo.custom.StockBO;
 import lk.ijse.restomaster.dao.custom.Impl.StockDAOImpl;
 import lk.ijse.restomaster.dao.custom.StockDAO;
+import lk.ijse.restomaster.dto.CustomerDTO;
 import lk.ijse.restomaster.dto.StockDTO;
 import lk.ijse.restomaster.dto.tm.StockTM;
 import lk.ijse.restomaster.model.StockModel;
@@ -34,6 +37,7 @@ import java.util.ResourceBundle;
 public class ManageStockFormController implements Initializable {
 
     StockDAO stockDAO = new StockDAOImpl();
+    StockBO stockBO = new StockBOImpl();
 
     private final static String URL = "jdbc:mysql://localhost:3306/RestoMaster";
     private final static Properties props = new Properties();
@@ -161,11 +165,11 @@ public class ManageStockFormController implements Initializable {
 
     }
 
-    public void btnaddonaction(ActionEvent actionEvent) throws SQLException {
-//        if(!isValidated()){
-//            new Alert(Alert.AlertType.ERROR, "Can't Added Stock!!").show();
-//            return;
-//        }
+    public void btnaddonaction(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
+        if(!isValidated()){
+            new Alert(Alert.AlertType.ERROR, "Can't Added Stock!!").show();
+            return;
+        }
 
         String siCode = labelMenuItemCode.getText();
         String siName = txtstockname.getText();
@@ -178,27 +182,34 @@ public class ManageStockFormController implements Initializable {
         Double totalCost = Double.valueOf(lbltotal.getText());
         String spId = String.valueOf(supllierIdCBox.getValue());
 
-        try (Connection con = DriverManager.getConnection(URL, props)) {
+//        try (Connection con = DriverManager.getConnection(URL, props)) {
+//
+//            String sql = "INSERT INTO Stock(StockItemCode , StockItemName , MaxStockLevel , MinStockLevel , PurchaseDate , ExpirationDate , Quantity , UnitPrice , TotalCost , SpId ) VALUES(?,?,?,?,?,?,?,?,?,?)";
+//
+//            PreparedStatement pstm = con.prepareStatement(sql);
+//            pstm.setString(1, labelMenuItemCode.getText());
+//            pstm.setString(2, siName);
+//            pstm.setString(3, maxLevel);
+//            pstm.setString(4, minLevel);
+//            pstm.setString(5, prDate);
+//            pstm.setString(6, exDate);
+//            pstm.setInt(7, Integer.parseInt(String.valueOf(quantity)));
+//            pstm.setDouble(8, Double.parseDouble(String.valueOf(unitPrice)));
+//            pstm.setDouble(9, Double.parseDouble(String.valueOf(totalCost)));
+//            pstm.setString(10, spId);
+//
+//            int affectedRows = pstm.executeUpdate();
+//            if(affectedRows > 0) {
+//                new Alert(Alert.AlertType.CONFIRMATION, "Stock Added!!").show();
+//            }
+//        }
 
-            String sql = "INSERT INTO Stock(StockItemCode , StockItemName , MaxStockLevel , MinStockLevel , PurchaseDate , ExpirationDate , Quantity , UnitPrice , TotalCost , SpId ) VALUES(?,?,?,?,?,?,?,?,?,?)";
-
-            PreparedStatement pstm = con.prepareStatement(sql);
-            pstm.setString(1, labelMenuItemCode.getText());
-            pstm.setString(2, siName);
-            pstm.setString(3, maxLevel);
-            pstm.setString(4, minLevel);
-            pstm.setString(5, prDate);
-            pstm.setString(6, exDate);
-            pstm.setInt(7, Integer.parseInt(String.valueOf(quantity)));
-            pstm.setDouble(8, Double.parseDouble(String.valueOf(unitPrice)));
-            pstm.setDouble(9, Double.parseDouble(String.valueOf(totalCost)));
-            pstm.setString(10, spId);
-
-            int affectedRows = pstm.executeUpdate();
-            if(affectedRows > 0) {
-                new Alert(Alert.AlertType.CONFIRMATION, "Stock Added!!").show();
-            }
+        if(!stockBO.addStocks(new StockDTO(siCode,siName,maxLevel,minLevel,prDate,exDate,quantity ,unitPrice, totalCost, spId))){
+            new Alert(Alert.AlertType.ERROR , "Can not Added Customer !").show();
+        }else{
+            new Alert(Alert.AlertType.CONFIRMATION , "Customer Added!!").show();
         }
+
         getAll();
 
         labelMenuItemCode.setText("");
@@ -351,11 +362,11 @@ public class ManageStockFormController implements Initializable {
     }
 
     public boolean isValidated(){
-        if (!Regex.setTextColor(TextFilds.PHONE,txtstockname))return false;
-        if (!Regex.setTextColor(TextFilds.ADDRESS,txtunitprice))return false;
-        if (!Regex.setTextColor(TextFilds.NAME,txtquantity))return false;
-        if (!Regex.setTextColor(TextFilds.NAME,txtmaxlevel))return false;
-        if (!Regex.setTextColor(TextFilds.NAME,txtminlevel))return false;
+        if (!Regex.setTextColor(TextFilds.NAME,txtstockname))return false;
+        if (!Regex.setTextColor(TextFilds.DOUBLE,txtunitprice))return false;
+        if (!Regex.setTextColor(TextFilds.INT,txtquantity))return false;
+        if (!Regex.setTextColor(TextFilds.INT,txtmaxlevel))return false;
+        if (!Regex.setTextColor(TextFilds.INT,txtminlevel))return false;
         return true;
     }
 }
