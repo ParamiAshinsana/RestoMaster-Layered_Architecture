@@ -22,7 +22,7 @@ public class StockDAOImpl implements StockDAO {
 
     @Override
     public boolean update(Stock entity) throws SQLException, ClassNotFoundException {
-        return false;
+        return SQLUtil.execute("UPDATE Stock SET StockItemName = ? , MaxStockLevel = ? , MinstockLevel = ? , PurchaseDate = ? , ExpirationDate = ? , Quantity = ? , UnitPrice = ? , TotalCost = ? , SpId = ?  WHERE StockItemCode = ?", entity.getSiName(), entity.getMaxLevel(), entity.getMinLevel(), entity.getPrDate(), entity.getExDate(), entity.getQuantity(), entity.getUnitPrice(), entity.getTotalCost(), entity.getSpId() , entity.getSiCode());
     }
 
     @Override

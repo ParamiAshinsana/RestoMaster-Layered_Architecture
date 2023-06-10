@@ -184,33 +184,33 @@ public class ManageStockFormController implements Initializable {
 
         Double tot = quantity * unitPrice;
 
-        try (Connection con = DriverManager.getConnection(URL, props)) {
-
-            String sql = "INSERT INTO Stock(StockItemCode , StockItemName , MaxStockLevel , MinStockLevel , PurchaseDate , ExpirationDate , Quantity , UnitPrice , TotalCost , SpId ) VALUES(?,?,?,?,?,?,?,?,?,?)";
-
-            PreparedStatement pstm = con.prepareStatement(sql);
-            pstm.setString(1, labelMenuItemCode.getText());
-            pstm.setString(2, siName);
-            pstm.setString(3, maxLevel);
-            pstm.setString(4, minLevel);
-            pstm.setString(5, prDate);
-            pstm.setString(6, exDate);
-            pstm.setInt(7, Integer.parseInt(String.valueOf(quantity)));
-            pstm.setDouble(8, Double.parseDouble(String.valueOf(unitPrice)));
-            pstm.setDouble(9, tot);
-            pstm.setString(10, spId);
-
-            int affectedRows = pstm.executeUpdate();
-            if(affectedRows > 0) {
-                new Alert(Alert.AlertType.CONFIRMATION, "Stock Added!!").show();
-            }
-        }
-
-//        if(!stockBO.addStocks(new StockDTO(siCode,siName,maxLevel,minLevel,prDate,exDate,quantity ,unitPrice, totalCost, spId))){
-//            new Alert(Alert.AlertType.ERROR , "Can not Added Stock !").show();
-//        }else{
-//            new Alert(Alert.AlertType.CONFIRMATION , "Stock Added!!").show();
+//        try (Connection con = DriverManager.getConnection(URL, props)) {
+//
+//            String sql = "INSERT INTO Stock(StockItemCode , StockItemName , MaxStockLevel , MinStockLevel , PurchaseDate , ExpirationDate , Quantity , UnitPrice , TotalCost , SpId ) VALUES(?,?,?,?,?,?,?,?,?,?)";
+//
+//            PreparedStatement pstm = con.prepareStatement(sql);
+//            pstm.setString(1, labelMenuItemCode.getText());
+//            pstm.setString(2, siName);
+//            pstm.setString(3, maxLevel);
+//            pstm.setString(4, minLevel);
+//            pstm.setString(5, prDate);
+//            pstm.setString(6, exDate);
+//            pstm.setInt(7, Integer.parseInt(String.valueOf(quantity)));
+//            pstm.setDouble(8, Double.parseDouble(String.valueOf(unitPrice)));
+//            pstm.setDouble(9, tot);
+//            pstm.setString(10, spId);
+//
+//            int affectedRows = pstm.executeUpdate();
+//            if(affectedRows > 0) {
+//                new Alert(Alert.AlertType.CONFIRMATION, "Stock Added!!").show();
+//            }
 //        }
+
+        if(!stockBO.addStocks(new StockDTO(siCode,siName,maxLevel,minLevel,prDate,exDate,quantity ,unitPrice, tot, spId))){
+            new Alert(Alert.AlertType.ERROR , "Can not Added Stock !").show();
+        }else{
+            new Alert(Alert.AlertType.CONFIRMATION , "Stock Added!!").show();
+        }
 
         getAll();
 
@@ -242,7 +242,7 @@ public class ManageStockFormController implements Initializable {
         exDatePicker.setValue(LocalDate.parse(colexdate.getCellData(index).toString()));
         txtquantity.setText(colquantity.getCellData(index).toString());
         txtunitprice.setText(colsiprice.getCellData(index).toString());
-        lbltotal.setText(coltotal.getCellData(index).toString());
+        //lbltotal.setText(coltotal.getCellData(index).toString());
         supllierIdCBox.setValue(colsupplierId.getCellData(index).toString());
     }
 
@@ -292,36 +292,37 @@ public class ManageStockFormController implements Initializable {
         String exDate = String.valueOf(exDatePicker.getValue());
         int quantity = Integer.parseInt(txtquantity.getText());
         Double unitPrice = Double.valueOf(txtunitprice.getText());
-        Double totalCost = quantity * unitPrice;
+        //Double totalCost = quantity * unitPrice;
         String spId = String.valueOf(supllierIdCBox.getValue());
 
 
-        try(Connection con = DriverManager.getConnection(URL, props)) {
-            String sql = "UPDATE Stock SET StockItemName = ? , MaxStockLevel = ? , MinStockLevel = ? , PurchaseDate = ? , ExpirationDate = ? , Quantity = ? , UnitPrice = ? , TotalCost = ? , SpId = ? WHERE StockItemCode = ?";
-
-            PreparedStatement pstm = con.prepareStatement(sql);
-            pstm.setString(1, siName);
-            pstm.setString(2, maxLevel);
-            pstm.setString(3, minLevel);
-            pstm.setString(4, prDate);
-            pstm.setString(5, exDate);
-            pstm.setInt(6, Integer.parseInt(String.valueOf(quantity)));
-            pstm.setDouble(7, Double.parseDouble(String.valueOf(unitPrice)));
-            pstm.setDouble(8, Double.parseDouble(String.valueOf(totalCost)));
-            pstm.setString(9, spId);
-            pstm.setString(10, siCode);
-
-
-            if(pstm.executeUpdate() > 0) {
-                new Alert(Alert.AlertType.CONFIRMATION, "Stock Updated!!").show();
-            }
-        }
-
-//        if(!stockBO.updateStocks(new StockDTO(siCode,siName,maxLevel,minLevel,prDate,exDate,quantity,unitPrice,totalCost,spId))){
-//            new Alert(Alert.AlertType.ERROR , "Can not Added Customer !").show();
-//        }else{
-//            new Alert(Alert.AlertType.CONFIRMATION , "Customer Added!!").show();
+//        try(Connection con = DriverManager.getConnection(URL, props)) {
+//            String sql = "UPDATE Stock SET StockItemName = ? , MaxStockLevel = ? , MinStockLevel = ? , PurchaseDate = ? , ExpirationDate = ? , Quantity = ? , UnitPrice = ? , TotalCost = ? , SpId = ? WHERE StockItemCode = ?";
+//
+//            PreparedStatement pstm = con.prepareStatement(sql);
+//            pstm.setString(1, siName);
+//            pstm.setString(2, maxLevel);
+//            pstm.setString(3, minLevel);
+//            pstm.setString(4, prDate);
+//            pstm.setString(5, exDate);
+//            pstm.setInt(6, Integer.parseInt(String.valueOf(quantity)));
+//            pstm.setDouble(7, Double.parseDouble(String.valueOf(unitPrice)));
+//            pstm.setDouble(8, Double.parseDouble(String.valueOf(totalCost)));
+//            pstm.setString(9, spId);
+//            pstm.setString(10, siCode);
+//
+//
+//            if(pstm.executeUpdate() > 0) {
+//                new Alert(Alert.AlertType.CONFIRMATION, "Stock Updated!!").show();
+//            }
 //        }
+       Double tot = quantity * unitPrice;
+
+        if(!stockBO.updateStocks(new StockDTO(siCode,siName,maxLevel,minLevel,prDate,exDate,quantity,unitPrice,tot,spId))){
+            new Alert(Alert.AlertType.ERROR , "Can not Added Stock !").show();
+        }else{
+            new Alert(Alert.AlertType.CONFIRMATION , "Stock Added!!").show();
+        }
 
         getAll();
 
@@ -333,7 +334,7 @@ public class ManageStockFormController implements Initializable {
         exDatePicker.setValue(null);
         txtquantity.setText("");
         txtunitprice.setText("");
-        lbltotal.setText("");
+        //lbltotal.setText("");
         supllierIdCBox.setValue("");
         generateNextStockId();
 

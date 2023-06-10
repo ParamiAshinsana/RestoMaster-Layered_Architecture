@@ -25,7 +25,7 @@ public class StockBOImpl implements StockBO {
 
     @Override
     public boolean updateStocks(StockDTO dto) throws SQLException, ClassNotFoundException {
-        return false;
+        return stockDAO.update(new Stock(dto.getSiCode(),dto.getSiName(),dto.getMaxLevel(),dto.getMinLevel(),dto.getPrDate(),dto.getExDate(),dto.getQuantity(),dto.getUnitPrice(),dto.getTotalCost(),dto.getSpId()));
     }
 
     @Override
