@@ -205,9 +205,9 @@ public class ManageStockFormController implements Initializable {
 //        }
 
         if(!stockBO.addStocks(new StockDTO(siCode,siName,maxLevel,minLevel,prDate,exDate,quantity ,unitPrice, totalCost, spId))){
-            new Alert(Alert.AlertType.ERROR , "Can not Added Customer !").show();
+            new Alert(Alert.AlertType.ERROR , "Can not Added Stock !").show();
         }else{
-            new Alert(Alert.AlertType.CONFIRMATION , "Customer Added!!").show();
+            new Alert(Alert.AlertType.CONFIRMATION , "Stock Added!!").show();
         }
 
         getAll();

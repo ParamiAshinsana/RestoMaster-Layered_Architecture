@@ -17,7 +17,7 @@ public class StockDAOImpl implements StockDAO {
 
     @Override
     public boolean add(Stock entity) throws SQLException, ClassNotFoundException {
-        return false;
+        return SQLUtil.execute("INSERT INTO Stock(StockItemCode,StockItemName,MaxStockLevel ,MinstockLevel ,PurchaseDate ,ExpirationDate ,Quantity ,UnitPrice , TotalCost,SpId) VALUES(?, ?, ?, ?,?, ?, ?, ?,?,?)" , entity.getSiCode(), entity.getSiName(), entity.getMaxLevel(), entity.getMinLevel(), entity.getPrDate(), entity.getExDate(), entity.getQuantity(), entity.getUnitPrice(), entity.getTotalCost(), entity.getSpId());
     }
 
     @Override
