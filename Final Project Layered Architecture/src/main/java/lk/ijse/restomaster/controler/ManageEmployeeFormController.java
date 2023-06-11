@@ -9,7 +9,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
-import lk.ijse.restomaster.dto.Employee;
+import lk.ijse.restomaster.dto.EmployeeDTO;
 import lk.ijse.restomaster.dto.tm.EmployeeTM;
 import lk.ijse.restomaster.model.EmployeeModel;
 import lk.ijse.restomaster.util.Regex;
@@ -90,9 +90,9 @@ public class ManageEmployeeFormController implements Initializable {
     private void getAll() {
         try{
             observableList = FXCollections.observableArrayList();
-            List<Employee> EmployeeList = EmployeeModel.getAll();
+            List<EmployeeDTO> EmployeeList = EmployeeModel.getAll();
 
-            for(Employee employee : EmployeeList){
+            for(EmployeeDTO employee : EmployeeList){
                 observableList.add(new EmployeeTM(
                         employee.getEmpId(),
                         employee.getEmpName(),
