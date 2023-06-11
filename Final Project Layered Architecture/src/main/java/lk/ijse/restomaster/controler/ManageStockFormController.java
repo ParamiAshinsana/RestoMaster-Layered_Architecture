@@ -214,7 +214,7 @@ public class ManageStockFormController implements Initializable {
 
         getAll();
 
-        labelMenuItemCode.setText("");
+        //labelMenuItemCode.setText("");
         txtstockname.setText("");
         txtmaxlevel.setText("");
         txtminlevel.setText("");
@@ -223,7 +223,7 @@ public class ManageStockFormController implements Initializable {
         txtquantity.setText("");
         txtunitprice.setText("");
         //lbltotal.setText("");
-        supllierIdCBox.setValue("");
+        supllierIdCBox.setValue(null);
 
         generateNextStockId();
     }
@@ -246,8 +246,8 @@ public class ManageStockFormController implements Initializable {
         supllierIdCBox.setValue(colsupplierId.getCellData(index).toString());
     }
 
-    public void btnclearonaction(ActionEvent actionEvent) {
-        labelMenuItemCode.setText("");
+    public void btnclearonaction(ActionEvent actionEvent){
+        //labelMenuItemCode.setText("");
         txtstockname.setText("");
         txtmaxlevel.setText("");
         txtminlevel.setText("");
@@ -255,9 +255,8 @@ public class ManageStockFormController implements Initializable {
         exDatePicker.setValue(null);
         txtquantity.setText("");
         txtunitprice.setText("");
-        lbltotal.setText("");
-        supllierIdCBox.setValue("");
-
+        supllierIdCBox.setValue(null);
+        //lbltotal.setText("");
     }
 
     public void btndeleteonaction(ActionEvent actionEvent) throws SQLException {
@@ -273,8 +272,16 @@ public class ManageStockFormController implements Initializable {
                 new Alert(Alert.AlertType.CONFIRMATION, "Huree!! deleted :)").show();
             }
         }
+
         getAll();
-        labelMenuItemCode.setText("");
+        txtstockname.setText("");
+        txtmaxlevel.setText("");
+        txtminlevel.setText("");
+        prDatePicker.setValue(null);
+        exDatePicker.setValue(null);
+        txtquantity.setText("");
+        txtunitprice.setText("");
+        supllierIdCBox.setValue(null);
         generateNextStockId();
     }
 
@@ -326,7 +333,8 @@ public class ManageStockFormController implements Initializable {
 
         getAll();
 
-        labelMenuItemCode.setText("");
+        //labelMenuItemCode.setText("");
+        txtstockid.setText("");
         txtstockname.setText("");
         txtmaxlevel.setText("");
         txtminlevel.setText("");
@@ -335,7 +343,7 @@ public class ManageStockFormController implements Initializable {
         txtquantity.setText("");
         txtunitprice.setText("");
         //lbltotal.setText("");
-        supllierIdCBox.setValue("");
+        supllierIdCBox.setValue(null);
         generateNextStockId();
 
     }

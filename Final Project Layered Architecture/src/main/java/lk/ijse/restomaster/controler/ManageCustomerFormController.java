@@ -207,6 +207,7 @@ public class ManageCustomerFormController implements Initializable{
         }else{
             new Alert(Alert.AlertType.CONFIRMATION, " Customer Deleted :)").show();
         }
+
         getAll();
         labelCustomerId.setText("");
         txtname.setText("");
