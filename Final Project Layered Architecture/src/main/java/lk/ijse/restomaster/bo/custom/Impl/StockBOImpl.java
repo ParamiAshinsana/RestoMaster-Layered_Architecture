@@ -42,6 +42,6 @@ public class StockBOImpl implements StockBO {
 
     @Override
     public String generateNewStocksID() throws SQLException, ClassNotFoundException {
-        return null;
+        return stockDAO.generateNewId();
     }
 }

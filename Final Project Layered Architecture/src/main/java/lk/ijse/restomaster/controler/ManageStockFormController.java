@@ -92,13 +92,15 @@ public class ManageStockFormController implements Initializable {
         generateNextStockId();
     }
 
-    private void generateNextStockId() {
-        try {
-            String nextId = StockModel.generateNextStockID();
-            labelMenuItemCode.setText(nextId);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+    private void generateNextStockId() throws SQLException, ClassNotFoundException {
+//        try {
+//            String nextId = StockModel.generateNextStockID();
+//            labelMenuItemCode.setText(nextId);
+//        } catch (SQLException e) {
+//            throw new RuntimeException(e);
+//        }
+        String nextId = stockBO.generateNewStocksID();
+        labelMenuItemCode.setText(nextId);
     }
 
     private void loadSupplierId() throws SQLException, ClassNotFoundException {
