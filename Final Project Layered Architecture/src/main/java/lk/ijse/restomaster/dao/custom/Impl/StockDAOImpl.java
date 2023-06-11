@@ -2,6 +2,7 @@ package lk.ijse.restomaster.dao.custom.Impl;
 
 import lk.ijse.restomaster.dao.SQLUtil;
 import lk.ijse.restomaster.dao.custom.StockDAO;
+import lk.ijse.restomaster.entity.Customer;
 import lk.ijse.restomaster.entity.Stock;
 
 import java.sql.ResultSet;
@@ -12,7 +13,13 @@ import java.util.List;
 public class StockDAOImpl implements StockDAO {
     @Override
     public ArrayList<Stock> getAll() throws SQLException, ClassNotFoundException {
-        return null;
+        ArrayList<Stock> allStock = new ArrayList<>();
+        ResultSet rst = SQLUtil.execute("SELECT * FROM Stock");
+        while (rst.next()) {
+            Stock stock = new Stock(rst.getString("StockItemCode") , rst.getString("StockItemName") , rst.getString("MaxStockLevel") , rst.getString("MinstockLevel") , rst.getString("PurchaseDate"), rst.getString("ExpirationDate"),rst.getInt("Quantity"),rst.getDouble("UnitPrice"),rst.getDouble("TotalCost"),rst.getString("SpId"));
+            allStock.add(stock);
+        }
+        return allStock;
     }
 
     @Override

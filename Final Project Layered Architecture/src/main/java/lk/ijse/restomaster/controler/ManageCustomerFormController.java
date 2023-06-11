@@ -171,7 +171,6 @@ public class ManageCustomerFormController implements Initializable{
             ArrayList<CustomerDTO> allCustomers = customerBO.getAllCustomers();
 
             for (CustomerDTO c : allCustomers) {
-                //tblcustomer.getItems().add(new CustomerTM(c.getId(), c.getName(), c.getAddress()));
                 tblcustomer.getItems().add(new CustomerTM(c.getId(),c.getName(),c.getContact(),c.getAddress()));
             }
         } catch (SQLException e) {

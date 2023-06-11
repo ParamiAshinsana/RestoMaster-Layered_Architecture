@@ -3,8 +3,10 @@ package lk.ijse.restomaster.bo.custom.Impl;
 import lk.ijse.restomaster.bo.custom.StockBO;
 import lk.ijse.restomaster.dao.custom.Impl.StockDAOImpl;
 import lk.ijse.restomaster.dao.custom.StockDAO;
+import lk.ijse.restomaster.dto.CustomerDTO;
 import lk.ijse.restomaster.dto.StockDTO;
 import lk.ijse.restomaster.dto.SupplierDTO;
+import lk.ijse.restomaster.entity.Customer;
 import lk.ijse.restomaster.entity.Stock;
 
 import java.sql.SQLException;
@@ -15,7 +17,12 @@ public class StockBOImpl implements StockBO {
 
     @Override
     public ArrayList<StockDTO> getAllStocks() throws SQLException, ClassNotFoundException {
-        return null;
+        ArrayList<StockDTO> allStocks= new ArrayList<>();
+        ArrayList<Stock> all = stockDAO.getAll();
+        for (Stock c : all) {
+            allStocks.add(new StockDTO(c.getSiCode(),c.getSiName(),c.getMaxLevel(),c.getMinLevel(),c.getPrDate(),c.getExDate(),c.getQuantity(),c.getUnitPrice(),c.getTotalCost(),c.getSpId()));
+        }
+        return allStocks;
     }
 
     @Override

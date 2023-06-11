@@ -17,6 +17,7 @@ import lk.ijse.restomaster.dao.custom.Impl.StockDAOImpl;
 import lk.ijse.restomaster.dao.custom.StockDAO;
 import lk.ijse.restomaster.dto.CustomerDTO;
 import lk.ijse.restomaster.dto.StockDTO;
+import lk.ijse.restomaster.dto.tm.CustomerTM;
 import lk.ijse.restomaster.dto.tm.StockTM;
 import lk.ijse.restomaster.model.StockModel;
 import lk.ijse.restomaster.model.SupplierModel;
@@ -30,6 +31,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 import java.util.ResourceBundle;
@@ -125,28 +127,40 @@ public class ManageStockFormController implements Initializable {
 
 
     private void getAll() {
-        try{
-            observableList = FXCollections.observableArrayList();
-            List<StockDTO> StockList = StockModel.getAll();
-            for(StockDTO stock : StockList){
-                observableList.add(new StockTM(
-                        stock.getSiCode(),
-                        stock.getSiName(),
-                        stock.getMaxLevel(),
-                        stock.getMinLevel(),
-                        stock.getPrDate(),
-                        stock.getExDate(),
-                        stock.getQuantity(),
-                        stock.getUnitPrice(),
-                        stock.getTotalCost(),
-                        stock.getSpId()
-                ));
-            }
-            tblstock.setItems(observableList);
-        }catch (SQLException e ){
-            e.printStackTrace();
-            new Alert(Alert.AlertType.ERROR , "Query Error !").show();
+//        try{
+//            observableList = FXCollections.observableArrayList();
+//            List<StockDTO> StockList = StockModel.getAll();
+//            for(StockDTO stock : StockList){
+//                observableList.add(new StockTM(
+//                        stock.getSiCode(),
+//                        stock.getSiName(),
+//                        stock.getMaxLevel(),
+//                        stock.getMinLevel(),
+//                        stock.getPrDate(),
+//                        stock.getExDate(),
+//                        stock.getQuantity(),
+//                        stock.getUnitPrice(),
+//                        stock.getTotalCost(),
+//                        stock.getSpId()
+//                ));
+//            }
+//            tblstock.setItems(observableList);
+//        }catch (SQLException e ){
+//            e.printStackTrace();
+//            new Alert(Alert.AlertType.ERROR , "Query Error !").show();
+//
+//        }
+        tblstock.getItems().clear();
+        try {
+            ArrayList<StockDTO> allCustomers = stockBO.getAllStocks();
 
+            for (StockDTO c : allCustomers) {
+                tblstock.getItems().add(new StockTM(c.getSiCode(),c.getSiName(),c.getMaxLevel(),c.getMinLevel(),c.getPrDate(),c.getExDate(),c.getQuantity(),c.getUnitPrice(),c.getTotalCost(),c.getSpId()));
+            }
+        } catch (SQLException e) {
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+        } catch (ClassNotFoundException e) {
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
     }
 
