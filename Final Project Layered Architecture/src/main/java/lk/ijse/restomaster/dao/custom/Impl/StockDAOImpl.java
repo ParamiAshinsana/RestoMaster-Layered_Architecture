@@ -27,7 +27,7 @@ public class StockDAOImpl implements StockDAO {
 
     @Override
     public boolean delete(String id) throws SQLException, ClassNotFoundException {
-        return false;
+        return SQLUtil.execute("DELETE FROM Stock WHERE StockItemCode=?", id);
     }
 
     @Override

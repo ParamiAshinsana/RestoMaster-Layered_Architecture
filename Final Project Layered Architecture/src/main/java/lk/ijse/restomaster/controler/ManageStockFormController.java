@@ -259,18 +259,24 @@ public class ManageStockFormController implements Initializable {
         //lbltotal.setText("");
     }
 
-    public void btndeleteonaction(ActionEvent actionEvent) throws SQLException {
+    public void btndeleteonaction(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
         String siCode = txtstockid.getText();
 
-        try (Connection con = DriverManager.getConnection(URL, props)) {
-            String sql = "DELETE FROM Stock WHERE StockItemCode = ?";
+//        try (Connection con = DriverManager.getConnection(URL, props)) {
+//            String sql = "DELETE FROM Stock WHERE StockItemCode = ?";
+//
+//            PreparedStatement pstm = con.prepareStatement(sql);
+//            pstm.setString(1, txtstockid.getText());
+//
+//            if(pstm.executeUpdate() > 0 ) {
+//                new Alert(Alert.AlertType.CONFIRMATION, "Huree!! deleted :)").show();
+//            }
+//        }
 
-            PreparedStatement pstm = con.prepareStatement(sql);
-            pstm.setString(1, txtstockid.getText());
-
-            if(pstm.executeUpdate() > 0 ) {
-                new Alert(Alert.AlertType.CONFIRMATION, "Huree!! deleted :)").show();
-            }
+        if(!stockBO.deleteStocks(txtstockid.getText())){
+            new Alert(Alert.AlertType.ERROR , "Can not Delete !)").show();
+        }else{
+            new Alert(Alert.AlertType.CONFIRMATION, " Stock Deleted :)").show();
         }
 
         getAll();

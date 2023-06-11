@@ -30,7 +30,7 @@ public class StockBOImpl implements StockBO {
 
     @Override
     public boolean deleteStocks(String id) throws SQLException, ClassNotFoundException {
-        return false;
+        return stockDAO.delete(id);
     }
 
     @Override
