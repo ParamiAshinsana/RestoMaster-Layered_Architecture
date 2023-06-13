@@ -1,5 +1,6 @@
 package lk.ijse.restomaster.dao.custom.Impl;
 
+import lk.ijse.restomaster.dao.SQLUtil;
 import lk.ijse.restomaster.dao.custom.CustomerDAO;
 import lk.ijse.restomaster.dao.custom.EmployeeDAO;
 import lk.ijse.restomaster.entity.Employee;
@@ -15,7 +16,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 
     @Override
     public boolean add(Employee entity) throws SQLException, ClassNotFoundException {
-        return false;
+        return SQLUtil.execute("INSERT INTO Employee(EmployeeId , EmployeeName ,Address  , Contact ,Age  , DOB ,JobTitle  , Department , Compensation  ) VALUES(?, ?, ?, ? , ? ,? , ? , ? , ?)",entity.getEmpId(),entity.getEmpName(),entity.getEmpAddress(),entity.getEmpContact(),entity.getEmpAge(),entity.getEmpDob(),entity.getEmpTitle(),entity.getEmpDepartment(),entity.getEmpCompensation());
     }
 
     @Override

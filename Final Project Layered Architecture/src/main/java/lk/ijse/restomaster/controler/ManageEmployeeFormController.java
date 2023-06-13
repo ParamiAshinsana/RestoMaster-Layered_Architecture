@@ -9,6 +9,11 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import lk.ijse.restomaster.bo.custom.CustomerBO;
+import lk.ijse.restomaster.bo.custom.EmployeeBO;
+import lk.ijse.restomaster.bo.custom.Impl.CustomerBOImpl;
+import lk.ijse.restomaster.bo.custom.Impl.EmployeeBOImpl;
+import lk.ijse.restomaster.dto.CustomerDTO;
 import lk.ijse.restomaster.dto.EmployeeDTO;
 import lk.ijse.restomaster.dto.tm.EmployeeTM;
 import lk.ijse.restomaster.model.EmployeeModel;
@@ -25,6 +30,7 @@ import java.util.Properties;
 import java.util.ResourceBundle;
 
 public class ManageEmployeeFormController implements Initializable {
+    EmployeeBO employeeBO = new EmployeeBOImpl();
 
     private final static String URL = "jdbc:mysql://localhost:3306/RestoMaster";
     private final static Properties props = new Properties();
@@ -58,11 +64,9 @@ public class ManageEmployeeFormController implements Initializable {
     public TableColumn <? , ?> colTitle;
     public TableColumn <? , ?> colCompen;
 
-
     public TableView <EmployeeTM> tblEmployee;
     public ObservableList<EmployeeTM> observableList;
     public Label labelEmpId;
-
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -125,7 +129,7 @@ public class ManageEmployeeFormController implements Initializable {
         colCompen.setCellValueFactory(new PropertyValueFactory<>("empCompensation"));
     }
 
-    public void btnAddEmployeeOnAction(ActionEvent actionEvent) throws SQLException {
+    public void btnAddEmployeeOnAction(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
         if(!isValidated()){
             new Alert(Alert.AlertType.ERROR, "Invalid Input !").show();
             return;
@@ -141,26 +145,33 @@ public class ManageEmployeeFormController implements Initializable {
         String empDepartment = String.valueOf(departmentCBox.getValue());
         Double empCompensation = Double.valueOf(txtCompensation.getText());
 
-        try (Connection con = DriverManager.getConnection(URL, props)) {
-            String sql = "INSERT INTO Employee(EmployeeId , EmployeeName ,Address  , Contact ,Age  , DOB ,JobTitle  , Department , Compensation  ) VALUES(?, ?, ?, ? , ? ,? , ? , ? , ?)";
+//        try (Connection con = DriverManager.getConnection(URL, props)) {
+//            String sql = "INSERT INTO Employee(EmployeeId , EmployeeName ,Address  , Contact ,Age  , DOB ,JobTitle  , Department , Compensation  ) VALUES(?, ?, ?, ? , ? ,? , ? , ? , ?)";
+//
+//            PreparedStatement pstm = con.prepareStatement(sql);
+//            pstm.setString(1, empId);
+//            pstm.setString(2, empName);
+//            pstm.setString(3, empAddress);
+//            pstm.setString(4, empContact);
+//            pstm.setString(5, empAge);
+//            pstm.setString(6, empDob);
+//            pstm.setString(7, empTitle);
+//            pstm.setString(8, empDepartment);
+//            pstm.setDouble(9, Double.parseDouble(String.valueOf(empCompensation)));
+//
+//
+//            int affectedRows = pstm.executeUpdate();
+//            if(affectedRows > 0) {
+//                new Alert(Alert.AlertType.CONFIRMATION, "Employee Added!!").show();
+//            }
+//        }
 
-            PreparedStatement pstm = con.prepareStatement(sql);
-            pstm.setString(1, empId);
-            pstm.setString(2, empName);
-            pstm.setString(3, empAddress);
-            pstm.setString(4, empContact);
-            pstm.setString(5, empAge);
-            pstm.setString(6, empDob);
-            pstm.setString(7, empTitle);
-            pstm.setString(8, empDepartment);
-            pstm.setDouble(9, Double.parseDouble(String.valueOf(empCompensation)));
-
-
-            int affectedRows = pstm.executeUpdate();
-            if(affectedRows > 0) {
-                new Alert(Alert.AlertType.CONFIRMATION, "Employee Added!!").show();
-            }
+        if(!employeeBO.addEmployees(new EmployeeDTO(empId ,empName,empAddress,empContact,empAge,empDob,empTitle,empDepartment,empCompensation))){
+            new Alert(Alert.AlertType.ERROR , "Can not Added Employee !").show();
+        }else{
+            new Alert(Alert.AlertType.CONFIRMATION , "Employee Added!!").show();
         }
+
         getAll();
 
         labelEmpId.setText("");
@@ -299,6 +310,5 @@ public class ManageEmployeeFormController implements Initializable {
         if (!Regex.setTextColor(TextFilds.DOUBLE,txtCompensation))return false;
         return true;
     }
-
 
 }
