@@ -174,7 +174,7 @@ public class ManageEmployeeFormController implements Initializable {
 
         getAll();
 
-        labelEmpId.setText("");
+        //labelEmpId.setText("");
         txteName.setText("");
         txtAddress.setText("");
         txtMobileNumber.setText("");
@@ -232,7 +232,7 @@ public class ManageEmployeeFormController implements Initializable {
 
         getAll();
 
-        labelEmpId.setText("");
+        //labelEmpId.setText("");
         txteName.setText("");
         txtAddress.setText("");
         txtMobileNumber.setText("");
@@ -243,25 +243,39 @@ public class ManageEmployeeFormController implements Initializable {
         txtCompensation.setText("");
     }
 
-    public void btnDeleteEmployeeOnAction(ActionEvent actionEvent) throws SQLException {
+    public void btnDeleteEmployeeOnAction(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
         String empId = txteId.getText();
 
-        try (Connection con = DriverManager.getConnection(URL, props)) {
-            String sql = "DELETE FROM Employee WHERE EmployeeId = ?";
-
-            PreparedStatement pstm = con.prepareStatement(sql);
-            pstm.setString(1, txteId.getText());
-
-            if(pstm.executeUpdate() > 0 ) {
-                new Alert(Alert.AlertType.CONFIRMATION, "Huree!! deleted :)").show();
-            }
+//        try (Connection con = DriverManager.getConnection(URL, props)) {
+//            String sql = "DELETE FROM Employee WHERE EmployeeId = ?";
+//
+//            PreparedStatement pstm = con.prepareStatement(sql);
+//            pstm.setString(1, txteId.getText());
+//
+//            if(pstm.executeUpdate() > 0 ) {
+//                new Alert(Alert.AlertType.CONFIRMATION, "Huree!! deleted :)").show();
+//            }
+//        }
+        if(!employeeBO.deleteEmployees(txteId.getText())){
+            new Alert(Alert.AlertType.ERROR , "Can not Delete !)").show();
+        }else{
+            new Alert(Alert.AlertType.CONFIRMATION, " Employee Deleted :)").show();
         }
+
         getAll();
-        labelEmpId.setText("");
+        txteName.setText("");
+        txtAddress.setText("");
+        txtMobileNumber.setText("");
+        txtAge.setText("");
+        txtDob.setText("");
+        jobTitleCBox.setValue("");
+        departmentCBox.setValue("");
+        txtCompensation.setText("");
+        generateNextemployeeId();
     }
 
     public void btnClearOnAction(ActionEvent actionEvent) {
-        labelEmpId.setText("");
+        //labelEmpId.setText("");
         txteName.setText("");
         txtAddress.setText("");
         txtMobileNumber.setText("");

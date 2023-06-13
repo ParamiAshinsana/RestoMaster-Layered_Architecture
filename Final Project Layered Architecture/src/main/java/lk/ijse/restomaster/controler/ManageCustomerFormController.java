@@ -128,7 +128,7 @@ public class ManageCustomerFormController implements Initializable{
         }else{
             new Alert(Alert.AlertType.CONFIRMATION , "Customer Added!!").show();
         }
-            labelCustomerId.setText("");
+            //labelCustomerId.setText("");
             txtname.setText("");
             txtnumber.setText("");
             txtaddress.setText("");
@@ -181,7 +181,7 @@ public class ManageCustomerFormController implements Initializable{
     }
 
     public void btnclearonaction(ActionEvent actionEvent) throws SQLException {
-        labelCustomerId.setText("");
+        //labelCustomerId.setText("");
         txtname.setText("");
         txtnumber.setText("");
         txtaddress.setText("");
@@ -208,7 +208,7 @@ public class ManageCustomerFormController implements Initializable{
         }
 
         getAll();
-        labelCustomerId.setText("");
+        //labelCustomerId.setText("");
         txtname.setText("");
         txtnumber.setText("");
         txtaddress.setText("");
@@ -254,7 +254,7 @@ public class ManageCustomerFormController implements Initializable{
 
         getAll();
 
-        labelCustomerId.setText("");
+        //labelCustomerId.setText("");
         txtname.setText("");
         txtnumber.setText("");
         txtaddress.setText("");

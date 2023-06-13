@@ -185,7 +185,7 @@ public class ManageSupplierFormController implements Initializable {
         }else{
             new Alert(Alert.AlertType.CONFIRMATION , "Supplier Added!!").show();
         }
-            labelSupplierId.setText("");
+            //labelSupplierId.setText("");
             txtSname.setText("");
             txtOfferings.setText("");
             txtUnitPrice.setText("");
@@ -240,7 +240,7 @@ public class ManageSupplierFormController implements Initializable {
         }
 
         getAll();
-        labelSupplierId.setText("");
+        //labelSupplierId.setText("");
         txtSname.setText("");
         txtOfferings.setText("");
         txtUnitPrice.setText("");
@@ -271,7 +271,14 @@ public class ManageSupplierFormController implements Initializable {
         }
 
         getAll();
-        labelSupplierId.setText("");
+        //labelSupplierId.setText("");
+        txtSname.setText("");
+        txtOfferings.setText("");
+        txtUnitPrice.setText("");
+        txtQuantity.setText("");
+        txtAddress.setText("");
+        txtSMobile.setText("");
+        txtEmailAddress.setText("");
         generateNextSupplierId();
     }
 
