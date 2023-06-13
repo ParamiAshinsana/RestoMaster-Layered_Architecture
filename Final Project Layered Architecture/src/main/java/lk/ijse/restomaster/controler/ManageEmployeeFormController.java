@@ -187,7 +187,7 @@ public class ManageEmployeeFormController implements Initializable {
         generateNextemployeeId();
     }
 
-    public void btnUpdateEmployeeOnAction(ActionEvent actionEvent) throws SQLException {
+    public void btnUpdateEmployeeOnAction(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
         if(!isValidated()){
             new Alert(Alert.AlertType.ERROR, "Invalid Input !").show();
             return;
@@ -203,26 +203,33 @@ public class ManageEmployeeFormController implements Initializable {
         String empDepartment = String.valueOf(departmentCBox.getValue());
         Double empCompensation = Double.valueOf(txtCompensation.getText());
 
-        try(Connection con = DriverManager.getConnection(URL, props)) {
+//        try(Connection con = DriverManager.getConnection(URL, props)) {
+//
+//            String sql = "UPDATE Employee SET EmployeeName = ? , Address = ? , Contact = ? , Age = ? , DOB = ? , JobTitle = ? , Department = ? , Compensation = ?  WHERE EmployeeId = ?";
+//
+//            PreparedStatement pstm = con.prepareStatement(sql);
+//
+//            pstm.setString(1, empName);
+//            pstm.setString(2, empAddress);
+//            pstm.setString(3, empContact);
+//            pstm.setString(4, empAge);
+//            pstm.setString(5, empDob);
+//            pstm.setString(6, empTitle);
+//            pstm.setString(7, empDepartment);
+//            pstm.setDouble(8, Double.parseDouble(String.valueOf(empCompensation)));
+//            pstm.setString(9, empId);
+//
+//            if(pstm.executeUpdate() > 0) {
+//                new Alert(Alert.AlertType.CONFIRMATION, "Employee Updated!!").show();
+//            }
+//        }
 
-            String sql = "UPDATE Employee SET EmployeeName = ? , Address = ? , Contact = ? , Age = ? , DOB = ? , JobTitle = ? , Department = ? , Compensation = ?  WHERE EmployeeId = ?";
-
-            PreparedStatement pstm = con.prepareStatement(sql);
-
-            pstm.setString(1, empName);
-            pstm.setString(2, empAddress);
-            pstm.setString(3, empContact);
-            pstm.setString(4, empAge);
-            pstm.setString(5, empDob);
-            pstm.setString(6, empTitle);
-            pstm.setString(7, empDepartment);
-            pstm.setDouble(8, Double.parseDouble(String.valueOf(empCompensation)));
-            pstm.setString(9, empId);
-
-            if(pstm.executeUpdate() > 0) {
-                new Alert(Alert.AlertType.CONFIRMATION, "Employee Updated!!").show();
-            }
+        if(!employeeBO.updateEmployees(new EmployeeDTO(empId,empName,empAddress,empContact,empAge,empDob,empTitle,empDepartment,empCompensation))){
+            new Alert(Alert.AlertType.ERROR , "Can not Uptaded Employee !").show();
+        }else{
+            new Alert(Alert.AlertType.CONFIRMATION , "Employee Added!!").show();
         }
+
         getAll();
 
         labelEmpId.setText("");
