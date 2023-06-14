@@ -1,7 +1,7 @@
 package lk.ijse.restomaster.model;
 
 import lk.ijse.restomaster.db.DBConnection;
-import lk.ijse.restomaster.dto.MenuItem;
+import lk.ijse.restomaster.dto.MenuItemDTO;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -11,15 +11,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MenuItemModel {
-    public static List<MenuItem> getAll() throws SQLException {
+    public static List<MenuItemDTO> getAll() throws SQLException {
         Connection con = DBConnection.getInstance().getConnection();
         String sql = "SELECT * FROM MenuItem";
 
-        List<MenuItem> data = new ArrayList<>();
+        List<MenuItemDTO> data = new ArrayList<>();
 
         ResultSet resultSet = con.createStatement().executeQuery(sql);
         while(resultSet.next()){
-            data.add(new MenuItem(
+            data.add(new MenuItemDTO(
                     resultSet.getString(1),
                     resultSet.getString(2),
                     resultSet.getString(3),
@@ -33,7 +33,7 @@ public class MenuItemModel {
 
     }
 
-    public static MenuItem searchById(String code) throws SQLException {
+    public static MenuItemDTO searchById(String code) throws SQLException {
         Connection con = DBConnection.getInstance().getConnection();
         String sql = "SELECT * FROM MenuItem WHERE MenuItemCode = ?";
 
@@ -42,7 +42,7 @@ public class MenuItemModel {
 
         ResultSet resultSet = pstm.executeQuery();
         if(resultSet.next()) {
-            return new MenuItem(
+            return new MenuItemDTO(
                     resultSet.getString(1),
                     resultSet.getString(2),
                     resultSet.getString(3),

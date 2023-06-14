@@ -15,12 +15,10 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import lk.ijse.restomaster.db.DBConnection;
-import lk.ijse.restomaster.dto.MenuItem;
+import lk.ijse.restomaster.dto.MenuItemDTO;
 import lk.ijse.restomaster.dto.Orders;
 import lk.ijse.restomaster.dto.tm.OrdersTM;
-import lk.ijse.restomaster.model.CustomerModel;
 import lk.ijse.restomaster.model.MenuItemModel;
 import lk.ijse.restomaster.model.OrderModel;
 import lk.ijse.restomaster.util.Regex;
@@ -208,8 +206,6 @@ public class ManageOrderFormController implements Initializable {
 
         Double tot = quantity * unitPrice ;
 
-
-
         try (Connection con = DriverManager.getConnection(URL, props)) {
             con.setAutoCommit(false);
             String sql = "INSERT INTO Orders (OrderId , CustomerId , MenuItemId , Description , UnitPrice , Quantity , Total , OrderDate , OrderTime ) VALUES(?, ?, ?, ? ,? , ? ,? , ? , ? )";
@@ -359,7 +355,7 @@ public class ManageOrderFormController implements Initializable {
 
     }
 
-    private void fillItemFields(lk.ijse.restomaster.dto.MenuItem item) {
+    private void fillItemFields(MenuItemDTO item) {
         lblUnitPrice.setText(String.valueOf(item.getItemUnitPrice()));
         lblDescription.setText(item.getDescription());
     }
@@ -368,7 +364,7 @@ public class ManageOrderFormController implements Initializable {
         String code = String.valueOf(micodeCBox.getSelectionModel().getSelectedItem());
 
         try {
-            MenuItem menuitem = MenuItemModel.searchById(code);
+            MenuItemDTO menuitem = MenuItemModel.searchById(code);
             if(menuitem==null)return;
             fillItemFields(menuitem);
         } catch (SQLException e) {

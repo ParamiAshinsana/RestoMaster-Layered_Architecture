@@ -1,4 +1,4 @@
-package lk.ijse.restomaster.dto;
+package lk.ijse.restomaster.entity;
 
 import lombok.*;
 

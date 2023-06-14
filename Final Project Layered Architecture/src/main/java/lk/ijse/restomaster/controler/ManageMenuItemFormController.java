@@ -10,7 +10,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import lk.ijse.restomaster.db.DBConnection;
-import lk.ijse.restomaster.dto.MenuItem;
+import lk.ijse.restomaster.dto.MenuItemDTO;
 import lk.ijse.restomaster.dto.tm.MenuItemTM;
 import lk.ijse.restomaster.model.MenuItemModel;
 import lk.ijse.restomaster.util.Regex;
@@ -106,7 +106,6 @@ public class ManageMenuItemFormController implements Initializable {
         int quantity = Integer.valueOf(txtQuantity.getText());
         String preTime = String.valueOf(preparationtimeCbox.getValue());
 
-
         try (Connection con = DriverManager.getConnection(URL, props)) {
             String sql = "INSERT INTO MenuItem(MenuItemCode , MenuItemType , Description , UnitPrice , Quantity , PreparationTime) VALUES(?,? ,? ,?,? , ?)";
 
@@ -118,7 +117,6 @@ public class ManageMenuItemFormController implements Initializable {
             pstm.setDouble(5, quantity);
             pstm.setString(6, preTime);
 
-
             int affectedRows = pstm.executeUpdate();
             if(affectedRows > 0) {
                 new Alert(Alert.AlertType.CONFIRMATION, "Menu Item Added!!").show();
@@ -126,7 +124,7 @@ public class ManageMenuItemFormController implements Initializable {
         }
         getAll();
 
-        labelMenuItemCode.setText("");
+        //labelMenuItemCode.setText("");
         itemtypeCbox.setValue("");
         txtdescription.setText("");
         txtunitprice.setText("");
@@ -139,9 +137,9 @@ public class ManageMenuItemFormController implements Initializable {
     private void getAll() {
         try{
             observableList = FXCollections.observableArrayList();
-            List <MenuItem> MenuItemList = MenuItemModel.getAll();
+            List <MenuItemDTO> MenuItemList = MenuItemModel.getAll();
 
-            for(MenuItem menuitem : MenuItemList){
+            for(MenuItemDTO menuitem : MenuItemList){
                 observableList.add(new MenuItemTM(
                         menuitem.getMiCode(),
                         menuitem.getMiType(),
@@ -160,7 +158,7 @@ public class ManageMenuItemFormController implements Initializable {
     }
 
     public void btnclearmenuonaction(ActionEvent actionEvent) {
-        labelMenuItemCode.setText("");
+        //labelMenuItemCode.setText("");
         itemtypeCbox.setValue("");
         txtdescription.setText("");
         txtunitprice.setText("");
@@ -182,8 +180,12 @@ public class ManageMenuItemFormController implements Initializable {
             }
         }
         getAll();
-        labelMenuItemCode.setText("");
-
+        //labelMenuItemCode.setText("");
+        itemtypeCbox.setValue("");
+        txtdescription.setText("");
+        txtunitprice.setText("");
+        txtQuantity.setText("");
+        preparationtimeCbox.setValue("");
         generateMenuItemCode();
     }
 
@@ -279,17 +281,14 @@ public class ManageMenuItemFormController implements Initializable {
 
     public void upOnKeyReleased(KeyEvent keyEvent) {
         Regex.setTextColor(TextFilds.DOUBLE , txtunitprice);
-
     }
 
     public void qtyOnKeyReleased(KeyEvent keyEvent) {
         Regex.setTextColor(TextFilds.INT , txtQuantity);
-
     }
 
     public void descriptionOnKeyReleased(KeyEvent keyEvent) {
         Regex.setTextColor(TextFilds.NAME , txtdescription);
-
     }
 
     public boolean isValidated(){
