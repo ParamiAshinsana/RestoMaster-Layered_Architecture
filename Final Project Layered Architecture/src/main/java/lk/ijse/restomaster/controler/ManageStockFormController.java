@@ -9,10 +9,12 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import lk.ijse.restomaster.bo.BOFactory;
 import lk.ijse.restomaster.bo.custom.CustomerBO;
 import lk.ijse.restomaster.bo.custom.Impl.CustomerBOImpl;
 import lk.ijse.restomaster.bo.custom.Impl.StockBOImpl;
 import lk.ijse.restomaster.bo.custom.StockBO;
+import lk.ijse.restomaster.dao.DAOFactory;
 import lk.ijse.restomaster.dao.custom.Impl.StockDAOImpl;
 import lk.ijse.restomaster.dao.custom.StockDAO;
 import lk.ijse.restomaster.dto.CustomerDTO;
@@ -38,8 +40,10 @@ import java.util.ResourceBundle;
 
 public class ManageStockFormController implements Initializable {
 
-    StockDAO stockDAO = new StockDAOImpl();
     StockBO stockBO = new StockBOImpl();
+    StockDAO stockDAO = new StockDAOImpl();
+    //StockBO stockBO = (StockBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.B_STOCKS);
+    //StockDAO stockDAO = (StockDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.STOCKS);
 
     private final static String URL = "jdbc:mysql://localhost:3306/RestoMaster";
     private final static Properties props = new Properties();
@@ -126,7 +130,6 @@ public class ManageStockFormController implements Initializable {
         }
         supllierIdCBox.setItems(obList);
     }
-
 
     private void getAll() {
 //        try{

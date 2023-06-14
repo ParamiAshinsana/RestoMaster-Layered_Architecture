@@ -15,6 +15,7 @@ import lk.ijse.restomaster.bo.custom.Impl.CustomerBOImpl;
 import lk.ijse.restomaster.bo.custom.Impl.EmployeeBOImpl;
 import lk.ijse.restomaster.dto.CustomerDTO;
 import lk.ijse.restomaster.dto.EmployeeDTO;
+import lk.ijse.restomaster.dto.tm.CustomerTM;
 import lk.ijse.restomaster.dto.tm.EmployeeTM;
 import lk.ijse.restomaster.model.EmployeeModel;
 import lk.ijse.restomaster.util.Regex;
@@ -25,6 +26,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 import java.util.ResourceBundle;
@@ -92,28 +94,40 @@ public class ManageEmployeeFormController implements Initializable {
     }
 
     private void getAll() {
-        try{
-            observableList = FXCollections.observableArrayList();
-            List<EmployeeDTO> EmployeeList = EmployeeModel.getAll();
+//        try{
+//            observableList = FXCollections.observableArrayList();
+//            List<EmployeeDTO> EmployeeList = EmployeeModel.getAll();
+//
+//            for(EmployeeDTO employee : EmployeeList){
+//                observableList.add(new EmployeeTM(
+//                        employee.getEmpId(),
+//                        employee.getEmpName(),
+//                        employee.getEmpAddress(),
+//                        employee.getEmpContact(),
+//                        employee.getEmpAge(),
+//                        employee.getEmpDob(),
+//                        employee.getEmpTitle(),
+//                        employee.getEmpDepartment(),
+//                        employee.getEmpCompensation()
+//                ));
+//            }
+//            tblEmployee.setItems(observableList);
+//        }catch (SQLException e ){
+//            e.printStackTrace();
+//            new Alert(Alert.AlertType.ERROR , "Query Error !").show();
+//
+//        }
+        tblEmployee.getItems().clear();
+        try {
+            ArrayList<EmployeeDTO> allEmployees = employeeBO.getAllEmployees();
 
-            for(EmployeeDTO employee : EmployeeList){
-                observableList.add(new EmployeeTM(
-                        employee.getEmpId(),
-                        employee.getEmpName(),
-                        employee.getEmpAddress(),
-                        employee.getEmpContact(),
-                        employee.getEmpAge(),
-                        employee.getEmpDob(),
-                        employee.getEmpTitle(),
-                        employee.getEmpDepartment(),
-                        employee.getEmpCompensation()
-                ));
+            for (EmployeeDTO c : allEmployees) {
+                tblEmployee.getItems().add(new EmployeeTM(c.getEmpId(),c.getEmpName(),c.getEmpAddress(),c.getEmpContact(),c.getEmpAge(),c.getEmpDob(),c.getEmpTitle(),c.getEmpDepartment(),c.getEmpCompensation()));
             }
-            tblEmployee.setItems(observableList);
-        }catch (SQLException e ){
-            e.printStackTrace();
-            new Alert(Alert.AlertType.ERROR , "Query Error !").show();
-
+        } catch (SQLException e) {
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+        } catch (ClassNotFoundException e) {
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
     }
 

@@ -3,15 +3,23 @@ package lk.ijse.restomaster.dao.custom.Impl;
 import lk.ijse.restomaster.dao.SQLUtil;
 import lk.ijse.restomaster.dao.custom.CustomerDAO;
 import lk.ijse.restomaster.dao.custom.EmployeeDAO;
+import lk.ijse.restomaster.entity.Customer;
 import lk.ijse.restomaster.entity.Employee;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class EmployeeDAOImpl implements EmployeeDAO {
     @Override
     public ArrayList<Employee> getAll() throws SQLException, ClassNotFoundException {
-        return null;
+        ArrayList<Employee> allEmployee = new ArrayList<>();
+        ResultSet rst = SQLUtil.execute("SELECT * FROM Employee");
+        while (rst.next()) {
+            Employee employee = new Employee(rst.getString("EmployeeId"),rst.getString("EmployeeName"),rst.getString("Address"),rst.getString("Contact"),rst.getString("Age"),rst.getString("DOB"),rst.getString("JobTitle"),rst.getString("Department"),rst.getDouble("Compensation"));
+            allEmployee.add(employee);
+        }
+        return allEmployee;
     }
 
     @Override
