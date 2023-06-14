@@ -20,6 +20,7 @@ import lk.ijse.restomaster.dto.tm.EmployeeTM;
 import lk.ijse.restomaster.model.EmployeeModel;
 import lk.ijse.restomaster.util.Regex;
 import lk.ijse.restomaster.util.TextFilds;
+import lombok.SneakyThrows;
 
 import java.net.URL;
 import java.sql.Connection;
@@ -70,6 +71,7 @@ public class ManageEmployeeFormController implements Initializable {
     public ObservableList<EmployeeTM> observableList;
     public Label labelEmpId;
 
+    @SneakyThrows
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         setCellValueFactory();
@@ -84,13 +86,15 @@ public class ManageEmployeeFormController implements Initializable {
         generateNextemployeeId();
     }
 
-    private void generateNextemployeeId() {
-        try {
-            String nextId = EmployeeModel.generateNextEmployeeID();
-            labelEmpId.setText(nextId);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+    private void generateNextemployeeId() throws SQLException, ClassNotFoundException {
+//        try {
+//            String nextId = EmployeeModel.generateNextEmployeeID();
+//            labelEmpId.setText(nextId);
+//        } catch (SQLException e) {
+//            throw new RuntimeException(e);
+//        }
+        String nextId = employeeBO.generateNewEmployeesID();
+        labelEmpId.setText(nextId);
     }
 
     private void getAll() {

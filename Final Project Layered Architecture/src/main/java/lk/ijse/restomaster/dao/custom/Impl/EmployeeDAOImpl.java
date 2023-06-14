@@ -39,6 +39,25 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 
     @Override
     public String generateNewId() throws SQLException, ClassNotFoundException {
-        return null;
+        ResultSet rst = SQLUtil.execute("SELECT EmployeeId FROM Employee ORDER BY EmployeeId DESC LIMIT 1");
+        if(rst.next()) {
+            String string = rst.getString(1);
+            String[] strings = string.split("E0");
+            int id = Integer.parseInt(strings[1]);
+            id++;
+            String ID = String.valueOf(id);
+            int length = ID.length();
+            if (length < 2) {
+                return "E00" + id;
+            } else {
+                if (length < 3) {
+                    return "E0" + id;
+                } else {
+                    return "E" + id;
+                }
+            }
+        }else{
+            return "EOO1";
+        }
     }
 }
