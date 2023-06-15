@@ -34,7 +34,7 @@ public class OrdersBOImpl implements OrdersBO {
 
     @Override
     public boolean deleteOrders(String id) throws SQLException, ClassNotFoundException {
-        return false;
+        return ordersDAO.delete(id);
     }
 
     @Override

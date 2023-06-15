@@ -320,18 +320,23 @@ public class ManageOrderFormController implements Initializable {
         generateNextOrderID();
     }
 
-    public void btnDeleteOrederOnAction(ActionEvent actionEvent) throws SQLException {
+    public void btnDeleteOrederOnAction(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
         String orderId = txtOrderId.getText();
 
-        try (Connection con = DriverManager.getConnection(URL, props)) {
-            String sql = "DELETE FROM Orders WHERE OrderId = ?";
-
-            PreparedStatement pstm = con.prepareStatement(sql);
-            pstm.setString(1, txtOrderId.getText());
-
-            if(pstm.executeUpdate() > 0 ) {
-                new Alert(Alert.AlertType.CONFIRMATION, "Huree!! deleted :)").show();
-            }
+//        try (Connection con = DriverManager.getConnection(URL, props)) {
+//            String sql = "DELETE FROM Orders WHERE OrderId = ?";
+//
+//            PreparedStatement pstm = con.prepareStatement(sql);
+//            pstm.setString(1, txtOrderId.getText());
+//
+//            if(pstm.executeUpdate() > 0 ) {
+//                new Alert(Alert.AlertType.CONFIRMATION, "Huree!! deleted :)").show();
+//            }
+//        }
+        if(!ordersBO.deleteOrders(txtOrderId.getText())){
+            new Alert(Alert.AlertType.ERROR , "Can not Delete !)").show();
+        }else{
+            new Alert(Alert.AlertType.CONFIRMATION, " Order Deleted :)").show();
         }
         getAll();
         lblCustId.setText("");
