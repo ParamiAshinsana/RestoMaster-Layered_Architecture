@@ -17,6 +17,7 @@ import lk.ijse.restomaster.db.DBConnection;
 import lk.ijse.restomaster.dto.CustomerDTO;
 import lk.ijse.restomaster.dto.EmployeeDTO;
 import lk.ijse.restomaster.dto.MenuItemDTO;
+import lk.ijse.restomaster.dto.tm.EmployeeTM;
 import lk.ijse.restomaster.dto.tm.MenuItemTM;
 import lk.ijse.restomaster.model.MenuItemModel;
 import lk.ijse.restomaster.util.Regex;
@@ -149,26 +150,39 @@ public class ManageMenuItemFormController implements Initializable {
     }
 
     private void getAll() {
-        try{
-            observableList = FXCollections.observableArrayList();
-            List <MenuItemDTO> MenuItemList = MenuItemModel.getAll();
+//        try{
+//            observableList = FXCollections.observableArrayList();
+//            List <MenuItemDTO> MenuItemList = MenuItemModel.getAll();
+//
+//            for(MenuItemDTO menuitem : MenuItemList){
+//                observableList.add(new MenuItemTM(
+//                        menuitem.getMiCode(),
+//                        menuitem.getMiType(),
+//                        menuitem.getDescription(),
+//                        menuitem.getItemUnitPrice(),
+//                        menuitem.getQuantity(),
+//                        menuitem.getPreTime()
+//                ));
+//            }
+//            tblmenuitem.setItems(observableList);
+//        }catch (SQLException e ){
+//            e.printStackTrace();
+//            new Alert(Alert.AlertType.ERROR , "Query Error !").show();
+//
+//        }
+        tblmenuitem.getItems().clear();
+        try {
+            ArrayList<MenuItemDTO> allMenuItems = menuItemBO.getAllMenuItems();
 
-            for(MenuItemDTO menuitem : MenuItemList){
-                observableList.add(new MenuItemTM(
-                        menuitem.getMiCode(),
-                        menuitem.getMiType(),
-                        menuitem.getDescription(),
-                        menuitem.getItemUnitPrice(),
-                        menuitem.getQuantity(),
-                        menuitem.getPreTime()
-                ));
+            for (MenuItemDTO c : allMenuItems) {
+                tblmenuitem.getItems().add(new MenuItemTM(c.getMiCode(),c.getMiType(),c.getDescription(),c.getItemUnitPrice(),c.getQuantity(),c.getPreTime()));
             }
-            tblmenuitem.setItems(observableList);
-        }catch (SQLException e ){
-            e.printStackTrace();
-            new Alert(Alert.AlertType.ERROR , "Query Error !").show();
-
+        } catch (SQLException e) {
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+        } catch (ClassNotFoundException e) {
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
+
     }
 
     public void btnclearmenuonaction(ActionEvent actionEvent) {
@@ -240,7 +254,7 @@ public class ManageMenuItemFormController implements Initializable {
         if(!menuItemBO.updateMenuItems(new MenuItemDTO(miCode,miType,description,itemUnitPrice,quantity,preTime))){
             new Alert(Alert.AlertType.ERROR , "Can not Uptaded MenuItem !").show();
         }else{
-            new Alert(Alert.AlertType.CONFIRMATION , "MenuItem Added!!").show();
+            new Alert(Alert.AlertType.CONFIRMATION , "MenuItem Uptaded!!").show();
         }
 
         getAll();

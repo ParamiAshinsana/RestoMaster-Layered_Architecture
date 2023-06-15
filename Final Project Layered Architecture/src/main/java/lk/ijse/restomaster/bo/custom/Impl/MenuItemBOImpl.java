@@ -7,6 +7,7 @@ import lk.ijse.restomaster.dao.custom.EmployeeDAO;
 import lk.ijse.restomaster.dao.custom.Impl.EmployeeDAOImpl;
 import lk.ijse.restomaster.dao.custom.Impl.MenuItemDAOImpl;
 import lk.ijse.restomaster.dao.custom.MenuItemDAO;
+import lk.ijse.restomaster.dto.EmployeeDTO;
 import lk.ijse.restomaster.dto.MenuItemDTO;
 import lk.ijse.restomaster.entity.Employee;
 import lk.ijse.restomaster.entity.MenuItem;
@@ -19,7 +20,12 @@ public class MenuItemBOImpl implements MenuItemBO {
 
     @Override
     public ArrayList<MenuItemDTO> getAllMenuItems() throws SQLException, ClassNotFoundException {
-        return null;
+        ArrayList<MenuItemDTO> allMenuItems= new ArrayList<>();
+        ArrayList<MenuItem> all = menuItemDAO.getAll();
+        for (MenuItem c : all) {
+            allMenuItems.add(new MenuItemDTO(c.getMiCode(),c.getMiType(),c.getDescription(),c.getItemUnitPrice(),c.getQuantity(),c.getPreTime()));
+        }
+        return allMenuItems;
     }
 
     @Override
