@@ -40,6 +40,25 @@ public class MenuItemDAOImpl implements MenuItemDAO {
 
     @Override
     public String generateNewId() throws SQLException, ClassNotFoundException {
-        return null;
+        ResultSet rst = SQLUtil.execute("SELECT MenuItemCode FROM MenuItem ORDER BY MenuItemCode DESC LIMIT 1");
+        if(rst.next()) {
+            String string = rst.getString(1);
+            String[] strings = string.split("I0");
+            int id = Integer.parseInt(strings[1]);
+            id++;
+            String ID = String.valueOf(id);
+            int length = ID.length();
+            if (length < 2) {
+                return "I00" + id;
+            } else {
+                if (length < 3) {
+                    return "I0" + id;
+                } else {
+                    return "I" + id;
+                }
+            }
+        }else{
+            return "IOO1";
+        }
     }
 }

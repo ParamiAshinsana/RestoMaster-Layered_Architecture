@@ -45,6 +45,6 @@ public class MenuItemBOImpl implements MenuItemBO {
 
     @Override
     public String generateNewMenuItemsID() throws SQLException, ClassNotFoundException {
-        return null;
+        return menuItemDAO.generateNewId();
     }
 }

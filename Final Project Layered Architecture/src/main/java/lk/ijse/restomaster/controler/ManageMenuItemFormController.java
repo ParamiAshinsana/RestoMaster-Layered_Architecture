@@ -22,6 +22,7 @@ import lk.ijse.restomaster.dto.tm.MenuItemTM;
 import lk.ijse.restomaster.model.MenuItemModel;
 import lk.ijse.restomaster.util.Regex;
 import lk.ijse.restomaster.util.TextFilds;
+import lombok.SneakyThrows;
 import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.design.JasperDesign;
 import net.sf.jasperreports.engine.xml.JRXmlLoader;
@@ -70,6 +71,7 @@ public class ManageMenuItemFormController implements Initializable {
     public Label labelMenuItemCode;
 
 
+    @SneakyThrows
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         setCellValueFactory();
@@ -84,13 +86,15 @@ public class ManageMenuItemFormController implements Initializable {
         generateMenuItemCode();
     }
 
-    private void generateMenuItemCode() {
-        try {
-            String nextId = MenuItemModel.generateNextMenuItemCode();
-            labelMenuItemCode.setText(nextId);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+    private void generateMenuItemCode() throws SQLException, ClassNotFoundException {
+//        try {
+//            String nextId = MenuItemModel.generateNextMenuItemCode();
+//            labelMenuItemCode.setText(nextId);
+//        } catch (SQLException e) {
+//            throw new RuntimeException(e);
+//        }
+        String nextId = menuItemBO.generateNewMenuItemsID();
+        labelMenuItemCode.setText(nextId);
     }
 
     private void setCellValueFactory() {
