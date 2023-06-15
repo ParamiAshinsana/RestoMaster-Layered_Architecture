@@ -16,5 +16,4 @@ public class MenuItemTM {
      private Double itemUnitPrice ;
      private int quantity;
      private String preTime;
-
 }

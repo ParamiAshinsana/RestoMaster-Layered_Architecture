@@ -9,7 +9,12 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import lk.ijse.restomaster.bo.custom.CustomerBO;
+import lk.ijse.restomaster.bo.custom.Impl.CustomerBOImpl;
+import lk.ijse.restomaster.bo.custom.Impl.MenuItemBOImpl;
+import lk.ijse.restomaster.bo.custom.MenuItemBO;
 import lk.ijse.restomaster.db.DBConnection;
+import lk.ijse.restomaster.dto.CustomerDTO;
 import lk.ijse.restomaster.dto.MenuItemDTO;
 import lk.ijse.restomaster.dto.tm.MenuItemTM;
 import lk.ijse.restomaster.model.MenuItemModel;
@@ -28,6 +33,8 @@ import java.sql.SQLException;
 import java.util.*;
 
 public class ManageMenuItemFormController implements Initializable {
+    MenuItemBO menuItemBO = new MenuItemBOImpl();
+
 
     private final static String URL = "jdbc:mysql://localhost:3306/RestoMaster";
     private final static Properties props = new Properties();
@@ -93,7 +100,7 @@ public class ManageMenuItemFormController implements Initializable {
         colpretime.setCellValueFactory(new PropertyValueFactory<>("preTime"));
     }
 
-    public void btnaddmenuonaction(ActionEvent actionEvent) throws SQLException {
+    public void btnaddmenuonaction(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
         if(!isValidated()){
             new Alert(Alert.AlertType.ERROR, "Invalid Input !").show();
             return;
@@ -106,21 +113,27 @@ public class ManageMenuItemFormController implements Initializable {
         int quantity = Integer.valueOf(txtQuantity.getText());
         String preTime = String.valueOf(preparationtimeCbox.getValue());
 
-        try (Connection con = DriverManager.getConnection(URL, props)) {
-            String sql = "INSERT INTO MenuItem(MenuItemCode , MenuItemType , Description , UnitPrice , Quantity , PreparationTime) VALUES(?,? ,? ,?,? , ?)";
+//        try (Connection con = DriverManager.getConnection(URL, props)) {
+//            String sql = "INSERT INTO MenuItem(MenuItemCode , MenuItemType , Description , UnitPrice , Quantity , PreparationTime) VALUES(?,? ,? ,?,? , ?)";
+//
+//            PreparedStatement pstm = con.prepareStatement(sql);
+//            pstm.setString(1, labelMenuItemCode.getText());
+//            pstm.setString(2, miType);
+//            pstm.setString(3, description);
+//            pstm.setDouble(4, itemUnitPrice);
+//            pstm.setDouble(5, quantity);
+//            pstm.setString(6, preTime);
+//
+//            int affectedRows = pstm.executeUpdate();
+//            if(affectedRows > 0) {
+//                new Alert(Alert.AlertType.CONFIRMATION, "Menu Item Added!!").show();
+//            }
+//        }
 
-            PreparedStatement pstm = con.prepareStatement(sql);
-            pstm.setString(1, labelMenuItemCode.getText());
-            pstm.setString(2, miType);
-            pstm.setString(3, description);
-            pstm.setDouble(4, itemUnitPrice);
-            pstm.setDouble(5, quantity);
-            pstm.setString(6, preTime);
-
-            int affectedRows = pstm.executeUpdate();
-            if(affectedRows > 0) {
-                new Alert(Alert.AlertType.CONFIRMATION, "Menu Item Added!!").show();
-            }
+        if(!menuItemBO.addMenuItems(new MenuItemDTO(miCode,miType,description,itemUnitPrice,quantity,preTime))){
+            new Alert(Alert.AlertType.ERROR , "Can not Added Customer !").show();
+        }else{
+            new Alert(Alert.AlertType.CONFIRMATION , "Customer Added!!").show();
         }
         getAll();
 

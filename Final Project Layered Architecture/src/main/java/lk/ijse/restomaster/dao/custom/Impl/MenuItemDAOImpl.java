@@ -1,6 +1,7 @@
 package lk.ijse.restomaster.dao.custom.Impl;
 
 import lk.ijse.restomaster.dao.CrudDAO;
+import lk.ijse.restomaster.dao.SQLUtil;
 import lk.ijse.restomaster.dao.custom.CustomerDAO;
 import lk.ijse.restomaster.dao.custom.MenuItemDAO;
 import lk.ijse.restomaster.entity.Employee;
@@ -17,7 +18,7 @@ public class MenuItemDAOImpl implements MenuItemDAO {
 
     @Override
     public boolean add(MenuItem entity) throws SQLException, ClassNotFoundException {
-        return false;
+        return SQLUtil.execute("INSERT INTO MenuItem(MenuItemCode , MenuItemType , Description , UnitPrice , Quantity , PreparationTime) VALUES(?,? ,? ,?,? , ?)",entity.getMiCode(),entity.getMiType(),entity.getDescription(),entity.getItemUnitPrice(),entity.getQuantity(),entity.getPreTime());
     }
 
     @Override
