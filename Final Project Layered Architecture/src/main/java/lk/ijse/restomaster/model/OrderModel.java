@@ -96,8 +96,7 @@ public class OrderModel {
 
         return pstm.executeUpdate() > 0;
     }
-
-
+    
     public static String generateNextOrderID() throws SQLException {
         Connection con = DBConnection.getInstance().getConnection();
 

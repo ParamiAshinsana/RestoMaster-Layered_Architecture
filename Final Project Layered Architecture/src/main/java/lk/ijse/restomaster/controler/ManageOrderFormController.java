@@ -15,6 +15,12 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import lk.ijse.restomaster.bo.custom.EmployeeBO;
+import lk.ijse.restomaster.bo.custom.Impl.EmployeeBOImpl;
+import lk.ijse.restomaster.bo.custom.Impl.OrdersBOImpl;
+import lk.ijse.restomaster.bo.custom.OrdersBO;
+import lk.ijse.restomaster.dao.custom.Impl.OrdersDAOImpl;
+import lk.ijse.restomaster.dao.custom.OrdersDAO;
 import lk.ijse.restomaster.db.DBConnection;
 import lk.ijse.restomaster.dto.MenuItemDTO;
 import lk.ijse.restomaster.dto.OrdersDTO;
@@ -38,8 +44,8 @@ import java.util.*;
 import java.util.Date;
 
 public class ManageOrderFormController implements Initializable {
-
-
+    OrdersBO ordersBO = new OrdersBOImpl();
+    OrdersDAO ordersDAO = new OrdersDAOImpl();
     private final static String URL = "jdbc:mysql://localhost:3306/RestoMaster";
     private final static Properties props = new Properties();
 
@@ -87,6 +93,7 @@ public class ManageOrderFormController implements Initializable {
     public Label labelOrderId;
     public Label labelOrderTime;
     String Date;
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -177,7 +184,6 @@ public class ManageOrderFormController implements Initializable {
         colordertime.setCellValueFactory(new PropertyValueFactory<>("orderTime"));
     }
 
-
     public void btnplaceorderonaction(ActionEvent actionEvent) throws IOException {
         controlArea.setVisible(true);
         FXMLLoader loader= new FXMLLoader(getClass().getResource("/view/manage_orders_form.fxml"));
@@ -190,7 +196,7 @@ public class ManageOrderFormController implements Initializable {
             this.controlArea = st ;
     }
 
-    public void btnAddOrderOnAction(ActionEvent actionEvent) throws SQLException {
+    public void btnAddOrderOnAction(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
         if(!isValidated()){
             new Alert(Alert.AlertType.ERROR, "Invalid Input !").show();
             return;
@@ -207,37 +213,57 @@ public class ManageOrderFormController implements Initializable {
 
         Double tot = quantity * unitPrice ;
 
-        try (Connection con = DriverManager.getConnection(URL, props)) {
+//        try (Connection con = DriverManager.getConnection(URL, props)) {
+//            con.setAutoCommit(false);
+//            String sql = "INSERT INTO Orders (OrderId , CustomerId , MenuItemId , Description , UnitPrice , Quantity , Total , OrderDate , OrderTime ) VALUES(?, ?, ?, ? ,? , ? ,? , ? , ? )";
+//
+//            PreparedStatement pstm = con.prepareStatement(sql);
+//            pstm.setString(1, labelOrderId.getText());
+//            pstm.setString(2, customerId);
+//            pstm.setString(3, menuItem);
+//            pstm.setString(4, description);
+//            pstm.setDouble(5, Double.parseDouble(String.valueOf(unitPrice)));
+//            pstm.setInt(6, Integer.parseInt(String.valueOf(quantity)));
+//            pstm.setDouble(7, tot);
+//            pstm.setString(8, orderDate);
+//            pstm.setString(9, orderTime);
+//
+//            int affectedRows = pstm.executeUpdate();
+//            if(affectedRows > 0) {
+//                //boolean IsUpdated = OrderModel.UpdateQuntity(quantity,menuItem);
+//
+//            }else {
+//                new Alert(Alert.AlertType.ERROR,"SQL ERROR !");
+//            }
+//            con.setAutoCommit(true);
+//        }
+
+        Connection con = null;
+        try {
+            con = DBConnection.getInstance().getConnection();
             con.setAutoCommit(false);
-            String sql = "INSERT INTO Orders (OrderId , CustomerId , MenuItemId , Description , UnitPrice , Quantity , Total , OrderDate , OrderTime ) VALUES(?, ?, ?, ? ,? , ? ,? , ? , ? )";
-
-            PreparedStatement pstm = con.prepareStatement(sql);
-            pstm.setString(1, labelOrderId.getText());
-            pstm.setString(2, customerId);
-            pstm.setString(3, menuItem);
-            pstm.setString(4, description);
-            pstm.setDouble(5, Double.parseDouble(String.valueOf(unitPrice)));
-            pstm.setInt(6, Integer.parseInt(String.valueOf(quantity)));
-            pstm.setDouble(7, tot);
-            pstm.setString(8, orderDate);
-            pstm.setString(9, orderTime);
-
-            int affectedRows = pstm.executeUpdate();
-            if(affectedRows > 0) {
-                boolean IsUpdated = OrderModel.UpdateQuntity(quantity,menuItem);
-                if (IsUpdated){
-                    con.commit();
+            if (!ordersBO.addOrders(new OrdersDTO(orderId, customerId, menuItem, description, unitPrice, quantity, tot, orderDate, orderTime))) {
+                new Alert(Alert.AlertType.ERROR, "Can not Added Order !").show();
+            } else {
+                //new Alert(Alert.AlertType.CONFIRMATION , "Order Added!!").show();
+                boolean IsUpdated = ordersDAO.updateQuantity(quantity, menuItem);
+                if (IsUpdated) {
                     new Alert(Alert.AlertType.CONFIRMATION, "Order Placed!!").show();
-                }else {
-                    new Alert(Alert.AlertType.ERROR,"SQL ERROR !");
+                    con.commit();
+                } else {
+                    new Alert(Alert.AlertType.ERROR, "SQL ERROR !");
                 }
-            }else {
-                new Alert(Alert.AlertType.ERROR,"SQL ERROR !");
             }
+        } catch (SQLException throwables) {
+            con.rollback();
+            throwables.printStackTrace();
+        }finally{
             con.setAutoCommit(true);
         }
+
+
         getAll();
-        labelOrderId.setText("");
+        //labelOrderId.setText("");
         lblCustId.setText("");
         micodeCBox.setValue("");
         lblDescription.setText("");
@@ -287,7 +313,7 @@ public class ManageOrderFormController implements Initializable {
             }
         }
         getAll();
-        labelOrderId.setText("");
+        //labelOrderId.setText("");
         lblCustId.setText("");
         micodeCBox.setValue("");
         lblDescription.setText("");
@@ -297,7 +323,6 @@ public class ManageOrderFormController implements Initializable {
         //labelOrderTime.setText("");
         generateNextOrderID();
     }
-
 
     public void btnDeleteOrederOnAction(ActionEvent actionEvent) throws SQLException {
         String orderId = txtOrderId.getText();
@@ -313,7 +338,13 @@ public class ManageOrderFormController implements Initializable {
             }
         }
         getAll();
-        labelOrderId.setText("");
+        //labelOrderId.setText("");
+        lblCustId.setText("");
+        micodeCBox.setValue("");
+        lblDescription.setText("");
+        lblUnitPrice.setText("");
+        txtQuantity.setText("");
+        orderDateCBox.setValue(null);
 
         generateNextOrderID();
     }
