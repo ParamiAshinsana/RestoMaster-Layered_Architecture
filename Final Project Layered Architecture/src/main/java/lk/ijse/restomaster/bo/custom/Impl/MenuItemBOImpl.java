@@ -34,7 +34,7 @@ public class MenuItemBOImpl implements MenuItemBO {
 
     @Override
     public boolean deleteMenuItems(String id) throws SQLException, ClassNotFoundException {
-        return false;
+        return menuItemDAO.delete(id);
     }
 
     @Override

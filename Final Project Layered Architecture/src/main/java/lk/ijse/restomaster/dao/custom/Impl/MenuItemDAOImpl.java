@@ -28,7 +28,7 @@ public class MenuItemDAOImpl implements MenuItemDAO {
 
     @Override
     public boolean delete(String id) throws SQLException, ClassNotFoundException {
-        return false;
+        return SQLUtil.execute("DELETE FROM MenuItem WHERE MenuItemCode=?", id);
     }
 
     @Override

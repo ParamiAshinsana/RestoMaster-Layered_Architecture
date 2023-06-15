@@ -180,19 +180,25 @@ public class ManageMenuItemFormController implements Initializable {
         preparationtimeCbox.setValue("");
     }
 
-    public void btndeletemenuonaction(ActionEvent actionEvent) throws SQLException {
+    public void btndeletemenuonaction(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
         String miCode = txtitemcode.getText();
 
-        try (Connection con = DriverManager.getConnection(URL, props)) {
-            String sql = "DELETE FROM MenuItem WHERE MenuItemCode = ?";
-
-            PreparedStatement pstm = con.prepareStatement(sql);
-            pstm.setString(1, txtitemcode.getText());
-
-            if(pstm.executeUpdate() > 0 ) {
-                new Alert(Alert.AlertType.CONFIRMATION, "Huree!! deleted :)").show();
-            }
+//        try (Connection con = DriverManager.getConnection(URL, props)) {
+//            String sql = "DELETE FROM MenuItem WHERE MenuItemCode = ?";
+//
+//            PreparedStatement pstm = con.prepareStatement(sql);
+//            pstm.setString(1, txtitemcode.getText());
+//
+//            if(pstm.executeUpdate() > 0 ) {
+//                new Alert(Alert.AlertType.CONFIRMATION, "Huree!! deleted :)").show();
+//            }
+//        }
+        if(!menuItemBO.deleteMenuItems(txtitemcode.getText())){
+            new Alert(Alert.AlertType.ERROR , "Can not Delete !)").show();
+        }else{
+            new Alert(Alert.AlertType.CONFIRMATION, " MenuItem Deleted :)").show();
         }
+
         getAll();
         //labelMenuItemCode.setText("");
         itemtypeCbox.setValue("");
