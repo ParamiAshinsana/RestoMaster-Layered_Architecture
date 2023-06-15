@@ -22,6 +22,7 @@ import lk.ijse.restomaster.bo.custom.OrdersBO;
 import lk.ijse.restomaster.dao.custom.Impl.OrdersDAOImpl;
 import lk.ijse.restomaster.dao.custom.OrdersDAO;
 import lk.ijse.restomaster.db.DBConnection;
+import lk.ijse.restomaster.dto.CustomerDTO;
 import lk.ijse.restomaster.dto.MenuItemDTO;
 import lk.ijse.restomaster.dto.OrdersDTO;
 import lk.ijse.restomaster.dto.tm.OrdersTM;
@@ -261,7 +262,6 @@ public class ManageOrderFormController implements Initializable {
             con.setAutoCommit(true);
         }
 
-
         getAll();
         lblCustId.setText("");
         micodeCBox.setValue("");
@@ -273,7 +273,7 @@ public class ManageOrderFormController implements Initializable {
         generateNextOrderID();
     }
 
-    public void btnUpdateOrderOnAction(ActionEvent actionEvent) throws SQLException {
+    public void btnUpdateOrderOnAction(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
         if(!isValidated()){
             new Alert(Alert.AlertType.ERROR, "Invalid Input !").show();
             return;
@@ -290,26 +290,33 @@ public class ManageOrderFormController implements Initializable {
 
         Double tot = quantity * unitPrice ;
 
-        try(Connection con = DriverManager.getConnection(URL, props)) {
+//        try(Connection con = DriverManager.getConnection(URL, props)) {
+//
+//            String sql = "UPDATE Orders SET CustomerId = ? , MenuItemId = ? , Description = ? , UnitPrice = ? , Quantity = ? , Total = ? , OrderDate = ? , OrderTime = ? WHERE OrderId = ?";
+//
+//            PreparedStatement pstm = con.prepareStatement(sql);
+//            pstm.setString(1, customerId);
+//            pstm.setString(2, menuItem);
+//            pstm.setString(3, description);
+//            pstm.setDouble(4, Double.parseDouble(String.valueOf(unitPrice)));
+//            pstm.setInt(5, Integer.parseInt(String.valueOf(quantity)));
+//            pstm.setDouble(6, tot);
+//            pstm.setString(7, orderDate);
+//            pstm.setString(8, orderTime);
+//            pstm.setString(9, orderId);
+//
+//
+//            if(pstm.executeUpdate() > 0) {
+//                new Alert(Alert.AlertType.CONFIRMATION, "Order Updated!!").show();
+//            }
+//        }
 
-            String sql = "UPDATE Orders SET CustomerId = ? , MenuItemId = ? , Description = ? , UnitPrice = ? , Quantity = ? , Total = ? , OrderDate = ? , OrderTime = ? WHERE OrderId = ?";
-
-            PreparedStatement pstm = con.prepareStatement(sql);
-            pstm.setString(1, customerId);
-            pstm.setString(2, menuItem);
-            pstm.setString(3, description);
-            pstm.setDouble(4, Double.parseDouble(String.valueOf(unitPrice)));
-            pstm.setInt(5, Integer.parseInt(String.valueOf(quantity)));
-            pstm.setDouble(6, tot);
-            pstm.setString(7, orderDate);
-            pstm.setString(8, orderTime);
-            pstm.setString(9, orderId);
-
-
-            if(pstm.executeUpdate() > 0) {
-                new Alert(Alert.AlertType.CONFIRMATION, "Order Updated!!").show();
-            }
+        if(!ordersBO.updateOrders(new OrdersDTO(orderId, customerId, menuItem, description, unitPrice, quantity, tot, orderDate, orderTime))){
+            new Alert(Alert.AlertType.ERROR , "Can not Uptaded Order !").show();
+        }else{
+            new Alert(Alert.AlertType.CONFIRMATION , "Order Added!!").show();
         }
+
         getAll();
         lblCustId.setText("");
         micodeCBox.setValue("");

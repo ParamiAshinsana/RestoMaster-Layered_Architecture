@@ -29,7 +29,7 @@ public class OrdersBOImpl implements OrdersBO {
 
     @Override
     public boolean updateOrders(OrdersDTO dto) throws SQLException, ClassNotFoundException {
-        return false;
+        return ordersDAO.update(new Orders(dto.getOrderId(),dto.getCustomerId(),dto.getMenuItem(),dto.getDescription(),dto.getUnitPrice(),dto.getQuantity(),dto.getTotal(),dto.getOrderDate(),dto.getOrderTime()));
     }
 
     @Override

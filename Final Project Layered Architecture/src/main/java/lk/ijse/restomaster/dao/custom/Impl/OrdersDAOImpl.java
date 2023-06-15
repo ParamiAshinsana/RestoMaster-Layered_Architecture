@@ -22,7 +22,7 @@ public class OrdersDAOImpl implements OrdersDAO {
 
     @Override
     public boolean update(Orders entity) throws SQLException, ClassNotFoundException {
-        return false;
+        return SQLUtil.execute("UPDATE Orders SET CustomerId = ? , MenuItemId = ? , Description = ? , UnitPrice = ? , Quantity = ? ,Total = ? , OrderDate = ? ,OrderTime = ? WHERE OrderId = ?",entity.getCustomerId(),entity.getMenuItem(),entity.getDescription(),entity.getUnitPrice(),entity.getQuantity(),entity.getTotal(),entity.getOrderDate(),entity.getOrderTime(),entity.getOrderId());
     }
 
     @Override
