@@ -263,14 +263,12 @@ public class ManageOrderFormController implements Initializable {
 
 
         getAll();
-        //labelOrderId.setText("");
         lblCustId.setText("");
         micodeCBox.setValue("");
         lblDescription.setText("");
         lblUnitPrice.setText("");
         txtQuantity.setText("");
         orderDateCBox.setValue(null);
-        //labelOrderTime.setText("");
 
         generateNextOrderID();
     }
@@ -313,14 +311,12 @@ public class ManageOrderFormController implements Initializable {
             }
         }
         getAll();
-        //labelOrderId.setText("");
         lblCustId.setText("");
         micodeCBox.setValue("");
         lblDescription.setText("");
         lblUnitPrice.setText("");
         txtQuantity.setText("");
         orderDateCBox.setValue(null);
-        //labelOrderTime.setText("");
         generateNextOrderID();
     }
 
@@ -338,7 +334,6 @@ public class ManageOrderFormController implements Initializable {
             }
         }
         getAll();
-        //labelOrderId.setText("");
         lblCustId.setText("");
         micodeCBox.setValue("");
         lblDescription.setText("");
@@ -350,14 +345,12 @@ public class ManageOrderFormController implements Initializable {
     }
 
     public void btnClearOrderOnAction(ActionEvent actionEvent) {
-        //labelOrderId.setText("");
         lblCustId.setText("");
         micodeCBox.setValue("");
         lblDescription.setText("");
         lblUnitPrice.setText("");
         txtQuantity.setText("");
         orderDateCBox.setValue(null);
-        //txtOrderTime.setText("");
     }
 
     public void tblOrderMouseClicked(MouseEvent mouseEvent) {
