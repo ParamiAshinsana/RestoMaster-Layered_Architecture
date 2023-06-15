@@ -29,7 +29,7 @@ public class MenuItemBOImpl implements MenuItemBO {
 
     @Override
     public boolean updateMenuItems(MenuItemDTO dto) throws SQLException, ClassNotFoundException {
-        return false;
+        return menuItemDAO.update(new MenuItem(dto.getMiCode(),dto.getMiType(),dto.getDescription(),dto.getItemUnitPrice(),dto.getQuantity(),dto.getPreTime()));
     }
 
     @Override

@@ -15,6 +15,7 @@ import lk.ijse.restomaster.bo.custom.Impl.MenuItemBOImpl;
 import lk.ijse.restomaster.bo.custom.MenuItemBO;
 import lk.ijse.restomaster.db.DBConnection;
 import lk.ijse.restomaster.dto.CustomerDTO;
+import lk.ijse.restomaster.dto.EmployeeDTO;
 import lk.ijse.restomaster.dto.MenuItemDTO;
 import lk.ijse.restomaster.dto.tm.MenuItemTM;
 import lk.ijse.restomaster.model.MenuItemModel;
@@ -202,7 +203,7 @@ public class ManageMenuItemFormController implements Initializable {
         generateMenuItemCode();
     }
 
-    public void btnupdatemenuonaction(ActionEvent actionEvent) throws SQLException {
+    public void btnupdatemenuonaction(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
         if(!isValidated()){
             new Alert(Alert.AlertType.ERROR, "Invalid Input !").show();
             return;
@@ -215,21 +216,27 @@ public class ManageMenuItemFormController implements Initializable {
         int quantity = Integer.valueOf(txtQuantity.getText());
         String preTime = String.valueOf(preparationtimeCbox.getValue());
 
-        try(Connection con = DriverManager.getConnection(URL, props)) {
-            String sql = "UPDATE MenuItem SET MenuItemType = ? , Description = ? , UnitPrice = ? , Quantity = ? , PreparationTime = ?  WHERE MenuItemCode = ?";
-            //String sql = "UPDATE Customer SET CustomerName = ? , CustomerContact = ? , CustomerAddress = ? WHERE CustomerId = ?";
-            PreparedStatement pstm = con.prepareStatement(sql);
-            pstm.setString(1, miType);
-            pstm.setString(2, description);
-            pstm.setDouble(3, itemUnitPrice);
-            pstm.setInt(4, quantity);
-            pstm.setString(5, preTime);
-            pstm.setString(6, miCode);
-
-            if(pstm.executeUpdate() > 0) {
-                new Alert(Alert.AlertType.CONFIRMATION, "Customer Updated!!").show();
-            }
+//        try(Connection con = DriverManager.getConnection(URL, props)) {
+//            String sql = "UPDATE MenuItem SET MenuItemType = ? , Description = ? , UnitPrice = ? , Quantity = ? , PreparationTime = ?  WHERE MenuItemCode = ?";
+//            //String sql = "UPDATE Customer SET CustomerName = ? , CustomerContact = ? , CustomerAddress = ? WHERE CustomerId = ?";
+//            PreparedStatement pstm = con.prepareStatement(sql);
+//            pstm.setString(1, miType);
+//            pstm.setString(2, description);
+//            pstm.setDouble(3, itemUnitPrice);
+//            pstm.setInt(4, quantity);
+//            pstm.setString(5, preTime);
+//            pstm.setString(6, miCode);
+//
+//            if(pstm.executeUpdate() > 0) {
+//                new Alert(Alert.AlertType.CONFIRMATION, "Customer Updated!!").show();
+//            }
+//        }
+        if(!menuItemBO.updateMenuItems(new MenuItemDTO(miCode,miType,description,itemUnitPrice,quantity,preTime))){
+            new Alert(Alert.AlertType.ERROR , "Can not Uptaded MenuItem !").show();
+        }else{
+            new Alert(Alert.AlertType.CONFIRMATION , "MenuItem Added!!").show();
         }
+
         getAll();
 
         txtitemcode.setText("");

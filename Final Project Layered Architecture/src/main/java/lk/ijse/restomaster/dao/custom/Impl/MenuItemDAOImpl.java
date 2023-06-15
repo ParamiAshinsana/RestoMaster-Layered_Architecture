@@ -23,7 +23,7 @@ public class MenuItemDAOImpl implements MenuItemDAO {
 
     @Override
     public boolean update(MenuItem entity) throws SQLException, ClassNotFoundException {
-        return false;
+        return SQLUtil.execute("UPDATE MenuItem SET MenuItemType = ? , Description = ? , UnitPrice = ? , Quantity = ? , PreparationTime = ? WHERE MenuItemCode = ?",entity.getMiType(),entity.getDescription(),entity.getItemUnitPrice(),entity.getQuantity(),entity.getPreTime(),entity.getMiCode());
     }
 
     @Override
