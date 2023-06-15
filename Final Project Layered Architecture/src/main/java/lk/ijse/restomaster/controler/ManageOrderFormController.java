@@ -17,7 +17,7 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import lk.ijse.restomaster.db.DBConnection;
 import lk.ijse.restomaster.dto.MenuItemDTO;
-import lk.ijse.restomaster.dto.Orders;
+import lk.ijse.restomaster.dto.OrdersDTO;
 import lk.ijse.restomaster.dto.tm.OrdersTM;
 import lk.ijse.restomaster.model.MenuItemModel;
 import lk.ijse.restomaster.model.OrderModel;
@@ -38,6 +38,7 @@ import java.util.*;
 import java.util.Date;
 
 public class ManageOrderFormController implements Initializable {
+
 
     private final static String URL = "jdbc:mysql://localhost:3306/RestoMaster";
     private final static Properties props = new Properties();
@@ -141,9 +142,9 @@ public class ManageOrderFormController implements Initializable {
     private void getAll() {
         try{
             observableList = FXCollections.observableArrayList();
-            List<Orders> OrdersList = OrderModel.getAll();
+            List<OrdersDTO> OrdersList = OrderModel.getAll();
 
-            for(Orders orders : OrdersList){
+            for(OrdersDTO orders : OrdersList){
                 observableList.add(new OrdersTM(
                         orders.getOrderId(),
                         orders.getCustomerId(),
@@ -391,7 +392,7 @@ public class ManageOrderFormController implements Initializable {
     }
 
     private Object NetTotalCalculate(String cusID, String date) throws SQLException {
-        Orders product = OrderModel.searchById(cusID);
+        OrdersDTO product = OrderModel.searchById(cusID);
 
         try (Connection con = DriverManager.getConnection(URL, props)) {
             double tot = 0;

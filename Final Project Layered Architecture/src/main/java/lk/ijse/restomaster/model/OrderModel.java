@@ -1,7 +1,7 @@
 package lk.ijse.restomaster.model;
 
 import lk.ijse.restomaster.db.DBConnection;
-import lk.ijse.restomaster.dto.Orders;
+import lk.ijse.restomaster.dto.OrdersDTO;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -11,15 +11,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class OrderModel {
-    public static List<Orders> getAll() throws SQLException {
+    public static List<OrdersDTO> getAll() throws SQLException {
         Connection con = DBConnection.getInstance().getConnection();
         String sql = "SELECT * FROM Orders";
 
-        List<Orders> data = new ArrayList<>();
+        List<OrdersDTO> data = new ArrayList<>();
 
         ResultSet resultSet = con.createStatement().executeQuery(sql);
         while(resultSet.next()){
-            data.add(new Orders(
+            data.add(new OrdersDTO(
                     resultSet.getString(1),
                     resultSet.getString(2),
                     resultSet.getString(3),
@@ -62,7 +62,7 @@ public class OrderModel {
         return ids;
     }
 
-    public static Orders searchById(String cusID) throws SQLException {
+    public static OrdersDTO searchById(String cusID) throws SQLException {
         Connection con = DBConnection.getInstance().getConnection();
         String sql = "SELECT * FROM orders WHERE CustomerId = ?";
 
@@ -71,7 +71,7 @@ public class OrderModel {
 
         ResultSet resultSet = pstm.executeQuery();
         if(resultSet.next()) {
-            return new Orders(
+            return new OrdersDTO(
                     resultSet.getString(1),
                     resultSet.getString(2),
                     resultSet.getString(3),
