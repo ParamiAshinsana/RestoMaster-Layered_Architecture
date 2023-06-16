@@ -108,19 +108,19 @@ public class ManageStockFormController implements Initializable {
     }
 
     private void loadSupplierId() throws SQLException, ClassNotFoundException {
-        try {
-            List<String> ids = SupplierModel.getIds();
-            ObservableList<String> obList = FXCollections.observableArrayList();
-
-            for (String id : ids) {
-                obList.add(id);
-            }
-            supllierIdCBox.setItems(obList);
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-            new Alert(Alert.AlertType.ERROR, "SQL Error!").show();
-        }
+//        try {
+//            List<String> ids = SupplierModel.getIds();
+//            ObservableList<String> obList = FXCollections.observableArrayList();
+//
+//            for (String id : ids) {
+//                obList.add(id);
+//            }
+//            supllierIdCBox.setItems(obList);
+//
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//            new Alert(Alert.AlertType.ERROR, "SQL Error!").show();
+//        }
 
         List<String> id = stockDAO.loadSuppliersId();
         ObservableList<String> obList = FXCollections.observableArrayList();

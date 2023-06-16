@@ -29,6 +29,7 @@ import lk.ijse.restomaster.dto.tm.MenuItemTM;
 import lk.ijse.restomaster.dto.tm.OrdersTM;
 import lk.ijse.restomaster.model.MenuItemModel;
 import lk.ijse.restomaster.model.OrderModel;
+import lk.ijse.restomaster.model.SupplierModel;
 import lk.ijse.restomaster.util.Regex;
 import lk.ijse.restomaster.util.TextFilds;
 import lombok.SneakyThrows;
@@ -48,6 +49,7 @@ import java.util.Date;
 public class ManageOrderFormController implements Initializable {
     OrdersBO ordersBO = new OrdersBOImpl();
     OrdersDAO ordersDAO = new OrdersDAOImpl();
+
     private final static String URL = "jdbc:mysql://localhost:3306/RestoMaster";
     private final static Properties props = new Properties();
 
@@ -119,7 +121,7 @@ public class ManageOrderFormController implements Initializable {
         labelOrderId.setText(nextId);
     }
 
-    private void loadMenuItemCode() {
+    private void loadMenuItemCode() throws SQLException, ClassNotFoundException {
         try {
             List<String> ids = OrderModel.getMenuItemCodes();
             ObservableList<String> obList = FXCollections.observableArrayList();
@@ -135,7 +137,7 @@ public class ManageOrderFormController implements Initializable {
         }
     }
 
-    private void loadCustomerId() {
+    private void loadCustomerId() throws SQLException, ClassNotFoundException {
         try {
             List<String> ids = OrderModel.getCustomerIds();
             ObservableList<String> obList = FXCollections.observableArrayList();
@@ -143,7 +145,7 @@ public class ManageOrderFormController implements Initializable {
             for (String id : ids) {
                 obList.add(id);
             }
-             custIdCBox.setItems(obList);
+            custIdCBox.setItems(obList);
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -496,7 +498,7 @@ public class ManageOrderFormController implements Initializable {
         lblError.setText("");
     }
 
-    public void cbCustIdOnMouseClicked(MouseEvent mouseEvent) {
+    public void cbCustIdOnMouseClicked(MouseEvent mouseEvent) throws SQLException, ClassNotFoundException {
         loadCustomerId();
     }
 

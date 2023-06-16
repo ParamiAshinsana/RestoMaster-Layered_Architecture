@@ -10,6 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class OrdersDAOImpl implements OrdersDAO {
     @Override
@@ -65,5 +66,16 @@ public class OrdersDAOImpl implements OrdersDAO {
     @Override
     public boolean updateQuantity(int quantity, String menuItems) throws SQLException, ClassNotFoundException {
         return SQLUtil.execute("UPDATE menuitem SET Quantity = (Quantity - ?) WHERE MenuItemCode = ?",quantity,menuItems);
+    }
+
+    @Override
+    public List<String> loadCustomersId() throws SQLException, ClassNotFoundException {
+        List<String> allCustomersIds = new ArrayList<>();
+        ResultSet rst = SQLUtil.execute("SELECT CustomerId FROM Customer");
+        while (rst.next()) {
+            String Ids = new String(rst.getString("CustomerId"));
+            allCustomersIds.add(Ids);
+        }
+        return allCustomersIds;
     }
 }
