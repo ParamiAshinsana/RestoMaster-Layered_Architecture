@@ -25,6 +25,7 @@ import lk.ijse.restomaster.db.DBConnection;
 import lk.ijse.restomaster.dto.CustomerDTO;
 import lk.ijse.restomaster.dto.MenuItemDTO;
 import lk.ijse.restomaster.dto.OrdersDTO;
+import lk.ijse.restomaster.dto.tm.MenuItemTM;
 import lk.ijse.restomaster.dto.tm.OrdersTM;
 import lk.ijse.restomaster.model.MenuItemModel;
 import lk.ijse.restomaster.model.OrderModel;
@@ -151,28 +152,40 @@ public class ManageOrderFormController implements Initializable {
     }
 
     private void getAll() {
-        try{
-            observableList = FXCollections.observableArrayList();
-            List<OrdersDTO> OrdersList = OrderModel.getAll();
+//        try{
+//            observableList = FXCollections.observableArrayList();
+//            List<OrdersDTO> OrdersList = OrderModel.getAll();
+//
+//            for(OrdersDTO orders : OrdersList){
+//                observableList.add(new OrdersTM(
+//                        orders.getOrderId(),
+//                        orders.getCustomerId(),
+//                        orders.getMenuItem(),
+//                        orders.getDescription(),
+//                        orders.getUnitPrice(),
+//                        orders.getQuantity(),
+//                        orders.getTotal(),
+//                        orders.getOrderDate(),
+//                        orders.getOrderTime()
+//                ));
+//            }
+//            tblOrder.setItems(observableList);
+//        }catch (SQLException e ){
+//            e.printStackTrace();
+//            new Alert(Alert.AlertType.ERROR , "Query Error !").show();
+//
+//        }
+        tblOrder.getItems().clear();
+        try {
+            ArrayList<OrdersDTO> allOrders = ordersBO.getAllOrders();
 
-            for(OrdersDTO orders : OrdersList){
-                observableList.add(new OrdersTM(
-                        orders.getOrderId(),
-                        orders.getCustomerId(),
-                        orders.getMenuItem(),
-                        orders.getDescription(),
-                        orders.getUnitPrice(),
-                        orders.getQuantity(),
-                        orders.getTotal(),
-                        orders.getOrderDate(),
-                        orders.getOrderTime()
-                ));
+            for (OrdersDTO c : allOrders) {
+                tblOrder.getItems().add(new OrdersTM(c.getOrderId(),c.getCustomerId(),c.getMenuItem(),c.getDescription(),c.getUnitPrice(),c.getQuantity(),c.getTotal(),c.getOrderDate(),c.getOrderTime()));
             }
-            tblOrder.setItems(observableList);
-        }catch (SQLException e ){
-            e.printStackTrace();
-            new Alert(Alert.AlertType.ERROR , "Query Error !").show();
-
+        } catch (SQLException e) {
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+        } catch (ClassNotFoundException e) {
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
     }
 

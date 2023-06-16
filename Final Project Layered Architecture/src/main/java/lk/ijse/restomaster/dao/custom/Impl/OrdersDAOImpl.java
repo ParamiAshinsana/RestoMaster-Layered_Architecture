@@ -3,6 +3,7 @@ package lk.ijse.restomaster.dao.custom.Impl;
 import lk.ijse.restomaster.dao.SQLUtil;
 import lk.ijse.restomaster.dao.custom.MenuItemDAO;
 import lk.ijse.restomaster.dao.custom.OrdersDAO;
+import lk.ijse.restomaster.entity.MenuItem;
 import lk.ijse.restomaster.entity.Orders;
 
 import java.sql.PreparedStatement;
@@ -13,7 +14,13 @@ import java.util.ArrayList;
 public class OrdersDAOImpl implements OrdersDAO {
     @Override
     public ArrayList<Orders> getAll() throws SQLException, ClassNotFoundException {
-        return null;
+        ArrayList<Orders> allOrders = new ArrayList<>();
+        ResultSet rst = SQLUtil.execute("SELECT * FROM Orders");
+        while (rst.next()) {
+            Orders orders = new Orders(rst.getString("OrderId"),rst.getString("CustomerId"),rst.getString("MenuItemId"),rst.getString("Description"),rst.getDouble("UnitPrice"),rst.getInt("Quantity"),rst.getDouble("Total"),rst.getString("OrderDate"),rst.getString("OrderTime"));
+            allOrders.add(orders);
+        }
+        return allOrders;
     }
 
     @Override

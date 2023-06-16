@@ -19,7 +19,12 @@ public class OrdersBOImpl implements OrdersBO {
 
     @Override
     public ArrayList<OrdersDTO> getAllOrders() throws SQLException, ClassNotFoundException {
-        return null;
+        ArrayList<OrdersDTO> allOrders= new ArrayList<>();
+        ArrayList<Orders> all = ordersDAO.getAll();
+        for (Orders c : all) {
+            allOrders.add(new OrdersDTO(c.getOrderId(),c.getCustomerId(),c.getMenuItem(),c.getDescription(),c.getUnitPrice(),c.getQuantity(),c.getTotal(),c.getOrderDate(),c.getOrderTime()));
+        }
+        return allOrders;
     }
 
     @Override
