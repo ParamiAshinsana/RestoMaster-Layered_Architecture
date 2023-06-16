@@ -1,7 +1,6 @@
 package lk.ijse.restomaster.dao;
 
-import lk.ijse.restomaster.dao.custom.Impl.CustomerDAOImpl;
-import lk.ijse.restomaster.dao.custom.Impl.StockDAOImpl;
+import lk.ijse.restomaster.dao.custom.Impl.*;
 
 public class DAOFactory {
     private static DAOFactory daoFactory ;
@@ -18,18 +17,18 @@ public class DAOFactory {
         switch (types){
             case CUSTOMERS:
                 return new CustomerDAOImpl();
-//            case ORDERS:
-//                return new CustomerDAOImpl();
+            case ORDERS:
+                return new OrdersDAOImpl();
 //            case ORDER_SELECTIONS:
-//                return new CustomerDAOImpl();
-//            case MENU_ITEMS:
-//                return new CustomerDAOImpl();
+//                return new OrderSelectionDAOImpl();
+            case MENU_ITEMS:
+                return new MenuItemDAOImpl();
             case SUPPLIERS:
-                return new CustomerDAOImpl();
+                return new SupplierDAOImpl();
             case STOCKS:
                 return new StockDAOImpl();
-//            case EMPLOYEES:
-//                return new CustomerDAOImpl();
+            case EMPLOYEES:
+                return new CustomerDAOImpl();
               default:
                   return null ;
         }

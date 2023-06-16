@@ -9,6 +9,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import lk.ijse.restomaster.bo.BOFactory;
 import lk.ijse.restomaster.bo.custom.CustomerBO;
 import lk.ijse.restomaster.bo.custom.Impl.CustomerBOImpl;
 import lk.ijse.restomaster.dao.DAOFactory;
@@ -32,8 +33,10 @@ import java.util.regex.Pattern;
 
 public class ManageCustomerFormController implements Initializable{
 
-    CustomerBO customerBO = new CustomerBOImpl();
+    //CustomerBO customerBO = new CustomerBOImpl();
     //CustomerDAO customerDAO = (CustomerDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.CUSTOMERS);
+    //StockBO stockBO = (StockBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.B_STOCKS);
+    CustomerBO customerBO = (CustomerBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.B_CUSTOMERS);
 
     private final static String URL = "jdbc:mysql://localhost:3306/RestoMaster";
     private final static Properties props = new Properties();
@@ -95,7 +98,7 @@ public class ManageCustomerFormController implements Initializable{
         //txtcustmerid.setStyle("-fx-background-color: white");
     }
 
-    public void btnaddonaction(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
+    public void btnaddonaction(ActionEvent actionEvent) throws SQLException,ClassNotFoundException {
         if(!isValidated()){
             new Alert(Alert.AlertType.ERROR, "Invalid Input !").show();
             return;

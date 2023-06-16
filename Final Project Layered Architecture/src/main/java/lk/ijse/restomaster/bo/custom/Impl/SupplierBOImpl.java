@@ -1,13 +1,9 @@
 package lk.ijse.restomaster.bo.custom.Impl;
 
 import lk.ijse.restomaster.bo.custom.SupplierBO;
-import lk.ijse.restomaster.dao.custom.CustomerDAO;
-import lk.ijse.restomaster.dao.custom.Impl.CustomerDAOImpl;
 import lk.ijse.restomaster.dao.custom.Impl.SupplierDAOImpl;
 import lk.ijse.restomaster.dao.custom.SupplierDAO;
-import lk.ijse.restomaster.dto.CustomerDTO;
 import lk.ijse.restomaster.dto.SupplierDTO;
-import lk.ijse.restomaster.entity.Customer;
 import lk.ijse.restomaster.entity.Supplier;
 
 import java.sql.SQLException;

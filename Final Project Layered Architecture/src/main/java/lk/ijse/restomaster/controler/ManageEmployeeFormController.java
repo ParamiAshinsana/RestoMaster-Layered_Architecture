@@ -13,6 +13,8 @@ import lk.ijse.restomaster.bo.custom.CustomerBO;
 import lk.ijse.restomaster.bo.custom.EmployeeBO;
 import lk.ijse.restomaster.bo.custom.Impl.CustomerBOImpl;
 import lk.ijse.restomaster.bo.custom.Impl.EmployeeBOImpl;
+import lk.ijse.restomaster.dao.DAOFactory;
+import lk.ijse.restomaster.dao.custom.EmployeeDAO;
 import lk.ijse.restomaster.dto.CustomerDTO;
 import lk.ijse.restomaster.dto.EmployeeDTO;
 import lk.ijse.restomaster.dto.tm.CustomerTM;
@@ -34,6 +36,8 @@ import java.util.ResourceBundle;
 
 public class ManageEmployeeFormController implements Initializable {
     EmployeeBO employeeBO = new EmployeeBOImpl();
+    //EmployeeDAO employeeDAO = (EmployeeDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.EMPLOYEES);
+
 
     private final static String URL = "jdbc:mysql://localhost:3306/RestoMaster";
     private final static Properties props = new Properties();
