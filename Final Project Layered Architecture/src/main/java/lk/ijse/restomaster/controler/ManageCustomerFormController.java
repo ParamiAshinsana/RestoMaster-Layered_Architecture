@@ -32,10 +32,6 @@ import java.util.ResourceBundle;
 import java.util.regex.Pattern;
 
 public class ManageCustomerFormController implements Initializable{
-
-    //CustomerBO customerBO = new CustomerBOImpl();
-    //CustomerDAO customerDAO = (CustomerDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.CUSTOMERS);
-    //StockBO stockBO = (StockBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.B_STOCKS);
     CustomerBO customerBO = (CustomerBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.B_CUSTOMERS);
 
     private final static String URL = "jdbc:mysql://localhost:3306/RestoMaster";

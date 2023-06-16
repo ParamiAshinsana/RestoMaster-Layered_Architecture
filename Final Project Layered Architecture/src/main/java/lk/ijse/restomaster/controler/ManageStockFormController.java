@@ -40,10 +40,10 @@ import java.util.ResourceBundle;
 
 public class ManageStockFormController implements Initializable {
 
-    StockBO stockBO = new StockBOImpl();
-    StockDAO stockDAO = new StockDAOImpl();
-    //StockBO stockBO = (StockBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.B_STOCKS);
-    //StockDAO stockDAO = (StockDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.STOCKS);
+//    StockBO stockBO = new StockBOImpl();
+//    StockDAO stockDAO = new StockDAOImpl();
+    StockBO stockBO = (StockBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.B_STOCKS);
+    StockDAO stockDAO = (StockDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.STOCKS);
 
     private final static String URL = "jdbc:mysql://localhost:3306/RestoMaster";
     private final static Properties props = new Properties();

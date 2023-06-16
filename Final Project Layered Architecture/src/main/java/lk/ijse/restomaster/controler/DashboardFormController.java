@@ -42,7 +42,6 @@ public class DashboardFormController implements Initializable {
         lbldate.setText(String.valueOf(LocalDate.now()));
         controllarea.setVisible(false);
         TimeNow();
-        //selectionpane.setVisible(false);
     }
 
     public void btnmanagecustomer(ActionEvent actionEvent) throws IOException {
@@ -50,16 +49,9 @@ public class DashboardFormController implements Initializable {
            Parent fxml = FXMLLoader.load(getClass().getResource("/view/manage_customer_form.fxml"));
            controllarea.getChildren().removeAll();
            controllarea.getChildren().setAll(fxml);
-           //selectionpane.setVisible(false);
     }
 
     public void btnonactionmanageorders(ActionEvent actionEvent) throws IOException {
-//        controllarea.setVisible(true);
-//        //selectionpane.setVisible(true);
-//        Parent fxml = FXMLLoader.load(getClass().getResource("/view/selection_form.fxml"));
-//        controllarea.getChildren().removeAll();
-//        controllarea.getChildren().setAll(fxml);
-
         controllarea.setVisible(true);
         FXMLLoader loader= new FXMLLoader(getClass().getResource("/view/selection_form.fxml"));
         AnchorPane anchorPane = loader.load();
@@ -67,7 +59,6 @@ public class DashboardFormController implements Initializable {
         controller.setControllArea(controllarea);
         controllarea.getChildren().removeAll();
         controllarea.getChildren().setAll(anchorPane);
-
     }
 
     public void logoutonmouseclicked(MouseEvent mouseEvent) throws IOException {
@@ -83,7 +74,6 @@ public class DashboardFormController implements Initializable {
         Parent fxml = FXMLLoader.load(getClass().getResource("/view/manage_stocks_form.fxml"));
         controllarea.getChildren().removeAll();
         controllarea.getChildren().setAll(fxml);
-        //selectionpane.setVisible(false);
     }
 
     public void btnmanagesupplieronaction(ActionEvent actionEvent) throws IOException {
@@ -91,7 +81,6 @@ public class DashboardFormController implements Initializable {
         Parent fxml = FXMLLoader.load(getClass().getResource("/view/manage_suppliers_form.fxml"));
         controllarea.getChildren().removeAll();
         controllarea.getChildren().setAll(fxml);
-        //selectionpane.setVisible(false);
     }
 
     public void btnmanagemenuitemonaction(ActionEvent actionEvent) throws IOException {
@@ -99,7 +88,6 @@ public class DashboardFormController implements Initializable {
         Parent fxml = FXMLLoader.load(getClass().getResource("/view/manage_menu_items_form.fxml"));
         controllarea.getChildren().removeAll();
         controllarea.getChildren().setAll(fxml);
-        //selectionpane.setVisible(false);
     }
 
     public void btnmanageemployeeonaction(ActionEvent actionEvent) throws IOException {
@@ -107,7 +95,6 @@ public class DashboardFormController implements Initializable {
         Parent fxml = FXMLLoader.load(getClass().getResource("/view/manage_employees_form.fxml"));
         controllarea.getChildren().removeAll();
         controllarea.getChildren().setAll(fxml);
-        //selectionpane.setVisible(false);
     }
 
     public void btnsuperviseitempriceonaction(ActionEvent actionEvent) throws IOException {
@@ -115,7 +102,6 @@ public class DashboardFormController implements Initializable {
         Parent fxml = FXMLLoader.load(getClass().getResource("/view/supervise_item_price_form.fxml"));
         controllarea.getChildren().removeAll();
         controllarea.getChildren().setAll(fxml);
-        //selectionpane.setVisible(false);
     }
 
     public void btngeneratereportsonaction(ActionEvent actionEvent) throws IOException {
@@ -123,7 +109,6 @@ public class DashboardFormController implements Initializable {
         Parent fxml = FXMLLoader.load(getClass().getResource("/view/generate_reports_form.fxml"));
         controllarea.getChildren().removeAll();
         controllarea.getChildren().setAll(fxml);
-        //selectionpane.setVisible(false);
     }
 
     public void btndecideprofitonaction(ActionEvent actionEvent) throws IOException {
@@ -131,7 +116,6 @@ public class DashboardFormController implements Initializable {
         Parent fxml = FXMLLoader.load(getClass().getResource("/view/decide_profit_percentage_form.fxml"));
         controllarea.getChildren().removeAll();
         controllarea.getChildren().setAll(fxml);
-        //selectionpane.setVisible(false);
     }
 
     private void TimeNow(){

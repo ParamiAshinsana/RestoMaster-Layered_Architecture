@@ -9,6 +9,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import lk.ijse.restomaster.bo.BOFactory;
 import lk.ijse.restomaster.bo.custom.CustomerBO;
 import lk.ijse.restomaster.bo.custom.EmployeeBO;
 import lk.ijse.restomaster.bo.custom.Impl.CustomerBOImpl;
@@ -35,8 +36,9 @@ import java.util.Properties;
 import java.util.ResourceBundle;
 
 public class ManageEmployeeFormController implements Initializable {
-    EmployeeBO employeeBO = new EmployeeBOImpl();
+    //EmployeeBO employeeBO = new EmployeeBOImpl();
     //EmployeeDAO employeeDAO = (EmployeeDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.EMPLOYEES);
+    EmployeeBO employeeBO = (EmployeeBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.B_EMPLOYEES);
 
 
     private final static String URL = "jdbc:mysql://localhost:3306/RestoMaster";

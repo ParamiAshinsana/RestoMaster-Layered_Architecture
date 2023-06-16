@@ -15,12 +15,17 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import lk.ijse.restomaster.bo.BOFactory;
+import lk.ijse.restomaster.bo.custom.CustomerBO;
 import lk.ijse.restomaster.bo.custom.EmployeeBO;
 import lk.ijse.restomaster.bo.custom.Impl.EmployeeBOImpl;
 import lk.ijse.restomaster.bo.custom.Impl.OrdersBOImpl;
+import lk.ijse.restomaster.bo.custom.MenuItemBO;
 import lk.ijse.restomaster.bo.custom.OrdersBO;
+import lk.ijse.restomaster.dao.DAOFactory;
 import lk.ijse.restomaster.dao.custom.Impl.OrdersDAOImpl;
 import lk.ijse.restomaster.dao.custom.OrdersDAO;
+import lk.ijse.restomaster.dao.custom.StockDAO;
 import lk.ijse.restomaster.db.DBConnection;
 import lk.ijse.restomaster.dto.CustomerDTO;
 import lk.ijse.restomaster.dto.MenuItemDTO;
@@ -47,8 +52,10 @@ import java.util.*;
 import java.util.Date;
 
 public class ManageOrderFormController implements Initializable {
-    OrdersBO ordersBO = new OrdersBOImpl();
-    OrdersDAO ordersDAO = new OrdersDAOImpl();
+    //OrdersBO ordersBO = new OrdersBOImpl();
+    //OrdersDAO ordersDAO = new OrdersDAOImpl();
+    OrdersBO ordersBO = (OrdersBO)BOFactory.getBoFactory().getBO(BOFactory.BOTypes.B_ORDERS);
+    OrdersDAO ordersDAO = (OrdersDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.ORDERS);
 
     private final static String URL = "jdbc:mysql://localhost:3306/RestoMaster";
     private final static Properties props = new Properties();
