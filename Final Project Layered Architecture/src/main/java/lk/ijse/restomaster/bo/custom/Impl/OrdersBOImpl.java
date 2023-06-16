@@ -39,6 +39,6 @@ public class OrdersBOImpl implements OrdersBO {
 
     @Override
     public String generateNewOrderID() throws SQLException, ClassNotFoundException {
-        return null;
+        return ordersDAO.generateNewId();
     }
 }

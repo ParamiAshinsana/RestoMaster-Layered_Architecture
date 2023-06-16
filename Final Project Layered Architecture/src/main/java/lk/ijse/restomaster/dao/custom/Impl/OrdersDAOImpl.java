@@ -6,6 +6,7 @@ import lk.ijse.restomaster.dao.custom.OrdersDAO;
 import lk.ijse.restomaster.entity.Orders;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -32,7 +33,26 @@ public class OrdersDAOImpl implements OrdersDAO {
 
     @Override
     public String generateNewId() throws SQLException, ClassNotFoundException {
-        return null;
+        ResultSet rst = SQLUtil.execute("SELECT OrderId FROM Orders ORDER BY OrderId DESC LIMIT 1");
+        if(rst.next()) {
+            String string = rst.getString(1);
+            String[] strings = string.split("OR0");
+            int id = Integer.parseInt(strings[1]);
+            id++;
+            String ID = String.valueOf(id);
+            int length = ID.length();
+            if (length < 2) {
+                return "OR00" + id;
+            } else {
+                if (length < 3) {
+                    return "OR0" + id;
+                } else {
+                    return "OR" + id;
+                }
+            }
+        }else{
+            return "OROO1";
+        }
     }
 
     @Override

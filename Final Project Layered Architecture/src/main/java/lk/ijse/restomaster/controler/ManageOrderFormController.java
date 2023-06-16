@@ -96,6 +96,7 @@ public class ManageOrderFormController implements Initializable {
     String Date;
 
 
+    @SneakyThrows
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         setCellValueFactory();
@@ -106,13 +107,15 @@ public class ManageOrderFormController implements Initializable {
         TimeNow();
     }
 
-    private void generateNextOrderID() {
-        try {
-            String nextId = OrderModel.generateNextOrderID();
-            labelOrderId.setText(nextId);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+    private void generateNextOrderID() throws SQLException, ClassNotFoundException {
+//        try {
+//            String nextId = OrderModel.generateNextOrderID();
+//            labelOrderId.setText(nextId);
+//        } catch (SQLException e) {
+//            throw new RuntimeException(e);
+//        }
+        String nextId = ordersBO.generateNewOrderID();
+        labelOrderId.setText(nextId);
     }
 
     private void loadMenuItemCode() {
