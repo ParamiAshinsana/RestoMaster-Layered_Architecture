@@ -89,4 +89,9 @@ public class OrdersDAOImpl implements OrdersDAO {
         }
         return allMenuItemsIds;
     }
+
+    @Override
+    public boolean searchCustomerMobileNumers() throws SQLException, ClassNotFoundException {
+        return false;
+    }
 }

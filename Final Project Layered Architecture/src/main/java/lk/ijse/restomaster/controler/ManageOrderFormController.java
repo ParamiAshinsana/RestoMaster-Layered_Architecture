@@ -422,7 +422,6 @@ public class ManageOrderFormController implements Initializable {
         Stage stage = new Stage();
         stage.setScene(scene);
         stage.show();
-
     }
 
     private void fillItemFields(MenuItemDTO item) {
@@ -457,7 +456,6 @@ public class ManageOrderFormController implements Initializable {
 
         JasperPrint jasPrint = JasperFillManager.fillReport(jasReport, data, DBConnection.getInstance().getConnection());
         JasperViewer.viewReport(jasPrint,false);
-
     }
 
     private Object NetTotalCalculate(String cusID, String date) throws SQLException {
