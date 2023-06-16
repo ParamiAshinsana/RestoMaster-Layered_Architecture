@@ -89,12 +89,6 @@ public class ManageMenuItemFormController implements Initializable {
     }
 
     private void generateMenuItemCode() throws SQLException, ClassNotFoundException {
-//        try {
-//            String nextId = MenuItemModel.generateNextMenuItemCode();
-//            labelMenuItemCode.setText(nextId);
-//        } catch (SQLException e) {
-//            throw new RuntimeException(e);
-//        }
         String nextId = menuItemBO.generateNewMenuItemsID();
         labelMenuItemCode.setText(nextId);
     }
@@ -121,23 +115,6 @@ public class ManageMenuItemFormController implements Initializable {
         int quantity = Integer.valueOf(txtQuantity.getText());
         String preTime = String.valueOf(preparationtimeCbox.getValue());
 
-//        try (Connection con = DriverManager.getConnection(URL, props)) {
-//            String sql = "INSERT INTO MenuItem(MenuItemCode , MenuItemType , Description , UnitPrice , Quantity , PreparationTime) VALUES(?,? ,? ,?,? , ?)";
-//
-//            PreparedStatement pstm = con.prepareStatement(sql);
-//            pstm.setString(1, labelMenuItemCode.getText());
-//            pstm.setString(2, miType);
-//            pstm.setString(3, description);
-//            pstm.setDouble(4, itemUnitPrice);
-//            pstm.setDouble(5, quantity);
-//            pstm.setString(6, preTime);
-//
-//            int affectedRows = pstm.executeUpdate();
-//            if(affectedRows > 0) {
-//                new Alert(Alert.AlertType.CONFIRMATION, "Menu Item Added!!").show();
-//            }
-//        }
-
         if(!menuItemBO.addMenuItems(new MenuItemDTO(miCode,miType,description,itemUnitPrice,quantity,preTime))){
             new Alert(Alert.AlertType.ERROR , "Can not Added Customer !").show();
         }else{
@@ -145,7 +122,6 @@ public class ManageMenuItemFormController implements Initializable {
         }
         getAll();
 
-        //labelMenuItemCode.setText("");
         itemtypeCbox.setValue("");
         txtdescription.setText("");
         txtunitprice.setText("");
@@ -156,26 +132,6 @@ public class ManageMenuItemFormController implements Initializable {
     }
 
     private void getAll() {
-//        try{
-//            observableList = FXCollections.observableArrayList();
-//            List <MenuItemDTO> MenuItemList = MenuItemModel.getAll();
-//
-//            for(MenuItemDTO menuitem : MenuItemList){
-//                observableList.add(new MenuItemTM(
-//                        menuitem.getMiCode(),
-//                        menuitem.getMiType(),
-//                        menuitem.getDescription(),
-//                        menuitem.getItemUnitPrice(),
-//                        menuitem.getQuantity(),
-//                        menuitem.getPreTime()
-//                ));
-//            }
-//            tblmenuitem.setItems(observableList);
-//        }catch (SQLException e ){
-//            e.printStackTrace();
-//            new Alert(Alert.AlertType.ERROR , "Query Error !").show();
-//
-//        }
         tblmenuitem.getItems().clear();
         try {
             ArrayList<MenuItemDTO> allMenuItems = menuItemBO.getAllMenuItems();
@@ -192,7 +148,6 @@ public class ManageMenuItemFormController implements Initializable {
     }
 
     public void btnclearmenuonaction(ActionEvent actionEvent) {
-        //labelMenuItemCode.setText("");
         itemtypeCbox.setValue("");
         txtdescription.setText("");
         txtunitprice.setText("");
@@ -203,16 +158,6 @@ public class ManageMenuItemFormController implements Initializable {
     public void btndeletemenuonaction(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
         String miCode = txtitemcode.getText();
 
-//        try (Connection con = DriverManager.getConnection(URL, props)) {
-//            String sql = "DELETE FROM MenuItem WHERE MenuItemCode = ?";
-//
-//            PreparedStatement pstm = con.prepareStatement(sql);
-//            pstm.setString(1, txtitemcode.getText());
-//
-//            if(pstm.executeUpdate() > 0 ) {
-//                new Alert(Alert.AlertType.CONFIRMATION, "Huree!! deleted :)").show();
-//            }
-//        }
         if(!menuItemBO.deleteMenuItems(txtitemcode.getText())){
             new Alert(Alert.AlertType.ERROR , "Can not Delete !)").show();
         }else{
@@ -220,7 +165,6 @@ public class ManageMenuItemFormController implements Initializable {
         }
 
         getAll();
-        //labelMenuItemCode.setText("");
         itemtypeCbox.setValue("");
         txtdescription.setText("");
         txtunitprice.setText("");
@@ -234,7 +178,6 @@ public class ManageMenuItemFormController implements Initializable {
             new Alert(Alert.AlertType.ERROR, "Invalid Input !").show();
             return;
         }
-
         String miCode = txtitemcode.getText();
         String miType = String.valueOf(itemtypeCbox.getValue());
         String description = txtdescription.getText();
@@ -242,21 +185,6 @@ public class ManageMenuItemFormController implements Initializable {
         int quantity = Integer.valueOf(txtQuantity.getText());
         String preTime = String.valueOf(preparationtimeCbox.getValue());
 
-//        try(Connection con = DriverManager.getConnection(URL, props)) {
-//            String sql = "UPDATE MenuItem SET MenuItemType = ? , Description = ? , UnitPrice = ? , Quantity = ? , PreparationTime = ?  WHERE MenuItemCode = ?";
-//            //String sql = "UPDATE Customer SET CustomerName = ? , CustomerContact = ? , CustomerAddress = ? WHERE CustomerId = ?";
-//            PreparedStatement pstm = con.prepareStatement(sql);
-//            pstm.setString(1, miType);
-//            pstm.setString(2, description);
-//            pstm.setDouble(3, itemUnitPrice);
-//            pstm.setInt(4, quantity);
-//            pstm.setString(5, preTime);
-//            pstm.setString(6, miCode);
-//
-//            if(pstm.executeUpdate() > 0) {
-//                new Alert(Alert.AlertType.CONFIRMATION, "Customer Updated!!").show();
-//            }
-//        }
         if(!menuItemBO.updateMenuItems(new MenuItemDTO(miCode,miType,description,itemUnitPrice,quantity,preTime))){
             new Alert(Alert.AlertType.ERROR , "Can not Uptaded MenuItem !").show();
         }else{
@@ -264,14 +192,12 @@ public class ManageMenuItemFormController implements Initializable {
         }
 
         getAll();
-
         txtitemcode.setText("");
         itemtypeCbox.setValue("");
         txtdescription.setText("");
         txtunitprice.setText("");
         txtQuantity.setText("");
         preparationtimeCbox.setValue("");
-
         generateMenuItemCode();
     }
 
@@ -310,7 +236,6 @@ public class ManageMenuItemFormController implements Initializable {
 
         JasperPrint jasPrint = JasperFillManager.fillReport(jasReport, data, DBConnection.getInstance().getConnection());
         JasperViewer.viewReport(jasPrint,false);
-
     }
 
     public void btnBeveragesOnAction(ActionEvent actionEvent) throws JRException, SQLException {
@@ -322,7 +247,6 @@ public class ManageMenuItemFormController implements Initializable {
 
         JasperPrint jasPrint = JasperFillManager.fillReport(jasReport, data, DBConnection.getInstance().getConnection());
         JasperViewer.viewReport(jasPrint,false);
-
     }
 
     public void upOnKeyReleased(KeyEvent keyEvent) {

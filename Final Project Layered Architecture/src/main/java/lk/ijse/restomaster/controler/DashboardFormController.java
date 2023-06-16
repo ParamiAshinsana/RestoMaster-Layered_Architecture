@@ -21,8 +21,6 @@ import java.util.Date;
 import java.util.ResourceBundle;
 
 public class DashboardFormController implements Initializable {
-
-
     public StackPane controllarea;
     public AnchorPane rootdashboard;
     public StackPane selectionpane;

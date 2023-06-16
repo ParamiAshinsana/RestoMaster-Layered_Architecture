@@ -40,7 +40,6 @@ public class ManageEmployeeFormController implements Initializable {
     //EmployeeDAO employeeDAO = (EmployeeDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.EMPLOYEES);
     EmployeeBO employeeBO = (EmployeeBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.B_EMPLOYEES);
 
-
     private final static String URL = "jdbc:mysql://localhost:3306/RestoMaster";
     private final static Properties props = new Properties();
 
@@ -93,40 +92,11 @@ public class ManageEmployeeFormController implements Initializable {
     }
 
     private void generateNextemployeeId() throws SQLException, ClassNotFoundException {
-//        try {
-//            String nextId = EmployeeModel.generateNextEmployeeID();
-//            labelEmpId.setText(nextId);
-//        } catch (SQLException e) {
-//            throw new RuntimeException(e);
-//        }
         String nextId = employeeBO.generateNewEmployeesID();
         labelEmpId.setText(nextId);
     }
 
     private void getAll() {
-//        try{
-//            observableList = FXCollections.observableArrayList();
-//            List<EmployeeDTO> EmployeeList = EmployeeModel.getAll();
-//
-//            for(EmployeeDTO employee : EmployeeList){
-//                observableList.add(new EmployeeTM(
-//                        employee.getEmpId(),
-//                        employee.getEmpName(),
-//                        employee.getEmpAddress(),
-//                        employee.getEmpContact(),
-//                        employee.getEmpAge(),
-//                        employee.getEmpDob(),
-//                        employee.getEmpTitle(),
-//                        employee.getEmpDepartment(),
-//                        employee.getEmpCompensation()
-//                ));
-//            }
-//            tblEmployee.setItems(observableList);
-//        }catch (SQLException e ){
-//            e.printStackTrace();
-//            new Alert(Alert.AlertType.ERROR , "Query Error !").show();
-//
-//        }
         tblEmployee.getItems().clear();
         try {
             ArrayList<EmployeeDTO> allEmployees = employeeBO.getAllEmployees();
@@ -169,27 +139,6 @@ public class ManageEmployeeFormController implements Initializable {
         String empDepartment = String.valueOf(departmentCBox.getValue());
         Double empCompensation = Double.valueOf(txtCompensation.getText());
 
-//        try (Connection con = DriverManager.getConnection(URL, props)) {
-//            String sql = "INSERT INTO Employee(EmployeeId , EmployeeName ,Address  , Contact ,Age  , DOB ,JobTitle  , Department , Compensation  ) VALUES(?, ?, ?, ? , ? ,? , ? , ? , ?)";
-//
-//            PreparedStatement pstm = con.prepareStatement(sql);
-//            pstm.setString(1, empId);
-//            pstm.setString(2, empName);
-//            pstm.setString(3, empAddress);
-//            pstm.setString(4, empContact);
-//            pstm.setString(5, empAge);
-//            pstm.setString(6, empDob);
-//            pstm.setString(7, empTitle);
-//            pstm.setString(8, empDepartment);
-//            pstm.setDouble(9, Double.parseDouble(String.valueOf(empCompensation)));
-//
-//
-//            int affectedRows = pstm.executeUpdate();
-//            if(affectedRows > 0) {
-//                new Alert(Alert.AlertType.CONFIRMATION, "Employee Added!!").show();
-//            }
-//        }
-
         if(!employeeBO.addEmployees(new EmployeeDTO(empId ,empName,empAddress,empContact,empAge,empDob,empTitle,empDepartment,empCompensation))){
             new Alert(Alert.AlertType.ERROR , "Can not Added Employee !").show();
         }else{
@@ -198,7 +147,6 @@ public class ManageEmployeeFormController implements Initializable {
 
         getAll();
 
-        //labelEmpId.setText("");
         txteName.setText("");
         txtAddress.setText("");
         txtMobileNumber.setText("");
@@ -227,27 +175,6 @@ public class ManageEmployeeFormController implements Initializable {
         String empDepartment = String.valueOf(departmentCBox.getValue());
         Double empCompensation = Double.valueOf(txtCompensation.getText());
 
-//        try(Connection con = DriverManager.getConnection(URL, props)) {
-//
-//            String sql = "UPDATE Employee SET EmployeeName = ? , Address = ? , Contact = ? , Age = ? , DOB = ? , JobTitle = ? , Department = ? , Compensation = ?  WHERE EmployeeId = ?";
-//
-//            PreparedStatement pstm = con.prepareStatement(sql);
-//
-//            pstm.setString(1, empName);
-//            pstm.setString(2, empAddress);
-//            pstm.setString(3, empContact);
-//            pstm.setString(4, empAge);
-//            pstm.setString(5, empDob);
-//            pstm.setString(6, empTitle);
-//            pstm.setString(7, empDepartment);
-//            pstm.setDouble(8, Double.parseDouble(String.valueOf(empCompensation)));
-//            pstm.setString(9, empId);
-//
-//            if(pstm.executeUpdate() > 0) {
-//                new Alert(Alert.AlertType.CONFIRMATION, "Employee Updated!!").show();
-//            }
-//        }
-
         if(!employeeBO.updateEmployees(new EmployeeDTO(empId,empName,empAddress,empContact,empAge,empDob,empTitle,empDepartment,empCompensation))){
             new Alert(Alert.AlertType.ERROR , "Can not Uptaded Employee !").show();
         }else{
@@ -256,7 +183,6 @@ public class ManageEmployeeFormController implements Initializable {
 
         getAll();
 
-        //labelEmpId.setText("");
         txteName.setText("");
         txtAddress.setText("");
         txtMobileNumber.setText("");
@@ -270,16 +196,6 @@ public class ManageEmployeeFormController implements Initializable {
     public void btnDeleteEmployeeOnAction(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
         String empId = txteId.getText();
 
-//        try (Connection con = DriverManager.getConnection(URL, props)) {
-//            String sql = "DELETE FROM Employee WHERE EmployeeId = ?";
-//
-//            PreparedStatement pstm = con.prepareStatement(sql);
-//            pstm.setString(1, txteId.getText());
-//
-//            if(pstm.executeUpdate() > 0 ) {
-//                new Alert(Alert.AlertType.CONFIRMATION, "Huree!! deleted :)").show();
-//            }
-//        }
         if(!employeeBO.deleteEmployees(txteId.getText())){
             new Alert(Alert.AlertType.ERROR , "Can not Delete !)").show();
         }else{
@@ -299,7 +215,6 @@ public class ManageEmployeeFormController implements Initializable {
     }
 
     public void btnClearOnAction(ActionEvent actionEvent) {
-        //labelEmpId.setText("");
         txteName.setText("");
         txtAddress.setText("");
         txtMobileNumber.setText("");

@@ -97,31 +97,11 @@ public class ManageStockFormController implements Initializable {
     }
 
     private void generateNextStockId() throws SQLException, ClassNotFoundException {
-//        try {
-//            String nextId = StockModel.generateNextStockID();
-//            labelMenuItemCode.setText(nextId);
-//        } catch (SQLException e) {
-//            throw new RuntimeException(e);
-//        }
         String nextId = stockBO.generateNewStocksID();
         labelMenuItemCode.setText(nextId);
     }
 
     private void loadSupplierId() throws SQLException, ClassNotFoundException {
-//        try {
-//            List<String> ids = SupplierModel.getIds();
-//            ObservableList<String> obList = FXCollections.observableArrayList();
-//
-//            for (String id : ids) {
-//                obList.add(id);
-//            }
-//            supllierIdCBox.setItems(obList);
-//
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//            new Alert(Alert.AlertType.ERROR, "SQL Error!").show();
-//        }
-
         List<String> id = stockDAO.loadSuppliersId();
         ObservableList<String> obList = FXCollections.observableArrayList();
 
@@ -132,29 +112,6 @@ public class ManageStockFormController implements Initializable {
     }
 
     private void getAll() {
-//        try{
-//            observableList = FXCollections.observableArrayList();
-//            List<StockDTO> StockList = StockModel.getAll();
-//            for(StockDTO stock : StockList){
-//                observableList.add(new StockTM(
-//                        stock.getSiCode(),
-//                        stock.getSiName(),
-//                        stock.getMaxLevel(),
-//                        stock.getMinLevel(),
-//                        stock.getPrDate(),
-//                        stock.getExDate(),
-//                        stock.getQuantity(),
-//                        stock.getUnitPrice(),
-//                        stock.getTotalCost(),
-//                        stock.getSpId()
-//                ));
-//            }
-//            tblstock.setItems(observableList);
-//        }catch (SQLException e ){
-//            e.printStackTrace();
-//            new Alert(Alert.AlertType.ERROR , "Query Error !").show();
-//
-//        }
         tblstock.getItems().clear();
         try {
             ArrayList<StockDTO> allCustomers = stockBO.getAllStocks();
@@ -189,7 +146,6 @@ public class ManageStockFormController implements Initializable {
             new Alert(Alert.AlertType.ERROR, "Can't Added Stock!!").show();
             return;
         }
-
         String siCode = labelMenuItemCode.getText();
         String siName = txtstockname.getText();
         String maxLevel = txtmaxlevel.getText();
@@ -198,42 +154,16 @@ public class ManageStockFormController implements Initializable {
         String exDate = String.valueOf(exDatePicker.getValue());
         int quantity = Integer.parseInt(txtquantity.getText());
         Double unitPrice = Double.valueOf(txtunitprice.getText());
-        //Double totalCost = Double.valueOf(lbltotal.getText());
         String spId = String.valueOf(supllierIdCBox.getValue());
 
         Double tot = quantity * unitPrice;
-
-//        try (Connection con = DriverManager.getConnection(URL, props)) {
-//
-//            String sql = "INSERT INTO Stock(StockItemCode , StockItemName , MaxStockLevel , MinStockLevel , PurchaseDate , ExpirationDate , Quantity , UnitPrice , TotalCost , SpId ) VALUES(?,?,?,?,?,?,?,?,?,?)";
-//
-//            PreparedStatement pstm = con.prepareStatement(sql);
-//            pstm.setString(1, labelMenuItemCode.getText());
-//            pstm.setString(2, siName);
-//            pstm.setString(3, maxLevel);
-//            pstm.setString(4, minLevel);
-//            pstm.setString(5, prDate);
-//            pstm.setString(6, exDate);
-//            pstm.setInt(7, Integer.parseInt(String.valueOf(quantity)));
-//            pstm.setDouble(8, Double.parseDouble(String.valueOf(unitPrice)));
-//            pstm.setDouble(9, tot);
-//            pstm.setString(10, spId);
-//
-//            int affectedRows = pstm.executeUpdate();
-//            if(affectedRows > 0) {
-//                new Alert(Alert.AlertType.CONFIRMATION, "Stock Added!!").show();
-//            }
-//        }
 
         if(!stockBO.addStocks(new StockDTO(siCode,siName,maxLevel,minLevel,prDate,exDate,quantity ,unitPrice, tot, spId))){
             new Alert(Alert.AlertType.ERROR , "Can not Added Stock !").show();
         }else{
             new Alert(Alert.AlertType.CONFIRMATION , "Stock Added!!").show();
         }
-
         getAll();
-
-        //labelMenuItemCode.setText("");
         txtstockname.setText("");
         txtmaxlevel.setText("");
         txtminlevel.setText("");
@@ -241,9 +171,7 @@ public class ManageStockFormController implements Initializable {
         exDatePicker.setValue(null);
         txtquantity.setText("");
         txtunitprice.setText("");
-        //lbltotal.setText("");
         supllierIdCBox.setValue(null);
-
         generateNextStockId();
     }
 
@@ -266,7 +194,6 @@ public class ManageStockFormController implements Initializable {
     }
 
     public void btnclearonaction(ActionEvent actionEvent){
-        //labelMenuItemCode.setText("");
         txtstockname.setText("");
         txtmaxlevel.setText("");
         txtminlevel.setText("");
@@ -275,23 +202,10 @@ public class ManageStockFormController implements Initializable {
         txtquantity.setText("");
         txtunitprice.setText("");
         supllierIdCBox.setValue(null);
-        //lbltotal.setText("");
     }
 
     public void btndeleteonaction(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
         String siCode = txtstockid.getText();
-
-//        try (Connection con = DriverManager.getConnection(URL, props)) {
-//            String sql = "DELETE FROM Stock WHERE StockItemCode = ?";
-//
-//            PreparedStatement pstm = con.prepareStatement(sql);
-//            pstm.setString(1, txtstockid.getText());
-//
-//            if(pstm.executeUpdate() > 0 ) {
-//                new Alert(Alert.AlertType.CONFIRMATION, "Huree!! deleted :)").show();
-//            }
-//        }
-
         if(!stockBO.deleteStocks(txtstockid.getText())){
             new Alert(Alert.AlertType.ERROR , "Can not Delete !)").show();
         }else{
@@ -324,30 +238,8 @@ public class ManageStockFormController implements Initializable {
         String exDate = String.valueOf(exDatePicker.getValue());
         int quantity = Integer.parseInt(txtquantity.getText());
         Double unitPrice = Double.valueOf(txtunitprice.getText());
-        //Double totalCost = quantity * unitPrice;
         String spId = String.valueOf(supllierIdCBox.getValue());
 
-
-//        try(Connection con = DriverManager.getConnection(URL, props)) {
-//            String sql = "UPDATE Stock SET StockItemName = ? , MaxStockLevel = ? , MinStockLevel = ? , PurchaseDate = ? , ExpirationDate = ? , Quantity = ? , UnitPrice = ? , TotalCost = ? , SpId = ? WHERE StockItemCode = ?";
-//
-//            PreparedStatement pstm = con.prepareStatement(sql);
-//            pstm.setString(1, siName);
-//            pstm.setString(2, maxLevel);
-//            pstm.setString(3, minLevel);
-//            pstm.setString(4, prDate);
-//            pstm.setString(5, exDate);
-//            pstm.setInt(6, Integer.parseInt(String.valueOf(quantity)));
-//            pstm.setDouble(7, Double.parseDouble(String.valueOf(unitPrice)));
-//            pstm.setDouble(8, Double.parseDouble(String.valueOf(totalCost)));
-//            pstm.setString(9, spId);
-//            pstm.setString(10, siCode);
-//
-//
-//            if(pstm.executeUpdate() > 0) {
-//                new Alert(Alert.AlertType.CONFIRMATION, "Stock Updated!!").show();
-//            }
-//        }
        Double tot = quantity * unitPrice;
 
         if(!stockBO.updateStocks(new StockDTO(siCode,siName,maxLevel,minLevel,prDate,exDate,quantity,unitPrice,tot,spId))){
@@ -357,8 +249,6 @@ public class ManageStockFormController implements Initializable {
         }
 
         getAll();
-
-        //labelMenuItemCode.setText("");
         txtstockid.setText("");
         txtstockname.setText("");
         txtmaxlevel.setText("");
@@ -367,21 +257,15 @@ public class ManageStockFormController implements Initializable {
         exDatePicker.setValue(null);
         txtquantity.setText("");
         txtunitprice.setText("");
-        //lbltotal.setText("");
         supllierIdCBox.setValue(null);
         generateNextStockId();
-
     }
 
     public void btngettotalOnAction(ActionEvent actionEvent) {
         int quantity = Integer.parseInt(txtquantity.getText());
         Double unitPrice = Double.valueOf(txtunitprice.getText());
-
-        //lbltotal = (double)quantity * unitPrice;
-
         Double tot = quantity * unitPrice;
         lbltotal.setText(String.valueOf(tot));
-
     }
 
     public void stockNameOnKeyReleased(KeyEvent keyEvent) {

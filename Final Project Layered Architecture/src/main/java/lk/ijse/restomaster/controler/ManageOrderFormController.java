@@ -118,30 +118,11 @@ public class ManageOrderFormController implements Initializable {
     }
 
     private void generateNextOrderID() throws SQLException, ClassNotFoundException {
-//        try {
-//            String nextId = OrderModel.generateNextOrderID();
-//            labelOrderId.setText(nextId);
-//        } catch (SQLException e) {
-//            throw new RuntimeException(e);
-//        }
         String nextId = ordersBO.generateNewOrderID();
         labelOrderId.setText(nextId);
     }
 
     private void loadMenuItemCode() throws SQLException, ClassNotFoundException {
-//        try {
-//            List<String> ids = OrderModel.getMenuItemCodes();
-//            ObservableList<String> obList = FXCollections.observableArrayList();
-//
-//            for (String id : ids) {
-//                obList.add(id);
-//            }
-//            micodeCBox.setItems(obList);
-//
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//            new Alert(Alert.AlertType.ERROR, "SQL Error!").show();
-//        }
         List<String> id = ordersDAO.loadMenuItemsId();
         ObservableList<String> obList = FXCollections.observableArrayList();
 
@@ -152,19 +133,6 @@ public class ManageOrderFormController implements Initializable {
     }
 
     private void loadCustomerId() throws SQLException, ClassNotFoundException {
-//        try {
-//            List<String> ids = OrderModel.getCustomerIds();
-//            ObservableList<String> obList = FXCollections.observableArrayList();
-//
-//            for (String id : ids) {
-//                obList.add(id);
-//            }
-//            custIdCBox.setItems(obList);
-//
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//            new Alert(Alert.AlertType.ERROR, "SQL Error!").show();
-//        }
         List<String> id = ordersDAO.loadCustomersId();
         ObservableList<String> obList = FXCollections.observableArrayList();
 
@@ -176,29 +144,6 @@ public class ManageOrderFormController implements Initializable {
     }
 
     private void getAll() {
-//        try{
-//            observableList = FXCollections.observableArrayList();
-//            List<OrdersDTO> OrdersList = OrderModel.getAll();
-//
-//            for(OrdersDTO orders : OrdersList){
-//                observableList.add(new OrdersTM(
-//                        orders.getOrderId(),
-//                        orders.getCustomerId(),
-//                        orders.getMenuItem(),
-//                        orders.getDescription(),
-//                        orders.getUnitPrice(),
-//                        orders.getQuantity(),
-//                        orders.getTotal(),
-//                        orders.getOrderDate(),
-//                        orders.getOrderTime()
-//                ));
-//            }
-//            tblOrder.setItems(observableList);
-//        }catch (SQLException e ){
-//            e.printStackTrace();
-//            new Alert(Alert.AlertType.ERROR , "Query Error !").show();
-//
-//        }
         tblOrder.getItems().clear();
         try {
             ArrayList<OrdersDTO> allOrders = ordersBO.getAllOrders();
@@ -254,31 +199,6 @@ public class ManageOrderFormController implements Initializable {
 
         Double tot = quantity * unitPrice ;
 
-//        try (Connection con = DriverManager.getConnection(URL, props)) {
-//            con.setAutoCommit(false);
-//            String sql = "INSERT INTO Orders (OrderId , CustomerId , MenuItemId , Description , UnitPrice , Quantity , Total , OrderDate , OrderTime ) VALUES(?, ?, ?, ? ,? , ? ,? , ? , ? )";
-//
-//            PreparedStatement pstm = con.prepareStatement(sql);
-//            pstm.setString(1, labelOrderId.getText());
-//            pstm.setString(2, customerId);
-//            pstm.setString(3, menuItem);
-//            pstm.setString(4, description);
-//            pstm.setDouble(5, Double.parseDouble(String.valueOf(unitPrice)));
-//            pstm.setInt(6, Integer.parseInt(String.valueOf(quantity)));
-//            pstm.setDouble(7, tot);
-//            pstm.setString(8, orderDate);
-//            pstm.setString(9, orderTime);
-//
-//            int affectedRows = pstm.executeUpdate();
-//            if(affectedRows > 0) {
-//                //boolean IsUpdated = OrderModel.UpdateQuntity(quantity,menuItem);
-//
-//            }else {
-//                new Alert(Alert.AlertType.ERROR,"SQL ERROR !");
-//            }
-//            con.setAutoCommit(true);
-//        }
-
         Connection con = null;
         try {
             con = DBConnection.getInstance().getConnection();
@@ -286,7 +206,6 @@ public class ManageOrderFormController implements Initializable {
             if (!ordersBO.addOrders(new OrdersDTO(orderId, customerId, menuItem, description, unitPrice, quantity, tot, orderDate, orderTime))) {
                 new Alert(Alert.AlertType.ERROR, "Can not Added Order !").show();
             } else {
-                //new Alert(Alert.AlertType.CONFIRMATION , "Order Added!!").show();
                 boolean IsUpdated = ordersDAO.updateQuantity(quantity, menuItem);
                 if (IsUpdated) {
                     new Alert(Alert.AlertType.CONFIRMATION, "Order Placed!!").show();
@@ -330,27 +249,6 @@ public class ManageOrderFormController implements Initializable {
 
         Double tot = quantity * unitPrice ;
 
-//        try(Connection con = DriverManager.getConnection(URL, props)) {
-//
-//            String sql = "UPDATE Orders SET CustomerId = ? , MenuItemId = ? , Description = ? , UnitPrice = ? , Quantity = ? , Total = ? , OrderDate = ? , OrderTime = ? WHERE OrderId = ?";
-//
-//            PreparedStatement pstm = con.prepareStatement(sql);
-//            pstm.setString(1, customerId);
-//            pstm.setString(2, menuItem);
-//            pstm.setString(3, description);
-//            pstm.setDouble(4, Double.parseDouble(String.valueOf(unitPrice)));
-//            pstm.setInt(5, Integer.parseInt(String.valueOf(quantity)));
-//            pstm.setDouble(6, tot);
-//            pstm.setString(7, orderDate);
-//            pstm.setString(8, orderTime);
-//            pstm.setString(9, orderId);
-//
-//
-//            if(pstm.executeUpdate() > 0) {
-//                new Alert(Alert.AlertType.CONFIRMATION, "Order Updated!!").show();
-//            }
-//        }
-
         if(!ordersBO.updateOrders(new OrdersDTO(orderId, customerId, menuItem, description, unitPrice, quantity, tot, orderDate, orderTime))){
             new Alert(Alert.AlertType.ERROR , "Can not Uptaded Order !").show();
         }else{
@@ -370,16 +268,6 @@ public class ManageOrderFormController implements Initializable {
     public void btnDeleteOrederOnAction(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
         String orderId = txtOrderId.getText();
 
-//        try (Connection con = DriverManager.getConnection(URL, props)) {
-//            String sql = "DELETE FROM Orders WHERE OrderId = ?";
-//
-//            PreparedStatement pstm = con.prepareStatement(sql);
-//            pstm.setString(1, txtOrderId.getText());
-//
-//            if(pstm.executeUpdate() > 0 ) {
-//                new Alert(Alert.AlertType.CONFIRMATION, "Huree!! deleted :)").show();
-//            }
-//        }
         if(!ordersBO.deleteOrders(txtOrderId.getText())){
             new Alert(Alert.AlertType.ERROR , "Can not Delete !)").show();
         }else{
@@ -418,7 +306,6 @@ public class ManageOrderFormController implements Initializable {
         lblUnitPrice.setText(colunitprice.getCellData(index).toString());
         txtQuantity.setText(colquantity.getCellData(index).toString());
         orderDateCBox.setValue(LocalDate.parse(colorderdate.getCellData(index).toString()));
-        //txtOrderTime.setText(colordertime.getCellData(index).toString());
     }
 
     @SneakyThrows
@@ -486,32 +373,18 @@ public class ManageOrderFormController implements Initializable {
         }
     }
 
-    public void txtSerachCustIdOnAction(ActionEvent actionEvent) throws SQLException {
+    public void txtSerachCustIdOnAction(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
         String contact = txtSerachCustId.getText();
 
-        try(Connection con = DriverManager.getConnection(URL, props)) {
-            String sql = "SELECT * FROM Customer WHERE CustomerContact = ?";
-
-            PreparedStatement pstm = con.prepareStatement(sql);
-            pstm.setString(1, contact);
-
-            ResultSet resultSet = pstm.executeQuery();
-
-            if(resultSet.next()) {
-                String cus_id = resultSet.getString(1);
-
-                lblCustId.setText(cus_id);
-                lblError.setText("");
-                txtSerachCustId.setText("");
-
-            }else{
-                lblError.setText("Not Found!");
-                txtSerachCustId.setText("");
-            }
+        String cusMobile = ordersDAO.searchOrder(contact);
+        if (cusMobile != null){
+            lblCustId.setText(cusMobile);
+        }else {
+            new Alert(Alert.AlertType.WARNING,"Try again", ButtonType.OK).show();
         }
     }
 
-    public void custIdCBoxOnAction(ActionEvent actionEvent) {
+        public void custIdCBoxOnAction(ActionEvent actionEvent) {
         Object C = custIdCBox.getValue();
         String CusID = String.valueOf(C);
         lblCustId.setText(CusID);

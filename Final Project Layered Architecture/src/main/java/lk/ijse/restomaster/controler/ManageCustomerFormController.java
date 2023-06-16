@@ -73,12 +73,6 @@ public class ManageCustomerFormController implements Initializable{
     }
 
     private void generateNextCustomerID() throws SQLException, ClassNotFoundException {
-//        try {
-//            String nextId = CustomerModel.generateNextCustomerID();
-//            labelCustomerId.setText(nextId);
-//        } catch (SQLException e) {
-//            throw new RuntimeException(e);
-//        }
         String nextId = customerBO.generateNewCustomersID();
         labelCustomerId.setText(nextId);
     }
@@ -88,10 +82,6 @@ public class ManageCustomerFormController implements Initializable{
         colname.setCellValueFactory(new PropertyValueFactory<>("name"));
         coladdress.setCellValueFactory(new PropertyValueFactory<>("address"));
         colnumber.setCellValueFactory(new PropertyValueFactory<>("contact"));
-    }
-
-    public void textfieldonkeypressed(KeyEvent keyEvent) {
-        //txtcustmerid.setStyle("-fx-background-color: white");
     }
 
     public void btnaddonaction(ActionEvent actionEvent) throws SQLException,ClassNotFoundException {
@@ -104,30 +94,11 @@ public class ManageCustomerFormController implements Initializable{
         String contact = txtnumber.getText();
         String address = txtaddress.getText();
 
-//            try (Connection con = DriverManager.getConnection(URL, props)) {
-//                String sql = "INSERT INTO Customer(CustomerId , CustomerName , CustomerContact , CustomerAddress) VALUES(?, ?, ?, ?)";
-//
-//                PreparedStatement pstm = con.prepareStatement(sql);
-//                pstm.setString(1, labelCustomerId.getText());
-//                pstm.setString(2, name);
-//                pstm.setString(3, contact);
-//                pstm.setString(4, address);
-//
-//
-//                int affectedRows = pstm.executeUpdate();
-//                if (affectedRows > 0) {
-//                    new Alert(Alert.AlertType.CONFIRMATION, "Customer Added!!").show();
-//                }
-//            }
-            //new
-        //customerBO.addCustomers(new CustomerDTO(id,name,contact,address));
-
         if(!customerBO.addCustomers(new CustomerDTO(id,name,contact,address))){
             new Alert(Alert.AlertType.ERROR , "Can not Added Customer !").show();
         }else{
             new Alert(Alert.AlertType.CONFIRMATION , "Customer Added!!").show();
         }
-            //labelCustomerId.setText("");
             txtname.setText("");
             txtnumber.setText("");
             txtaddress.setText("");
@@ -147,24 +118,6 @@ public class ManageCustomerFormController implements Initializable{
 
     @SneakyThrows
     private void getAll() {
-//          try{
-//              observableList = FXCollections.observableArrayList();
-//              List <CustomerDTO> CustomerList = CustomerModel.getAll();
-//
-//              for(CustomerDTO customer : CustomerList){
-//                     observableList.add(new CustomerTM(
-//                             customer.getId(),
-//                             customer.getName(),
-//                             customer.getContact(),
-//                             customer.getAddress()
-//                     ));
-//              }
-//              tblcustomer.setItems(observableList);
-//          }catch (SQLException e ){
-//              e.printStackTrace();
-//              new Alert(Alert.AlertType.ERROR , "Query Error !").show();
-//
-//          }
         tblcustomer.getItems().clear();
         try {
             ArrayList<CustomerDTO> allCustomers = customerBO.getAllCustomers();
@@ -180,7 +133,6 @@ public class ManageCustomerFormController implements Initializable{
     }
 
     public void btnclearonaction(ActionEvent actionEvent) throws SQLException {
-        //labelCustomerId.setText("");
         txtname.setText("");
         txtnumber.setText("");
         txtaddress.setText("");
@@ -189,17 +141,6 @@ public class ManageCustomerFormController implements Initializable{
     public void btndeleteonaction(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
         String id = txtid.getText();
 
-//        try (Connection con = DriverManager.getConnection(URL, props)) {
-//            String sql = "DELETE FROM Customer WHERE CustomerId = ?";
-//
-//            PreparedStatement pstm = con.prepareStatement(sql);
-//            pstm.setString(1, id);
-//
-//            if(pstm.executeUpdate() > 0 ) {
-//                new Alert(Alert.AlertType.CONFIRMATION, "Huree!! deleted :)").show();
-//            }
-//        }
-
         if(!customerBO.deleteCustomers(txtid.getText())){
             new Alert(Alert.AlertType.ERROR , "Can not Delete !)").show();
         }else{
@@ -207,7 +148,6 @@ public class ManageCustomerFormController implements Initializable{
         }
 
         getAll();
-        //labelCustomerId.setText("");
         txtname.setText("");
         txtnumber.setText("");
         txtaddress.setText("");
@@ -216,7 +156,6 @@ public class ManageCustomerFormController implements Initializable{
     }
 
     public void btnupdateonaction(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
-
         if(!isValidated()){
             new Alert(Alert.AlertType.ERROR, "  Can not Updated !!").show();
             return;
@@ -226,25 +165,6 @@ public class ManageCustomerFormController implements Initializable{
         String contact = txtnumber.getText();
         String address = txtaddress.getText();
 
-        //CustomerBO customerBO = new CustomerBOImpl();
-
-//        try(Connection con = DriverManager.getConnection(URL, props)) {
-//            //String sql = "UPDATE Customer SET name = ?, address = ?, salary = ? WHERE id = ?";
-//            String sql = "UPDATE Customer SET CustomerName = ? , CustomerContact = ? , CustomerAddress = ? WHERE CustomerId = ?";
-//            //"UPDATE Customer SET(CustomerId , CustomerName , CustomerContact , CustomerAddress) VALUES(?, ?, ?, ?)"
-//
-//            PreparedStatement pstm = con.prepareStatement(sql);
-//            pstm.setString(1, name);
-//            pstm.setString(2, contact);
-//            pstm.setString(3, address);
-//            pstm.setString(4, id);
-//
-//            if(pstm.executeUpdate() > 0) {
-//                new Alert(Alert.AlertType.CONFIRMATION, "Customer Updated!!").show();
-//            }
-//        }
-
-        //customerBO.updateCustomers(new CustomerDTO(name,contact,address,id));
         if(!customerBO.updateCustomers(new CustomerDTO(id,name,contact,address))){
             new Alert(Alert.AlertType.ERROR , "Can not Uptaded Customer !").show();
         }else{
@@ -252,8 +172,6 @@ public class ManageCustomerFormController implements Initializable{
         }
 
         getAll();
-
-        //labelCustomerId.setText("");
         txtname.setText("");
         txtnumber.setText("");
         txtaddress.setText("");

@@ -3,6 +3,9 @@ package lk.ijse.restomaster.dao.custom.Impl;
 import lk.ijse.restomaster.dao.SQLUtil;
 import lk.ijse.restomaster.dao.custom.MenuItemDAO;
 import lk.ijse.restomaster.dao.custom.OrdersDAO;
+import lk.ijse.restomaster.dto.CustomerDTO;
+import lk.ijse.restomaster.dto.OrdersDTO;
+import lk.ijse.restomaster.entity.Customer;
 import lk.ijse.restomaster.entity.MenuItem;
 import lk.ijse.restomaster.entity.Orders;
 
@@ -91,7 +94,16 @@ public class OrdersDAOImpl implements OrdersDAO {
     }
 
     @Override
-    public boolean searchCustomerMobileNumers() throws SQLException, ClassNotFoundException {
+    public boolean searchCustomerMobileNumers(String mobile) throws SQLException, ClassNotFoundException {
         return false;
+    }
+
+    @Override
+    public String searchOrder(String contact) throws SQLException, ClassNotFoundException {
+        ResultSet rst = SQLUtil.execute("SELECT CustomerId FROM Customer WHERE CustomerContact =?", contact);
+        if (rst.next()){
+            return rst.getString(1);
+        }
+        return null;
     }
 }

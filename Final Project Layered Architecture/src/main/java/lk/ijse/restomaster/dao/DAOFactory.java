@@ -19,8 +19,6 @@ public class DAOFactory {
                 return new CustomerDAOImpl();
             case ORDERS:
                 return new OrdersDAOImpl();
-//            case ORDER_SELECTIONS:
-//                return new OrderSelectionDAOImpl();
             case MENU_ITEMS:
                 return new MenuItemDAOImpl();
             case SUPPLIERS:
@@ -28,7 +26,7 @@ public class DAOFactory {
             case STOCKS:
                 return new StockDAOImpl();
             case EMPLOYEES:
-                return new CustomerDAOImpl();
+                return new EmployeeDAOImpl();
               default:
                   return null ;
         }

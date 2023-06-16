@@ -86,39 +86,11 @@ public class ManageSupplierFormController implements Initializable {
     }
 
     private void generateNextSupplierId() throws SQLException, ClassNotFoundException{
-//        try {
-//            String nextId = SupplierModel.generateNextSupplierId();
-//            labelSupplierId.setText(nextId);
-//        } catch (SQLException e) {
-//            throw new RuntimeException(e);
-//        }
         String nextId = supplierBO.generateNewSuppliersID();
         labelSupplierId.setText(nextId);
     }
 
     private void getAll() {
-//        try{
-//            observableList = FXCollections.observableArrayList();
-//            List<SupplierDTO> SupplierList = SupplierModel.getAll();
-//
-//            for(SupplierDTO supplier : SupplierList){
-//                observableList.add(new SupplierTM(
-//                        supplier.getSpId(),
-//                        supplier.getSpName(),
-//                        supplier.getServiceOfferings(),
-//                        supplier.getUnitPrice(),
-//                        supplier.getQuantity(),
-//                        supplier.getTotal(),
-//                        supplier.getAddress(),
-//                        supplier.getMobileNumber(),
-//                        supplier.getEmail()
-//                ));
-//            }
-//            tblSupplier.setItems(observableList);
-//        }catch (SQLException e ){
-//            e.printStackTrace();
-//            new Alert(Alert.AlertType.ERROR , "Query Error !").show();
-//        }
         tblSupplier.getItems().clear();
         try {
             ArrayList<SupplierDTO> allSuppliers = supplierBO.getAllSuppliers();
@@ -162,32 +134,11 @@ public class ManageSupplierFormController implements Initializable {
         String email = txtEmailAddress.getText();
         Double  tot = quantity * unitPrice;
 
-//            try (Connection con = DriverManager.getConnection(URL, props)) {
-//                String sql = "INSERT INTO Supplier( SupplierId , SupplierName , ServiceOfferings , UnitPrice , Quantity , Total , Address , MobileNumber , EmailAddress ) VALUES(?,? ,? ,?, ?,?,?,?,?)";
-//
-//                PreparedStatement pstm = con.prepareStatement(sql);
-//                pstm.setString(1, spId);
-//                pstm.setString(2, spName);
-//                pstm.setString(3, serviceOfferings);
-//                pstm.setDouble(4, Double.parseDouble(String.valueOf(unitPrice)));
-//                pstm.setInt(5, quantity);
-//                pstm.setDouble(6, tot);
-//                pstm.setString(7, address);
-//                pstm.setString(8, mobileNumber);
-//                pstm.setString(9, email);
-//
-//                int affectedRows = pstm.executeUpdate();
-//                if (affectedRows > 0) {
-//                    new Alert(Alert.AlertType.CONFIRMATION, "Stock Added!!").show();
-//                }
-//            }
-
         if(!supplierBO.addSuppliers(new SupplierDTO(spId,spName,serviceOfferings,unitPrice,quantity,tot,address,mobileNumber,email))){
             new Alert(Alert.AlertType.ERROR , "Can not Added Supplier !").show();
         }else{
             new Alert(Alert.AlertType.CONFIRMATION , "Supplier Added!!").show();
         }
-            //labelSupplierId.setText("");
             txtSname.setText("");
             txtOfferings.setText("");
             txtUnitPrice.setText("");
@@ -217,24 +168,6 @@ public class ManageSupplierFormController implements Initializable {
 
         Double tot = quantity * unitPrice;
 
-//        try(Connection con = DriverManager.getConnection(URL, props)) {
-//            String sql = "UPDATE Supplier SET SupplierName = ? , ServiceOfferings = ? , UnitPrice = ? , Quantity = ? , Total = ? , Address = ? , MobileNumber = ? , EmailAddress = ?  WHERE SupplierId = ?";
-//
-//            PreparedStatement pstm = con.prepareStatement(sql);
-//
-//            pstm.setString(1, spName);
-//            pstm.setString(2, serviceOfferings);
-//            pstm.setDouble(3, Double.parseDouble(String.valueOf(unitPrice)));
-//            pstm.setInt(4, quantity);
-//            pstm.setDouble(5, tot);
-//            pstm.setString(6, address);
-//            pstm.setString(7, mobileNumber);
-//            pstm.setString(8, email);
-//            pstm.setString(9, spId);
-//            if(pstm.executeUpdate() > 0) {
-//                new Alert(Alert.AlertType.CONFIRMATION, "Supplier Updated!!").show();
-//            }
-//        }
         if(!supplierBO.updateSuppliers(new SupplierDTO(spId,spName,serviceOfferings,unitPrice,quantity,tot,address,mobileNumber,email))){
             new Alert(Alert.AlertType.ERROR , "Can not Added Supplier !").show();
         }else{
@@ -242,7 +175,6 @@ public class ManageSupplierFormController implements Initializable {
         }
 
         getAll();
-        //labelSupplierId.setText("");
         txtSname.setText("");
         txtOfferings.setText("");
         txtUnitPrice.setText("");
@@ -255,17 +187,6 @@ public class ManageSupplierFormController implements Initializable {
 
     public void btnDeleteSupplierOnAction(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
         String spId = txtSId.getText();
-
-//        try (Connection con = DriverManager.getConnection(URL, props)) {
-//            String sql = "DELETE FROM Supplier WHERE SupplierId = ?";
-//
-//            PreparedStatement pstm = con.prepareStatement(sql);
-//            pstm.setString(1, txtSId.getText());
-//
-//            if(pstm.executeUpdate() > 0 ) {
-//                new Alert(Alert.AlertType.CONFIRMATION, "Huree!! deleted :)").show();
-//            }
-//        }
         if(!supplierBO.deleteSuppliers(txtSId.getText())){
             new Alert(Alert.AlertType.ERROR , "Can not Delete !)").show();
         }else{
@@ -273,7 +194,6 @@ public class ManageSupplierFormController implements Initializable {
         }
 
         getAll();
-        //labelSupplierId.setText("");
         txtSname.setText("");
         txtOfferings.setText("");
         txtUnitPrice.setText("");
@@ -285,7 +205,6 @@ public class ManageSupplierFormController implements Initializable {
     }
 
     public void btnClearOnAction(ActionEvent actionEvent) {
-        //labelSupplierId.setText("");
         txtSname.setText("");
         txtOfferings.setText("");
         txtUnitPrice.setText("");
