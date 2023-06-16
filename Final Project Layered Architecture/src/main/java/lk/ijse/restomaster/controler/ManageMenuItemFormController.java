@@ -38,7 +38,6 @@ import java.sql.SQLException;
 import java.util.*;
 
 public class ManageMenuItemFormController implements Initializable {
-    //MenuItemBO menuItemBO = new MenuItemBOImpl();
     MenuItemBO menuItemBO = (MenuItemBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.B_MENUITEMS);
 
     private final static String URL = "jdbc:mysql://localhost:3306/RestoMaster";

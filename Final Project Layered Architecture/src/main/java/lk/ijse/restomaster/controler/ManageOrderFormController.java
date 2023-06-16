@@ -52,8 +52,6 @@ import java.util.*;
 import java.util.Date;
 
 public class ManageOrderFormController implements Initializable {
-    //OrdersBO ordersBO = new OrdersBOImpl();
-    //OrdersDAO ordersDAO = new OrdersDAOImpl();
     OrdersBO ordersBO = (OrdersBO)BOFactory.getBoFactory().getBO(BOFactory.BOTypes.B_ORDERS);
     OrdersDAO ordersDAO = (OrdersDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.ORDERS);
 

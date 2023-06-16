@@ -35,7 +35,6 @@ import java.util.Properties;
 import java.util.ResourceBundle;
 
 public class ManageSupplierFormController implements Initializable {
-    //SupplierBO supplierBO = new SupplierBOImpl();
     SupplierBO supplierBO = (SupplierBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.B_SUPPLIERS);
 
     private final static String URL = "jdbc:mysql://localhost:3306/RestoMaster";
