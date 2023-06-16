@@ -78,4 +78,15 @@ public class OrdersDAOImpl implements OrdersDAO {
         }
         return allCustomersIds;
     }
+
+    @Override
+    public List<String> loadMenuItemsId() throws SQLException, ClassNotFoundException {
+        List<String> allMenuItemsIds = new ArrayList<>();
+        ResultSet rst = SQLUtil.execute("SELECT MenuItemCode FROM MenuItem");
+        while (rst.next()) {
+            String Ids = new String(rst.getString("MenuItemCode"));
+            allMenuItemsIds.add(Ids);
+        }
+        return allMenuItemsIds;
+    }
 }

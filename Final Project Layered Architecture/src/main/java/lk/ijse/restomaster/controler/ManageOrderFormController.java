@@ -122,35 +122,50 @@ public class ManageOrderFormController implements Initializable {
     }
 
     private void loadMenuItemCode() throws SQLException, ClassNotFoundException {
-        try {
-            List<String> ids = OrderModel.getMenuItemCodes();
-            ObservableList<String> obList = FXCollections.observableArrayList();
+//        try {
+//            List<String> ids = OrderModel.getMenuItemCodes();
+//            ObservableList<String> obList = FXCollections.observableArrayList();
+//
+//            for (String id : ids) {
+//                obList.add(id);
+//            }
+//            micodeCBox.setItems(obList);
+//
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//            new Alert(Alert.AlertType.ERROR, "SQL Error!").show();
+//        }
+        List<String> id = ordersDAO.loadMenuItemsId();
+        ObservableList<String> obList = FXCollections.observableArrayList();
 
-            for (String id : ids) {
-                obList.add(id);
-            }
-            micodeCBox.setItems(obList);
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-            new Alert(Alert.AlertType.ERROR, "SQL Error!").show();
+        for (String un : id){
+            obList.add(un);
         }
+        micodeCBox.setItems(obList);
     }
 
     private void loadCustomerId() throws SQLException, ClassNotFoundException {
-        try {
-            List<String> ids = OrderModel.getCustomerIds();
-            ObservableList<String> obList = FXCollections.observableArrayList();
+//        try {
+//            List<String> ids = OrderModel.getCustomerIds();
+//            ObservableList<String> obList = FXCollections.observableArrayList();
+//
+//            for (String id : ids) {
+//                obList.add(id);
+//            }
+//            custIdCBox.setItems(obList);
+//
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//            new Alert(Alert.AlertType.ERROR, "SQL Error!").show();
+//        }
+        List<String> id = ordersDAO.loadCustomersId();
+        ObservableList<String> obList = FXCollections.observableArrayList();
 
-            for (String id : ids) {
-                obList.add(id);
-            }
-            custIdCBox.setItems(obList);
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-            new Alert(Alert.AlertType.ERROR, "SQL Error!").show();
+        for (String un : id){
+            obList.add(un);
         }
+        custIdCBox.setItems(obList);
+
     }
 
     private void getAll() {

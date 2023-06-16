@@ -10,4 +10,5 @@ import java.util.List;
 public interface OrdersDAO extends CrudDAO<Orders> {
    public boolean updateQuantity(int quantity , String menuItems) throws SQLException, ClassNotFoundException;
    public List<String> loadCustomersId() throws SQLException, ClassNotFoundException;
+   public List<String> loadMenuItemsId() throws SQLException, ClassNotFoundException;
 }
